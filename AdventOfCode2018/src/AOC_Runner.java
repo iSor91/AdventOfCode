@@ -14,14 +14,18 @@ abstract public class AOC_Runner {
        } catch (Exception e) {
            System.out.println("Exception thrown: " + e.getMessage());
        }
-       executeGoal();
+       executeGoal_1();
+       executeGoal_2();
     }
 
     private List<String> readLines() throws IOException {
         String day = this.getClass().getSimpleName();
-        Path path = Paths.get("resource",day + ".txt");
+        Path path = Paths.get("AdventOfCode2018/resources",day + ".txt");
+        System.out.println(path.toAbsolutePath());
         return Files.readAllLines(path);
     }
 
-    abstract protected void executeGoal();
+    abstract protected void executeGoal_1();
+
+    abstract protected void executeGoal_2();
 }

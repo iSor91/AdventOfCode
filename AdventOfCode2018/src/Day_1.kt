@@ -1,3 +1,4 @@
+
 /**
 
 "We've detected some temporal anomalies," one of Santa's Elves at the Temporal Anomaly Research and Detection Instrument Station tells you. She sounded pretty worried when she called you down here. "At 500-year intervals into the past, someone has been changing Santa's history!"
@@ -27,19 +28,33 @@ Here are other example situations:
 
 Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?
 
-Your puzzle answer was 510.
-
  */
 
-class Day_1_1: AOC_Runner() {
+fun main(args: Array<String>) {
+    Day_1()
+}
 
-    fun main(args: Array<String>) {
-        Day_1_1()
+class Day_1: AOC_Runner() {
+
+    override fun executeGoal_1() {
+        var sum = 0
+        this.allLines.forEach{
+            line -> sum += Integer.parseInt(line)
+        }
+        println(sum)
     }
 
-    override fun executeGoal() {
-        this.allLines.forEach{
-            line -> println(line)
+    override fun executeGoal_2() {
+        val frequencies:MutableSet<Int> = mutableSetOf()
+        var sum = 0
+        var searching = true
+        while (searching) {
+            searching = this.allLines.firstOrNull {
+                line ->
+                    sum += Integer.parseInt(line)
+                    !frequencies.add(sum)
+            } == null
         }
+        println(sum)
     }
 }
