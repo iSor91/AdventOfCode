@@ -1,3 +1,5 @@
+package com.isor.aoc2018;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,6 +9,7 @@ import java.util.List;
 abstract public class AOC_Runner {
 
     protected List<String> allLines;
+    private final String project = "AdventOfCode2018";
 
     public AOC_Runner() {
        try {
@@ -20,7 +23,7 @@ abstract public class AOC_Runner {
 
     private List<String> readLines() throws IOException {
         String day = this.getClass().getSimpleName();
-        Path path = Paths.get("AdventOfCode2018/resources",day + ".txt");
+        Path path = Paths.get(project,"resources",day);
         System.out.println(path.toAbsolutePath());
         return Files.readAllLines(path);
     }
