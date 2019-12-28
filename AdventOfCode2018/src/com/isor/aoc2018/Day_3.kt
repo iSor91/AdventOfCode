@@ -58,11 +58,11 @@ fun main(){
     Day_3().executeGoals()
 }
 
-class Day_3 : AOC_Runner{
+class Day_3 : AOC_Runner() {
 
     private val occupations: MutableList<Occupation>
 
-    constructor() {
+    init {
         occupations = mutableListOf()
         this.allLines.forEach{line ->
             occupations.add(
@@ -113,11 +113,11 @@ class Day_3 : AOC_Runner{
     }
 
     private fun MutableMap<Position, Int>.increaseOrCreate(key: Position) {
-        val value = this.get(key)
+        val value = this[key]
         if(value == null) {
             this[key] = 1
         } else {
-            this[key] = value+1!!
+            this[key] = value+1
         }
     }
 
