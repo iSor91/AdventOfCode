@@ -46,8 +46,8 @@ What letters are common between the two correct box IDs? (In the example above, 
 Your puzzle answer was mphcuasvrnjzzkbgdtqeoylva.
  */
 
-fun main(args: Array<String>) {
-    Day_2()
+fun main() {
+    Day_2().executeGoals()
 }
 
 class Day_2 : AOC_Runner(){

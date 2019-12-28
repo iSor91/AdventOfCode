@@ -53,8 +53,8 @@ What is the first frequency your device reaches twice?
 Your puzzle answer was 655.
  */
 
-fun main(args: Array<String>) {
-    Day_1()
+fun main() {
+    Day_1().executeGoals()
 }
 
 class Day_1: AOC_Runner() {

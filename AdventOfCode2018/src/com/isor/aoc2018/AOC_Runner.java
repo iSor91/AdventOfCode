@@ -11,14 +11,17 @@ abstract public class AOC_Runner {
     protected List<String> allLines;
     private final String project = "AdventOfCode2018";
 
-    public AOC_Runner() {
-       try {
-           this.allLines = readLines();
-       } catch (Exception e) {
-           System.out.println("Exception thrown: " + e.getMessage());
-       }
-       executeGoal_1();
-       executeGoal_2();
+    {
+        try {
+            this.allLines = readLines();
+        } catch (Exception e) {
+            System.out.println("Exception thrown: " + e.getMessage());
+        }
+    }
+
+    public void executeGoals() {
+        executeGoal_1();
+        executeGoal_2();
     }
 
     private List<String> readLines() throws IOException {
