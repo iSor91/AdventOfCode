@@ -1,5 +1,7 @@
 package com.isor.aoc2018
 
+import com.isor.aoc.common.AOC_Runner
+
 /**
 --- Day 3: No Matter How You Slice It ---
 The Elves managed to locate the chimney-squeeze prototype fabric for Santa's suit (thanks to someone who helpfully wrote its box IDs on the wall of the warehouse in the middle of the night). Unfortunately, anomalies are still affecting them - nobody can even agree on how to cut the fabric.
@@ -58,7 +60,7 @@ fun main(){
     Day_3().executeGoals()
 }
 
-class Day_3 : com.isor.aoc.common.AOC_Runner() {
+class Day_3 : AOC_Runner(2018) {
 
     private val occupations: MutableList<Occupation>
 

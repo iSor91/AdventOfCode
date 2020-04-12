@@ -1,5 +1,7 @@
 package com.isor.aoc2018
 
+import com.isor.aoc.common.AOC_Runner
+
 /**
 --- Day 2: Inventory Management System ---
 You stop falling through time, catch your breath, and check the screen on the device. "Destination reached. Current Year: 1518. Current Location: North Pole Utility Closet 83N10." You made it! Now, to find those anomalies.
@@ -50,7 +52,7 @@ fun main() {
     Day_2().executeGoals()
 }
 
-class Day_2 : com.isor.aoc.common.AOC_Runner(){
+class Day_2 : AOC_Runner(2018){
 
 
     override fun executeGoal_1() {
@@ -74,7 +76,7 @@ class Day_2 : com.isor.aoc.common.AOC_Runner(){
 
 
     override fun executeGoal_2() {
-        this.allLines.sort()
+        this.allLines.sorted()
         for(i in 0..allLines.size-2) {
             val first = this.allLines.get(i)
             val second = this.allLines.get(i+1)

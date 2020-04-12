@@ -1,4 +1,7 @@
 package com.isor.aoc2018
+
+import com.isor.aoc.common.AOC_Runner
+
 /**
 --- Day 1: Chronal Calibration ---
 "We've detected some temporal anomalies," one of Santa's Elves at the Temporal Anomaly Research and Detection Instrument Station tells you. She sounded pretty worried when she called you down here. "At 500-year intervals into the past, someone has been changing Santa's history!"
@@ -57,7 +60,7 @@ fun main() {
     Day_1().executeGoals()
 }
 
-class Day_1: com.isor.aoc.common.AOC_Runner() {
+class Day_1: AOC_Runner(2018) {
 
     override fun executeGoal_1() {
         var sum = 0
