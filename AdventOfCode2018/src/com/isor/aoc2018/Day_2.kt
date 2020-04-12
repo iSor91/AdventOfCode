@@ -50,7 +50,7 @@ fun main() {
     Day_2().executeGoals()
 }
 
-class Day_2 : AOC_Runner(){
+class Day_2 : com.isor.aoc.common.AOC_Runner(){
 
 
     override fun executeGoal_1() {

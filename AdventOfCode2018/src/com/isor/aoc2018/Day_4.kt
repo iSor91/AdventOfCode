@@ -79,7 +79,7 @@ operator fun  LocalDateTime.minus(toSubStract: LocalDateTime) : Int {
 
 val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm")
 
-class Day_4 : AOC_Runner() {
+class Day_4 : com.isor.aoc.common.AOC_Runner() {
 
     val guards: MutableMap<Int,Guard> = mutableMapOf()
 

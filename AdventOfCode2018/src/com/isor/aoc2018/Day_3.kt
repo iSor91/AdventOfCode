@@ -58,7 +58,7 @@ fun main(){
     Day_3().executeGoals()
 }
 
-class Day_3 : AOC_Runner() {
+class Day_3 : com.isor.aoc.common.AOC_Runner() {
 
     private val occupations: MutableList<Occupation>
 

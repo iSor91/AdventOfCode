@@ -1,4 +1,4 @@
-package com.isor.aoc2018;
+package com.isor.aoc.common;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -57,7 +57,7 @@ fun main() {
     Day_1().executeGoals()
 }
 
-class Day_1: AOC_Runner() {
+class Day_1: com.isor.aoc.common.AOC_Runner() {
 
     override fun executeGoal_1() {
         var sum = 0
