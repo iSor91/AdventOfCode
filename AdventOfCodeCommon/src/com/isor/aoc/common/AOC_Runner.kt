@@ -6,7 +6,7 @@ import java.nio.file.Paths
 abstract class AOC_Runner(private val year: Int) {
 
     private val moduleName: String = """AdventOfCode${year}"""
-    val test: String = "\\test"
+    val test: String = ""
     val allLines: List<String>  = readAllLines()
 
     private fun readAllLines() : List<String> {
