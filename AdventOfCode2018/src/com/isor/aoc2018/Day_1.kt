@@ -1,6 +1,7 @@
 package com.isor.aoc2018
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.Year
 
 /**
 --- Day 1: Chronal Calibration ---
@@ -60,7 +61,8 @@ fun main() {
     Day_1().executeGoals()
 }
 
-class Day_1: AOC_Runner(2018) {
+@Year(2018)
+class Day_1: AOC_Runner() {
 
     override fun executeGoal_1() {
         var sum = 0

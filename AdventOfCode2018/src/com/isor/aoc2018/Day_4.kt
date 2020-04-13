@@ -1,6 +1,7 @@
 package com.isor.aoc2018
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.Year
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -80,7 +81,8 @@ operator fun  LocalDateTime.minus(toSubStract: LocalDateTime) : Int {
 
 val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm")
 
-class Day_4 : AOC_Runner(2018) {
+@Year(2018)
+class Day_4 : AOC_Runner() {
 
     val guards: MutableMap<Int,Guard> = mutableMapOf()
 

@@ -1,6 +1,8 @@
 package com.isor.aoc2018
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.TestResources
+import com.isor.aoc.common.Year
 import java.util.*
 
 /**
@@ -51,7 +53,8 @@ fun main() {
     Day_5().executeGoals()
 }
 
-class Day_5 : AOC_Runner(2018) {
+@Year(2018)
+class Day_5 : AOC_Runner() {
 
     override fun executeGoal_1() {
         var s = allLines[0]

@@ -1,6 +1,7 @@
 package com.isor.aoc2018
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.Year
 
 /**
 --- Day 3: No Matter How You Slice It ---
@@ -60,7 +61,8 @@ fun main(){
     Day_3().executeGoals()
 }
 
-class Day_3 : AOC_Runner(2018) {
+@Year(2018)
+class Day_3 : AOC_Runner() {
 
     private val occupations: MutableList<Occupation>
 

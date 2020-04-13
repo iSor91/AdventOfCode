@@ -1,6 +1,7 @@
 package com.isor.aoc2018
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.Year
 
 /**
 --- Day 2: Inventory Management System ---
@@ -52,7 +53,8 @@ fun main() {
     Day_2().executeGoals()
 }
 
-class Day_2 : AOC_Runner(2018){
+@Year(2018)
+class Day_2 : AOC_Runner(){
 
 
     override fun executeGoal_1() {

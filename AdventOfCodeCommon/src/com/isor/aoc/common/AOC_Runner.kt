@@ -3,15 +3,25 @@ package com.isor.aoc.common
 import java.nio.file.Files
 import java.nio.file.Paths
 
-abstract class AOC_Runner(private val year: Int) {
 
-    private val moduleName: String = """AdventOfCode${year}"""
-    val test: String = ""
+abstract class AOC_Runner() {
     val allLines: List<String>  = readAllLines()
 
     private fun readAllLines() : List<String> {
-        val day = this.javaClass.simpleName
-        val inputPath = Paths.get(this.moduleName, "resources$test", day)
+
+        val annotations = javaClass.annotations
+        val year = (annotations.filter { a -> a is Year }[0] as Year).year
+        val moduleName: String = "AdventOfCode${year}"
+
+        var test = ""
+        if(annotations.any { a -> a is TestResources }) {
+            test = "\\test"
+        }
+        val resourcesFolder = "resources$test"
+
+        val day = javaClass.simpleName
+
+        val inputPath = Paths.get(moduleName, resourcesFolder, day)
         println(inputPath.toAbsolutePath())
         return Files.readAllLines(inputPath)
     }
