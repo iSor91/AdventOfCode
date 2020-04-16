@@ -1,22 +1,24 @@
 package com.isor.aoc.common
 
+import java.lang.IllegalStateException
 import java.nio.file.Files
 import java.nio.file.Paths
 
-
+@RequiredAnnotations([Year::class])
 abstract class AOC_Runner() {
-    val allLines: List<String>  = readAllLines()
+
+    val allLines: List<String>
+
+    init {
+        validateAnnotations();
+        allLines =  readAllLines();
+    }
 
     private fun readAllLines() : List<String> {
-
-        val annotations = javaClass.annotations
-        val year = (annotations.filter { a -> a is Year }[0] as Year).year
+        val year = javaClass.getAnnotation(Year::class.java).year
         val moduleName: String = "AdventOfCode${year}"
 
-        var test = ""
-        if(annotations.any { a -> a is TestResources }) {
-            test = "\\test"
-        }
+        val test =  if(javaClass.isAnnotationPresent(TestResources::class.java)) "\\test" else ""
         val resourcesFolder = "resources$test"
 
         val day = javaClass.simpleName
@@ -24,6 +26,16 @@ abstract class AOC_Runner() {
         val inputPath = Paths.get(moduleName, resourcesFolder, day)
         println(inputPath.toAbsolutePath())
         return Files.readAllLines(inputPath)
+    }
+
+    fun validateAnnotations() {
+        val required = AOC_Runner::class.java.getAnnotation(RequiredAnnotations::class.java)
+        val requiredannotations = required.annotations.map { it.java }
+        requiredannotations.forEach {
+            if(!javaClass.annotations.map { a -> a.annotationClass.java }.contains(it)) {
+                throw IllegalStateException("Missing Annotation: [${it.canonicalName}].")
+            }
+        }
     }
 
     fun executeGoals() {
