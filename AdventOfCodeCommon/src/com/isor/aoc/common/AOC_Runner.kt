@@ -10,8 +10,8 @@ abstract class AOC_Runner() {
     val allLines: List<String>
 
     init {
-        validateAnnotations();
-        allLines =  readAllLines();
+        validateAnnotations()
+        allLines =  readAllLines()
     }
 
     private fun readAllLines() : List<String> {
