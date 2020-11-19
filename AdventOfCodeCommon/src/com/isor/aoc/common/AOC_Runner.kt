@@ -5,7 +5,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 @RequiredAnnotations([Year::class])
-abstract class AOC_Runner() {
+abstract class AOC_Runner : AOC_Utility() {
 
     val allLines: List<String>
 
