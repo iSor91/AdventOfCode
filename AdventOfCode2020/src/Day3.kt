@@ -1,5 +1,4 @@
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
 
 /**
@@ -96,7 +95,7 @@ class Day3 : AOC_Runner() {
         var posX = 0
         while (posY < map.size) {
             treesEncountered += if (map[posY][posX] == tree) 1 else 0
-            posX = posX.aocPlus(posXIncr)
+            posX = posX.upperBoundPlus(posXIncr, map[0].indices.max()!!)
             posY += posYIncr
         }
         return treesEncountered
@@ -112,13 +111,5 @@ class Day3 : AOC_Runner() {
         }
         println(encounteredTrees.reduce{acc,b -> acc * b})
 
-    }
-
-    infix fun Int.aocPlus(x:Int) : Int {
-        if (this + x in map[0].indices) {
-            return this + x
-        } else {
-            return this + x - map[0].size
-        }
     }
 }

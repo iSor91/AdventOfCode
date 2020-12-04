@@ -11,6 +11,13 @@ open class AOC_Utility {
             return copy
         }
 
+    fun Int.upperBoundPlus(x:Int, bound:Int) : Int {
+        return if (this + x in 0..bound) {
+            this + x
+        } else {
+            this + x - bound - 1
+        }
+    }
 
     fun String.countChar(a: Char): Int {
         return this.filter { c -> c==a}.count()
