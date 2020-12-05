@@ -58,4 +58,7 @@ open class AOC_Utility {
         }
         return sb.toString()
     }
+
+    fun CharSequence.translateToBinaryString(translationMap: Map<Char, String>) : Int =
+            this.map { c -> translationMap[c] }.joinToString("").toInt(2)
 }
