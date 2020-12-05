@@ -1,9 +1,7 @@
 package com.isor.aoc2015
 
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
-import java.lang.StringBuilder
 
 /**
  * --- Day 11: Corporate Policy ---

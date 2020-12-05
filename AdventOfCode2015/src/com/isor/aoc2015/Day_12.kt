@@ -1,9 +1,7 @@
 package com.isor.aoc2015
 
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
-import com.sun.org.apache.xpath.internal.operations.Bool
 
 /**
  * --- Day 12: JSAbacusFramework.io ---
