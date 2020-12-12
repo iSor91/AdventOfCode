@@ -214,10 +214,8 @@ class Day11 : AOC_Runner() {
         rowNum = seats.size
         columnNum = seats[0].size
         var update = true
-        while (update!=false) {
-            printSeats()
+        while (update) {
             update = update()
-            println()
         }
 
         printSeats()
@@ -310,7 +308,6 @@ class Day11 : AOC_Runner() {
         }
     }
 
-
     private fun getStartIndex(i: Int) : Int {
         return when (i) {
             0 -> 0
@@ -332,7 +329,6 @@ class Day11 : AOC_Runner() {
     override fun executeGoal_1() {
         println(seats.sumBy { it.count { a -> a == '#' } })
     }
-
 
     override fun executeGoal_2() {
         println(seats.sumBy { it.count { a -> a == '#' } })

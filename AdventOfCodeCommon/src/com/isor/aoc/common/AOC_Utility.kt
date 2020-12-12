@@ -19,6 +19,17 @@ open class AOC_Utility {
         }
     }
 
+    fun Int.boundedPlus(x:Int, lowerBound:Int, upperBound: Int) : Int {
+        val i = this + x
+        return if (i in lowerBound..upperBound) {
+            i
+        } else if (i > upperBound){
+            i - upperBound - 1 + lowerBound
+        } else {
+            upperBound - (lowerBound - i) + 1
+        }
+    }
+
     fun String.countChar(a: Char): Int {
         return this.filter { c -> c==a}.count()
     }
