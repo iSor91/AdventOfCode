@@ -1,6 +1,9 @@
 package com.isor.aoc.common
 
-import java.lang.StringBuilder
+import kotlin.math.cos
+import kotlin.math.roundToInt
+import kotlin.math.sin
+
 
 open class AOC_Utility {
 
@@ -72,4 +75,50 @@ open class AOC_Utility {
 
     fun CharSequence.translateToBinaryString(translationMap: Map<Char, String>) : Int =
             this.map { c -> translationMap[c] }.joinToString("").toInt(2)
+
+
+    operator fun Pair<Int, Int>.times(value: Int) : Pair<Int, Int> {
+        return this.first * value to this.second * value
+    }
+
+    operator fun Pair<Int, Int>.plus(value: Pair<Int, Int>) : Pair<Int, Int> {
+        return this.first + value.first to this.second + value.second
+    }
+
+    operator fun Pair<Int, Int>.minus(value: Pair<Int, Int>) : Pair<Int, Int> {
+        return this.first - value.first to this.second - value.second
+    }
+
+    fun Pair<Int, Int>.rotate(value: Int) : Pair<Int,Int> {
+        val radVal = toRad(value)
+        val cosx = cos(radVal).roundToInt()
+        val sinx = sin(radVal).roundToInt()
+        return Pair((this.first * cosx - this.second * sinx), (this.first * sinx + this.second * cosx))
+    }
+
+    private fun toRad(value: Int) = value.toDouble() * Math.PI / 180
+
+    private fun gcd(a: Long, b:Long) : Long {
+        var tb = b
+        var ta = a
+        while (tb > 0) {
+            var temp = tb;
+            tb = ta % tb
+            ta = temp
+        }
+        return ta
+    }
+
+    protected fun gcd(list: List<Long>) : Long {
+        return list.reduce { acc, num -> gcd(acc, num) }
+    }
+
+    private fun lcm(a: Long, b: Long): Long {
+        return a * (b / gcd(a, b));
+    }
+
+    protected fun lcm(list: List<Long>) : Long {
+        return list.reduce { acc, num -> lcm(acc, num) }
+    }
+
 }
