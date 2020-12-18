@@ -1,5 +1,4 @@
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
 import java.util.function.BiFunction
 
@@ -7,7 +6,7 @@ fun main() {
     Day18().executeGoals()
 }
 
-@TestResources
+//@TestResources
 @Year(2020)
 class Day18 : AOC_Runner() {
 
@@ -37,13 +36,14 @@ class Day18 : AOC_Runner() {
                 val tmp = astElement.element
                 astElement.element = ""
                 currentAst = astElement.addSubAst()
+                currentAst.setPrecedence()
                 astElement.subAst!!.addElement(tmp)
             } else if(!AstElement(null, currentElement).isNumeric() ) {
                 currentAst = bracketAst
             }
             astElement = currentAst.addElement(currentElement)
             repeat(stepup) {
-                astElement = bracketAst.parent!!
+                astElement = bracketAst.getNonPrecedenceParent()
                 bracketAst = astElement.parent!!
                 currentAst = bracketAst
             }
@@ -64,15 +64,22 @@ class Day18 : AOC_Runner() {
     override fun executeGoal_2() {
         println()
         val asts = allLines.map { buildAst(it, "+") }
-        asts.forEach { println(it.eval()) }
+//        asts.forEach { println(it.eval()) }
         var sum = 0L
+//        val fw: FileWriter = FileWriter("C:\\Projects\\AdventOfCode\\myoutput.txt")
         for (ast in asts) {
-            sum += ast.eval()
+            val eval = ast.eval()
+//            fw.write("${eval.toString()} \n")
+            sum += eval
         }
+//        fw.close()
         println(sum)
+        //171259538712010 -should be
     }
 
     class Ast (val parent: AstElement?){
+
+        var precedenceAst: Boolean = false
 
         val elements: MutableList<AstElement> = mutableListOf()
 
@@ -82,6 +89,18 @@ class Day18 : AOC_Runner() {
             val element = AstElement(this, value)
             elements.add(element)
             return element
+        }
+
+        fun setPrecedence() {
+            this.precedenceAst = true
+        }
+
+        fun getNonPrecedenceParent() : AstElement {
+            var parentAst = this.parent!!
+            while(parentAst.parent!!.precedenceAst) {
+                parentAst = parentAst.parent!!.parent!!
+            }
+            return parentAst
         }
 
         override fun toString(): String {

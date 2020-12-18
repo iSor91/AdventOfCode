@@ -1,7 +1,7 @@
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
-import java.util.function.BiFunction
+import java.io.FileWriter
+
 
 fun main() {
     Day18_cheat().executeGoals()
@@ -19,379 +19,379 @@ class Day18_cheat : AOC_Runner() {
     }
 
     override fun executeGoal_2() {
-        var sum = 0L
-        sum += (5L M (5L M 7L M 6L M 7L + 2L) M 5L + 7L) + 3L M 2L M 8L + 8L
-        sum += 8L M 6L + (5L M (3L + 2L M 8L + 2L + 7L + 4L) + (7L + 5L M 6L) M 9L)
-        sum += (6L + (2L M 3L)) + (3L M (8L M 6L) + 4L M 5L + 9L) + (7L M 8L M 2L + (2L M 3L M 6L + 2L) M 4L) M 7L + 8L M 4L
-        sum += 5L M (2L M (7L + 9L) M 5L) + 5L + 6L M 7L
-        sum += 7L + (4L M 2L + 5L) + 6L
-        sum += 9L + (7L M (4L + 7L) + 4L M 9L) + 3L + 9L M 5L
-        sum += (9L + 8L) M 9L + ((9L M 3L M 7L + 9L + 5L) M 2L M 7L M 7L) + 3L M 5L
-        sum += 5L M (8L M (2L + 6L) M 5L M 8L) + 4L
-        sum += (2L + 9L + 9L + 8L M 6L M 7L) + 9L + 7L + 6L
-        sum += ((9L + 3L M 7L) + 4L + 6L M 6L M 4L + (8L M 7L M 5L + 9L)) M 8L + 7L + 4L + (7L + 7L) M 3L
-        sum += (2L M 5L) M 2L M (4L + 7L + 2L) + 7L
-        sum += ((8L + 2L) M 2L + 5L M (3L + 6L M 6L) M 2L M (6L + 9L + 9L M 7L)) + 5L + (2L + 8L) M (9L + 6L + 5L + (5L M 5L + 7L M 7L + 7L) M 9L)
-        sum += 5L M (2L + 5L + 8L + 3L + 3L) M (6L M 3L M 6L M 2L M 7L) + 7L
-        sum += (6L + (9L + 8L M 5L M 8L)) M 8L + 7L M 4L
-        sum += (3L + 4L M 8L + 7L M 9L M 2L) M 2L + (3L M (4L M 6L M 4L M 9L))
-        sum += (3L M 4L) M 7L M (5L + 4L M 9L) M ((4L M 7L + 2L) + 9L + 7L M 7L + (3L + 5L M 3L + 7L) M 5L) + 7L M (7L M 7L + 6L + 5L M (4L M 7L M 6L + 4L + 2L) M 7L)
-        sum += (2L M (5L M 5L + 2L M 3L M 4L M 5L) + (9L M 9L M 9L + 2L) + 9L M 8L + 2L) + 8L
-        sum += (6L M 3L + (9L M 9L + 2L M 9L)) M (3L M 6L + 5L + 7L M 7L) + 8L M 3L
-        sum += 4L + 3L
-        sum += (7L + (9L M 2L + 7L + 7L M 5L) M 4L M 8L) + (3L + 4L + (7L + 8L + 6L M 2L + 9L + 3L)) + 6L + (5L + 6L + 7L M 6L + 8L + 5L) M (8L + (7L + 9L M 6L M 7L + 8L) + (4L + 9L M 9L + 2L M 6L))
-        sum += 5L + (9L + 4L M (4L + 6L) M 4L + 5L M 8L) M 2L + 4L + (7L + 2L + 4L M 4L + (8L M 6L + 4L + 4L) M 6L)
-        sum += (6L M (7L + 5L M 9L M 5L M 6L M 4L)) + (9L + 3L M 5L) + 3L + 4L + 8L + 8L
-        sum += 2L M (7L M 6L M 7L M 7L) M 2L M 5L + 2L
-        sum += 5L + 5L M 2L + (8L + (9L + 2L + 2L + 3L + 5L M 4L) + 7L M 3L M 4L + (8L + 5L M 6L + 5L M 6L M 3L))
-        sum += 9L + 6L
-        sum += (9L M 3L M 7L + 5L + 7L M 4L) + 2L M 4L + 5L M 8L M (5L + 6L M (3L + 8L + 4L + 4L M 7L) M 9L M 2L + 8L)
-        sum += (9L M 7L + (3L + 4L + 8L + 7L M 7L)) + 3L + 9L
-        sum += 5L M 4L M 4L + (7L + 7L M (6L M 8L M 7L) + 5L)
-        sum += (9L M 5L) + (7L + 4L) + (4L M (3L + 8L M 4L M 7L M 6L) M 8L) + (4L + 2L M (6L + 3L) + 2L) + 8L
-        sum += (2L + 3L) M (9L M 9L M 9L + 4L M (6L M 4L + 4L M 3L)) M 7L M 8L
-        sum += 7L + 3L + 5L + (3L + 3L + 8L + (6L M 3L + 9L + 5L) M (5L M 7L M 8L + 5L) + (3L + 4L M 8L M 8L M 8L + 3L)) M ((3L M 9L) + 3L)
-        sum += (6L M (3L M 2L) M (8L + 3L + 2L M 3L + 6L) + 9L + 7L) + (5L M (8L M 7L) + 2L M 4L) M 6L + ((3L + 4L) + 8L M (9L + 6L M 4L + 5L)) M 5L
-        sum += 3L + ((5L M 3L M 6L M 3L + 2L M 7L) M 7L) + 2L M 4L
-        sum += (7L M 5L) M (3L M 3L)
-        sum += 8L + 3L M 3L M (6L + (6L + 9L M 9L) + 8L + 7L) M 2L
-        sum += 5L M (8L + 3L) + 5L + (4L + (7L M 7L) + 7L + 5L) M ((6L + 5L + 3L + 9L + 5L) + 8L + 3L + 4L) M 9L
-        sum += 7L + (4L M 6L M (4L + 8L + 9L M 2L M 3L + 4L) M (5L + 9L M 8L M 7L M 9L) + (5L M 3L M 9L M 2L M 9L) M 2L) M 2L M 6L
-        sum += 8L M (5L M 5L M (2L M 5L M 2L + 4L M 6L) + (7L + 8L) + 5L + 8L) + 9L
-        sum += 5L M 4L M (7L + 4L + 9L + (5L M 2L + 9L) + 7L M 3L)
-        sum += 9L M (8L + (5L + 6L + 2L) M (6L M 7L M 9L) + 8L M 5L) M (3L M 8L) + 7L + 8L
-        sum += 6L + 4L + 6L M 4L M 6L
-        sum += ((2L + 5L + 8L) M (7L + 2L M 8L + 8L + 4L M 3L) + 4L M 9L) M 5L M ((6L + 2L + 9L + 2L M 9L) M 5L M 6L M 3L M 6L + 8L) M 6L + 5L
-        sum += 5L M 5L M 7L M (6L M 6L) M (5L M (8L M 4L M 2L M 9L M 2L))
-        sum += 3L + 6L + 9L M 6L M (6L + 5L + 8L) + (3L M 5L + 6L M 2L + 6L)
-        sum += ((7L + 3L + 9L M 4L + 7L M 7L) M 2L M 5L M 9L M 7L) M 9L M ((5L M 7L + 8L) + 8L M (4L + 4L M 6L M 7L M 6L))
-        sum += (7L + 6L + (8L + 3L) + 5L + 8L M 2L) M 3L
-        sum += 4L M (8L + 4L M 2L + 3L M 7L) + (7L + (5L + 3L M 9L M 4L) M 5L + 2L) + 6L
-        sum += 8L M 5L M 3L M 3L
-        sum += 8L + 6L + (9L + 6L + 6L + 2L M 8L M 8L) + 8L M (5L M 3L) + 4L
-        sum += 4L M ((3L + 9L) + 4L + 3L M (7L M 3L + 3L) + 3L + 3L) M 9L M (7L + 4L) M 4L M 8L
-        sum += (8L + 3L + 8L + 3L) + (3L M 8L M 7L + 7L M 3L + 9L) + 5L + 6L
-        sum += (9L M 7L) + 3L M 4L + 9L M 7L + (9L M 9L M 3L M 7L)
-        sum += 3L + 2L + 4L + 4L M 3L M (6L + 2L M 2L M (5L M 5L M 5L M 8L M 9L) + 5L)
-        sum += 5L + (5L + 3L + (6L M 9L M 9L + 2L + 2L + 4L)) + 8L M (9L M 3L M (7L + 2L M 5L M 7L + 8L M 3L) M (7L M 8L) M (7L M 7L M 5L + 2L + 4L)) M 9L + 2L
-        sum += 7L + 2L M 3L + 5L + (7L M 6L) + 2L
-        sum += 7L + 3L M 9L + 8L M 4L + (5L M 5L M 5L + 8L M 5L)
-        sum += 7L M 7L M ((9L + 3L) M 8L + 5L M 5L + (4L M 5L M 5L + 6L + 4L + 9L)) M 2L + 2L + 8L
-        sum += (2L + 3L + (2L + 6L) + 7L + 7L M 8L) M 9L + (6L + 5L)
-        sum += 9L + (5L + 4L) M 2L
-        sum += 6L M 6L M 6L M (4L + 7L) M (8L M 8L + 7L + 5L + 6L) M 6L
-        sum += 2L M 6L + (2L + 4L M 4L + 3L) M 5L + 8L
-        sum += ((7L + 8L M 7L) M 7L M 6L + (6L M 7L M 9L + 5L M 6L + 7L) + (4L M 3L M 2L M 7L M 4L + 5L)) + (6L + (6L + 3L)) + 8L
-        sum += 7L + (7L M 9L M 3L + 6L + 5L) + 5L M 2L + 2L + 9L
-        sum += 3L + 3L M (5L M 4L M 7L M 8L) + (8L M 9L + 2L M 6L) + 5L M 7L
-        sum += (2L + (6L + 9L + 6L) + (4L M 6L M 7L M 7L M 3L) + 8L + (8L + 3L + 9L) M 7L) M (8L + 3L M 9L + 7L M 8L) M 5L M 9L + 3L
-        sum += ((2L M 4L + 8L + 6L M 5L + 7L) + 7L M 5L + (4L + 5L + 5L M 4L) + 2L + 7L) M 4L M 7L M 7L
-        sum += 5L M ((3L + 5L M 2L M 8L M 3L + 6L) + 8L) M 2L
-        sum += 4L + 2L + 4L + (5L + 2L M 7L + 7L M (9L M 3L + 4L) + 4L)
-        sum += 7L + (5L + (4L + 8L) + (3L M 5L + 6L M 7L M 3L M 4L) + 7L)
-        sum += (4L + 7L M 7L M 9L + (6L + 2L M 3L + 3L M 8L M 3L)) + 9L + (5L + 4L M 7L + 5L + (5L M 5L + 9L + 3L M 3L)) + 6L
-        sum += 6L + 5L M 4L
-        sum += ((5L M 8L + 9L M 7L) M 8L M 5L M 8L + 3L M 5L) + 5L + ((7L M 3L M 7L + 4L M 4L) + 4L + (6L M 3L M 8L M 5L + 5L) M 2L + 7L)
-        sum += 7L + 3L M 9L M 3L + 8L M (4L M 3L M 5L + 7L)
-        sum += 7L M 3L
-        sum += (4L + 9L) M 4L M ((4L M 9L + 7L M 6L) M 7L + 6L) + 3L
-        sum += (8L M 9L + 8L) M 3L + 2L
-        sum += 7L + (2L M 8L + 8L M 5L M 2L M 8L)
-        sum += (2L M (7L M 3L + 3L + 2L + 7L + 6L) M 6L M 4L + 2L M 5L) M 6L
-        sum += 6L + 8L M (4L + 5L + 6L M 3L) M 6L
-        sum += 3L M 8L M 6L M (8L + 6L M 7L + 7L) M 2L + 6L
-        sum += 4L M 9L + 4L M (7L + 5L + 4L M 8L M (9L M 4L)) + (2L + 8L + 3L + 9L + 7L + 6L)
-        sum += (2L + 3L M 9L M (9L + 5L + 2L M 2L M 6L M 2L) + 3L M 3L) M 6L
-        sum += 9L + (6L + 3L + 9L M 3L) + (9L + 8L M 8L + 8L M 7L M (8L M 2L M 4L + 2L))
-        sum += 2L + (8L + (7L + 2L) + 7L + 8L M 8L) + 9L + (4L M 3L M 8L + 3L M (5L + 9L + 3L)) M ((4L M 5L + 2L M 3L M 4L) + 9L M 3L) M 3L
-        sum += 3L + 6L M (6L + (9L + 3L + 6L + 5L M 9L M 7L) + 9L + 4L + 3L)
-        sum += 5L + 8L + 5L M (2L + (2L M 3L M 2L + 7L + 2L) M 6L + 7L)
-        sum += 4L + (8L M 2L + 2L + (8L + 5L M 5L M 4L + 4L + 2L) + 7L + (7L + 5L M 5L + 6L + 8L + 4L)) M 3L M 4L + (9L M 8L + 3L M 6L + (7L M 7L M 4L + 9L M 2L + 8L) + 8L) M 6L
-        sum += (4L M 9L M 3L M 3L) + (8L M 8L M 3L + 6L M 9L) M 8L
-        sum += 7L M 6L + (8L M 8L + 9L + 8L M 9L + 7L) + ((8L + 5L M 5L) + 3L + (6L + 6L M 5L M 8L M 4L + 5L) M (9L + 2L + 6L + 9L + 6L) + (5L M 2L + 5L M 4L M 9L) M 9L) + 3L
-        sum += 5L M 8L + 4L M 7L + 5L M ((3L + 7L M 3L + 7L) + 2L + 7L)
-        sum += 5L M ((8L M 9L M 5L + 8L M 4L M 4L) M 7L + (3L M 7L M 9L) M (8L + 8L + 2L M 4L + 4L))
-        sum += 8L + 6L M 9L M (2L + 3L) + (4L M (2L M 3L M 8L)) M 2L
-        sum += (5L M 2L M 6L + 7L) + (7L + 2L M (5L + 3L M 5L M 7L M 8L + 3L) + 4L + 3L) M 7L
-        sum += 9L + 9L + 3L M (9L + 7L M 2L) + 6L
-        sum += 5L M 4L + 7L M (7L + 8L + 4L) + 4L M 9L
-        sum += 5L M 7L + 2L + 7L + (4L + 7L M 4L M 6L)
-        sum += ((4L + 3L + 2L + 4L M 5L + 8L) + (5L + 8L) + (3L M 6L + 2L + 7L + 7L) M 8L) + 2L + 8L
-        sum += 4L M 8L + 8L + (5L M 5L + 2L + 4L) + (9L + 3L + 9L + 6L M 9L) + 7L
-        sum += 4L + (4L M 7L M 2L M 7L) M 6L M 2L
-        sum += 7L M (4L + 2L + 7L) M (2L + 4L M (4L M 4L + 8L M 3L) M 2L M 7L) + (3L + 8L) M 4L
-        sum += 5L + 2L + 2L M 5L M (3L + (8L + 7L + 5L) + 4L M (2L + 3L) M 7L) M 8L
-        sum += 6L + 4L + (2L + 8L M (4L + 6L) + 5L M 5L) + 6L + (6L + 2L + 2L M 3L + 4L) + 7L
-        sum += (7L M 6L M 6L) M (9L + (5L M 4L M 3L + 5L + 8L)) M 2L M 2L + 6L
-        sum += ((5L + 8L) + 5L) + 8L + 6L M 8L
-        sum += 4L M (4L M (6L + 5L) + 8L + 5L + (2L + 7L + 2L M 4L M 7L))
-        sum += (8L M 7L) + 8L
-        sum += 7L + ((2L M 6L M 3L) + 8L + (7L M 4L) M (7L M 2L + 6L + 9L + 8L) M 2L) + 7L
-        sum += ((7L M 8L M 3L + 8L + 4L) + 4L M (5L + 9L M 4L + 3L M 8L) + (7L M 8L) M (5L M 7L + 9L + 5L)) + 2L M 3L + 2L M 6L + 7L
-        sum += 9L M ((3L M 2L + 8L + 5L) M 9L + 5L)
-        sum += 6L M 9L + 3L M 7L + 8L
-        sum += 6L M 8L + 9L M 9L M 4L M ((9L M 9L M 2L + 5L) + 7L)
-        sum += (8L M 9L + 8L M (4L + 4L + 3L M 6L + 4L M 7L)) M 3L + 7L + (5L + (5L + 4L + 6L + 2L + 2L) + 5L)
-        sum += 7L M 7L M 2L
-        sum += 5L M (9L M 4L M 5L M (4L + 2L + 3L M 2L + 3L M 8L) M 3L) M 3L M 4L M ((9L + 2L) + 7L M (5L + 4L) M 4L M 4L + 7L)
-        sum += ((2L + 3L + 2L M 6L) M (8L M 2L + 3L M 2L + 6L M 6L) M 9L + 2L + (4L M 2L M 3L) M 4L) M 4L + 6L
-        sum += 4L M 5L M 5L M 2L M 9L + 6L
-        sum += 3L M 4L M (3L + (3L M 7L M 2L + 9L) M 7L + 3L M 6L M 4L) M 5L
-        sum += 6L + (6L + 3L + 3L M 5L) + 9L
-        sum += 9L M 2L M 2L + (5L + 7L M 9L) M 8L + (6L + 6L)
-        sum += 3L M 3L + 6L M 5L
-        sum += (4L + 7L + 5L) + 6L + 2L + 9L M 6L M ((2L M 2L M 7L + 9L) M 6L)
-        sum += 2L M 4L + 3L + 4L + 8L M (5L M 3L)
-        sum += 7L + 6L M 9L M 8L + (5L + 2L + (2L + 7L M 6L M 9L + 4L M 5L))
-        sum += 7L M 3L M ((2L M 9L + 5L + 5L) + 7L + 5L + (6L M 2L + 5L + 3L M 6L))
-        sum += 4L + 9L + (4L + (7L M 7L M 5L) + 3L)
-        sum += (8L + 6L + 5L M 9L M 9L + 6L) + 6L + 5L + 5L + 4L
-        sum += (3L + 8L + 4L + 2L) + 6L M 5L + 4L M (7L M 5L M 6L) M 8L
-        sum += 7L M (6L + (4L M 5L + 8L M 9L + 3L) + 7L M 6L M 8L) M 9L + 7L
-        sum += 3L + (2L + 9L + 3L + 6L + 2L) M 3L M (6L M 5L + (2L M 6L + 5L + 6L M 3L) + 4L)
-        sum += (7L + 6L + (2L + 8L + 5L M 5L M 3L M 8L) M 3L + (7L M 4L + 5L) M 7L) M 3L + ((4L + 3L) M 2L + (8L M 2L + 3L M 2L)) + 8L
-        sum += (9L + 3L M 6L + (7L + 3L M 8L + 7L) M (5L M 5L M 6L + 8L M 6L M 8L) + 2L) + 6L + 9L
-        sum += ((7L M 4L) + 5L + 6L) M (6L M 6L M 2L) M (3L + (6L + 5L M 6L M 5L M 6L) + 4L)
-        sum += 9L M (8L M 2L + 9L) M (7L + 7L + (9L M 9L + 3L M 8L M 2L + 7L))
-        sum += (6L + 5L + 9L + (3L + 2L + 9L + 5L M 4L M 7L)) M 5L + ((4L + 4L + 7L) + 6L) + 7L + 3L + (3L + 3L M 5L)
-        sum += (4L M 5L M 3L) M 8L M 6L + ((7L + 9L + 5L + 5L + 3L) M (9L M 2L M 9L M 4L + 9L + 4L) M (3L + 6L + 3L + 7L M 9L + 5L)) + ((4L + 6L + 8L) M 9L + 3L + 6L + 8L)
-        sum += 4L + ((9L + 2L + 3L + 6L M 4L + 9L) + 3L + 7L) + 5L + 8L + (8L + 5L + 8L)
-        sum += (7L + 2L) M 4L M 5L
-        sum += 6L M 2L M (8L + 4L + 6L M 3L + (4L M 4L + 8L M 7L M 6L M 2L) + 6L) M 9L M 8L
-        sum += 2L M 2L M (8L M 9L + 4L M 9L + (5L + 4L + 5L) + 3L) M (8L + 7L) + 8L
-        sum += 6L + 4L M 9L M 3L M ((8L + 9L M 7L) M 5L) M ((7L + 7L M 4L + 7L) M (9L M 6L M 9L M 4L) + (5L M 7L) M (8L M 5L + 4L) M 6L)
-        sum += 3L M (5L M 9L M 7L + (4L M 6L M 6L + 8L + 8L M 8L) M 8L M (2L M 8L + 5L)) + 7L + 8L M 6L + 9L
-        sum += 6L + ((2L + 3L + 7L + 9L) M 5L M 2L + 5L M 9L) + 8L M 8L M 8L
-        sum += 5L + 6L M 5L + 4L + 5L M (4L M (3L + 4L + 3L M 7L M 9L + 5L) M (9L + 8L + 2L + 7L))
-        sum += 8L M 7L M 4L + 2L M 7L M (9L M 5L + 6L M 8L + 7L + 6L)
-        sum += ((3L + 8L M 2L + 5L M 9L M 5L) M (7L + 6L M 6L M 7L M 7L + 6L)) M 4L
-        sum += (2L + (5L M 5L + 5L) M (5L M 3L M 7L + 5L) M 4L + 2L M 9L) M 3L + 9L M 3L + 4L + 7L
-        sum += 4L M 5L M (3L M 4L + 7L + (3L + 9L M 5L + 6L + 3L + 6L)) + (3L + 9L + (7L + 6L M 7L + 6L) + 4L) + 7L
-        sum += 5L M ((5L M 4L + 8L + 7L) M 7L M 3L + 6L M (8L + 2L)) + 3L M (5L M 7L)
-        sum += 8L M 2L M (6L + 5L + 5L) + (9L M 4L M (7L + 9L) M 4L + 6L + 3L) + (7L M 6L + (5L M 5L M 5L + 6L + 3L + 5L) M 5L + 3L) + 4L
-        sum += (6L M 7L M 8L M (2L M 9L) + 9L + 2L) + 2L M 7L + 5L
-        sum += 3L M 3L + 5L + 6L
-        sum += 8L M (3L M 3L) + 8L M (9L M 6L M (6L + 9L M 4L M 9L + 6L))
-        sum += 3L M 3L + (9L + 6L) + 2L + 6L
-        sum += 8L + 8L + 2L + 2L M 6L M 7L
-        sum += 4L M (6L + 7L) M (2L M 8L + 6L + 6L) M 2L M 2L M 7L
-        sum += 5L M 5L M 6L + 3L M (7L M 5L + 6L M 6L) M 9L
-        sum += 3L + 6L + 9L M (8L M 3L M 6L M 6L M (7L + 2L M 9L M 8L + 2L + 2L))
-        sum += 7L M 5L + (7L M 4L + 4L M 3L + (7L + 6L))
-        sum += 8L + (8L M 8L M 2L) M 6L + 4L M (6L + (2L M 6L + 2L + 8L) M 3L M 3L)
-        sum += 3L + 7L + (2L + 2L + 3L M (2L M 5L M 7L + 9L + 2L) + 7L + 5L)
-        sum += 3L + (2L + (5L + 5L + 3L M 2L)) + 2L
-        sum += 9L + 8L + 7L + 3L + (8L + 5L + 3L + 3L M 6L) M 3L
-        sum += 4L M 9L + 4L + 7L + 6L
-        sum += 9L + 7L M 8L M 2L M 6L + (5L M 2L + 9L + (7L + 7L + 9L + 9L))
-        sum += (3L + (5L M 9L) M (8L M 9L M 3L + 4L + 2L + 5L)) + 5L M (7L M 4L) + 3L + ((9L + 3L) M 5L M (7L + 4L) + 6L)
-        sum += 6L + 8L + 9L
-        sum += ((2L + 9L + 9L) + 2L M 9L M 9L) + 8L + 3L + ((6L + 2L + 4L M 8L + 7L M 2L) + 5L)
-        sum += (3L + 9L + 2L M 8L + 5L + 3L) M 8L
-        sum += 8L + (6L M (2L + 4L M 5L + 6L + 7L) M 6L M 7L) M 8L + 8L + 9L
-        sum += ((8L M 9L + 6L M 3L + 6L M 7L) M 6L M 4L + 6L) M ((5L + 2L + 9L + 6L + 2L M 5L) M (3L + 8L M 7L) + 5L M 8L) + 8L + 3L M 8L
-        sum += 4L + 7L M (6L + 3L) + 5L
-        sum += (4L + (2L + 4L M 3L M 4L) M (5L + 7L M 2L + 7L M 8L)) M 3L
-        sum += (2L + 7L + (7L M 4L + 8L M 3L)) M 4L + 4L + 6L + (5L M 4L M 4L + 3L)
-        sum += (2L + 4L) + (5L M 8L + 2L + (4L + 4L + 2L M 9L + 5L + 7L) M (4L + 6L + 6L)) + 3L M 3L + 8L M 8L
-        sum += 6L + 7L M 4L M 9L + 3L
-        sum += 7L + 9L + ((2L + 2L) M 3L + 9L) M 8L
-        sum += 9L M 2L M 8L M (3L M 7L M 4L + 5L M 4L)
-        sum += 5L M 3L
-        sum += 4L M 5L + 4L M (7L M 3L M 7L M (8L M 5L) M 9L) M 5L
-        sum += 9L M (4L + 8L) M 9L + 3L M (5L + 7L)
-        sum += 6L + ((9L M 8L) + 3L M 8L + (3L + 4L M 9L + 8L M 6L M 4L)) + 6L M 9L M 5L M 3L
-        sum += ((6L M 9L M 8L M 6L + 7L M 6L) M 8L M 6L) M (3L M (8L M 6L + 3L + 7L M 4L M 9L) M 4L M 3L) + 5L
-        sum += (7L + 3L) + 9L M (3L M 9L) M (5L M 3L + 2L + 2L + 4L) M 6L + 7L
-        sum += (2L + (4L + 4L)) M (6L + 7L) M 5L M 9L + 3L
-        sum += 3L + (4L + 6L) + 3L M 8L M (4L M 5L + 6L M 5L) + (5L + 2L + 6L + 7L M 5L)
-        sum += ((5L M 6L + 9L) M 2L M (8L M 5L + 5L M 5L + 7L) M 9L M 2L + 6L) + 2L M 9L M (2L + 4L M 5L + 6L + 6L)
-        sum += 6L M 9L + 9L + 5L M ((3L + 6L M 3L M 9L + 9L) M 2L M (7L + 6L + 9L M 8L) M (5L M 8L) + 9L M 2L)
-        sum += (9L + 3L + 8L) + 7L M 5L M (4L + (3L + 4L M 2L + 5L + 9L) M 2L + 9L + 8L) M 8L
-        sum += (5L M 4L + 4L + 8L + (2L M 2L + 5L + 3L M 7L) M 3L) M (7L M 5L + 4L + 4L M 5L M 2L) + 9L M (3L M (3L + 7L M 3L) M 9L M 5L + 7L) M 9L + 8L
-        sum += (4L M 9L + 5L + 5L M 4L M (4L + 7L M 3L + 3L M 3L M 6L)) M 3L M 9L M 3L
-        sum += 5L + 9L + (5L + 8L) + (4L M 7L M 3L + 6L)
-        sum += 2L + 4L + ((5L + 7L) M 3L M 5L) M (5L M 7L + (7L M 9L M 9L + 7L + 5L) M 4L) + 4L
-        sum += (3L + 6L M 4L) + 2L
-        sum += (2L + 9L) + (9L + 7L + 4L M 4L) + 5L + 8L
-        sum += 7L M 7L + ((2L + 6L + 5L) M 2L + (9L M 9L M 7L M 5L) + 7L + 7L) M 3L
-        sum += ((4L + 5L M 8L) + 6L M 6L + 5L + (5L + 6L)) M 8L M 2L + 5L M 4L M 7L
-        sum += 3L M ((2L M 5L M 7L M 7L + 2L) + 7L + (8L + 7L + 2L + 2L M 4L) + 6L) M 8L M (9L M (9L M 9L) + 6L M 6L M 5L + 7L) + 4L
-        sum += 9L M ((8L M 3L M 6L + 8L + 5L) M 8L M 6L + 4L + 8L + 8L) + 6L M ((6L M 9L M 4L + 4L M 8L) M (2L + 6L M 3L + 6L + 4L M 9L))
-        sum += (4L M (5L + 5L + 4L M 8L + 3L)) M 5L M (7L M 3L M 2L) M 2L
-        sum += 2L M 9L + 8L M ((9L M 4L M 7L + 4L + 6L + 8L) + 6L M 3L M 7L M 5L + 2L) M 7L
-        sum += 3L M (4L + 9L M 8L M (3L + 3L + 3L + 3L + 5L) M 4L) + 6L
-        sum += 9L + 9L M 5L M 9L + ((7L M 8L M 8L M 8L) + 5L + 3L)
-        sum += ((6L + 4L M 2L M 7L) M 3L M (5L M 9L M 5L M 2L M 3L M 6L) M 7L M (6L + 8L)) M (2L + 3L M 3L M (5L + 4L + 2L)) + 8L M 9L M 9L
-        sum += 8L + 9L + 5L + 6L
-        sum += (5L + (2L M 9L + 8L M 4L + 5L M 2L) + 5L) + 3L M 9L M 2L + (9L M 4L M 8L)
-        sum += 6L + (8L + 5L M 6L M 5L + (2L M 6L))
-        sum += 2L M ((5L + 4L + 6L + 7L + 4L + 2L) M 6L M 4L) + 2L + 3L + 8L + 6L
-        sum += ((3L M 8L + 8L M 5L M 4L) M (5L M 9L + 3L) M (2L M 6L + 4L + 3L) + 3L + (4L M 9L + 9L)) M 7L + ((9L + 5L + 5L) + 3L + 9L + 5L) + 8L
-        sum += 5L M 5L M 7L + 2L + 4L + 6L
-        sum += 2L M 4L + (2L + 7L M 3L + 9L + 5L) + (8L + 8L M 4L) M 7L
-        sum += (8L + (2L + 8L) M 9L M 8L M 4L) + 8L M 8L M 6L
-        sum += 8L M (3L + 4L M 4L M (2L + 7L M 2L + 5L M 8L)) M 3L
-        sum += ((2L M 8L + 3L) + 3L M 4L + (3L M 9L + 5L M 6L M 6L + 3L) M (5L + 3L M 4L + 6L + 3L M 5L) + 3L) M 6L + 6L + 8L M 2L
-        sum += 4L + 6L + ((9L M 5L + 2L M 8L) + 2L M 3L) + (2L M 7L M (3L M 2L M 4L M 2L) + 6L M (6L + 8L M 8L M 8L + 5L M 9L))
-        sum += 3L + 6L + ((5L M 7L M 9L M 2L M 9L M 3L) + 3L + (3L M 4L + 3L + 7L M 8L) M (3L + 4L))
-        sum += (9L + (4L + 8L M 3L + 7L M 6L M 9L)) M 4L
-        sum += 5L + (7L M 2L M 4L + 8L) M 9L M ((9L + 8L M 8L M 7L + 5L) M 6L M (3L + 7L + 8L M 3L + 7L))
-        sum += (4L M 5L M (9L M 8L)) M 9L M 8L M (4L + 8L M 9L + 9L + 6L) M 6L + 7L
-        sum += (4L M 3L M 8L M 2L M 7L) M 4L
-        sum += 2L + (5L + 5L + (9L M 4L + 8L + 9L + 8L) M 4L + 3L) + 9L + 6L M 7L + 5L
-        sum += (7L M 4L) M 7L M (5L M 9L + 5L + 6L + 6L) M 3L M 9L M 9L
-        sum += 7L + (6L + 7L M 2L M 7L M (5L M 7L + 2L + 6L M 6L)) M 8L
-        sum += 2L M 3L + (3L M 2L M 7L M (7L M 7L + 9L M 7L + 6L)) + 3L + 9L
-        sum += ((3L M 9L + 6L M 6L + 9L) + 2L M 5L + (9L + 8L + 6L M 6L + 6L) M 7L) M (6L + 2L + 5L) + (4L M 5L + 6L) M ((6L M 8L + 8L + 3L) M 7L M 7L M 6L + 4L) M 3L M 6L
-        sum += 3L + (9L + 7L + 2L M 7L + 5L)
-        sum += 2L M 6L + 2L + (9L M 9L) M 9L M 4L
-        sum += ((3L + 8L M 3L M 9L + 6L) M 5L) M 6L M 3L + 6L M 5L + 6L
-        sum += 5L + (7L + 8L)
-        sum += 6L M 4L + (5L M 5L) M ((4L M 3L + 9L + 6L + 3L) + 2L M 3L + 4L) + 9L M (6L M 7L M 4L + 5L)
-        sum += 4L + (6L + (9L M 5L M 7L + 7L + 9L) + 7L) + 7L + 6L + 3L
-        sum += 3L M 4L + (2L + (4L + 8L M 5L M 9L M 7L)) + 4L M 6L
-        sum += 3L + 7L M 3L M (2L + 9L M 2L + 5L) M 5L
-        sum += 2L M 2L + (4L + (5L M 5L)) M 3L
-        sum += ((3L + 6L M 7L + 6L) + 6L + 9L + (7L M 7L + 6L) + 9L M 6L) + (3L M 5L) + 8L + 8L
-        sum += 9L M (3L + 4L M 8L) M 5L + ((8L M 7L M 5L + 2L M 6L + 7L) + 4L M 8L M 5L + 5L) M 8L
-        sum += ((5L M 9L) + 6L + 6L) + 5L
-        sum += (2L M 3L) + (8L M (8L M 3L + 7L M 6L + 3L) + (7L M 7L + 6L + 6L M 8L M 7L) + (3L + 8L M 4L) M 6L) M 9L
-        sum += 5L M 3L M (5L + 8L M 3L + 8L + 8L + 2L) + (7L + 7L M 8L)
-        sum += 2L M 4L M ((9L + 8L M 9L M 6L) M 4L M (5L + 7L + 5L M 3L) M 7L M 2L + (8L M 7L M 3L M 5L))
-        sum += 8L + 6L + 9L M (9L + 9L + (7L + 2L + 3L + 3L + 6L)) M (3L + (4L + 9L M 2L M 3L)) + 4L
-        sum += (4L + 7L + 5L M 8L) M 3L M 3L + 6L M 3L
-        sum += (9L M 8L M 6L + 9L) M 5L M (3L M (8L + 5L M 9L M 4L + 2L M 2L) + 6L M (5L + 7L) M 9L + 6L) + 6L + 4L
-        sum += 7L M 2L M (8L + 5L M 9L M 6L + 9L + (6L + 8L)) M 6L + 3L
-        sum += 2L M 4L M (3L M 8L + 9L)
-        sum += 7L + ((3L M 4L M 3L + 6L + 2L) M 7L M (4L M 4L + 2L)) M 7L M 4L + 3L + 3L
-        sum += 6L M (5L M 8L M 2L M 4L M 3L M 4L) + 4L M 2L + 9L + (7L + 8L M 2L M 3L + (5L M 7L + 6L + 5L) + (5L + 8L))
-        sum += (3L M 4L M 7L + 5L + 7L) + 6L + ((4L M 7L M 8L M 9L + 4L) + 4L M 8L) M 6L M 7L
-        sum += 9L M (7L + 5L M 5L M 9L) + (4L + (2L M 9L M 8L) + 2L M 5L)
-        sum += 6L M 7L M 4L + (4L + 9L M (4L + 2L + 4L M 6L) M 5L) M 3L + ((3L M 3L M 6L M 5L M 9L) + 4L M 2L)
-        sum += 9L M (5L M 3L M 8L + 8L M 4L M 5L) + 2L + (2L M 8L + (6L M 3L + 7L + 9L) + 5L + 3L) M 8L
-        sum += 3L M 4L M 4L + 9L M 4L + (9L + 5L + 8L M (5L + 3L + 5L) M (8L M 6L M 2L) + 2L)
-        sum += 5L M 5L + 2L M 2L
-        sum += 5L + 3L M (7L M (2L + 2L + 6L M 3L M 5L + 5L) + 9L M 3L M (6L M 3L + 6L M 4L)) + 3L
-        sum += (2L + (2L M 6L + 7L M 6L) + (6L + 4L + 7L M 9L M 4L M 8L) + 3L) + 9L + 5L + 3L M 2L
-        sum += 7L + ((2L + 2L + 8L + 3L M 6L) + 2L)
-        sum += 3L M 9L + (5L + 7L + 3L + 9L + 6L) M 8L
-        sum += 2L M ((7L M 9L M 3L) M 7L M 6L) M 8L M 3L
-        sum += 9L M 7L + 7L + 6L + 3L M ((9L + 3L + 6L + 3L M 4L M 2L) + 4L M (3L M 2L) M (6L + 6L M 2L M 4L M 8L + 7L) + 2L M 6L)
-        sum += ((8L + 9L + 8L + 3L M 4L) M 9L M (3L M 6L + 5L) M 6L + (2L M 3L M 4L + 9L)) + 5L + 2L + (4L + (7L M 8L + 4L + 4L M 7L + 8L)) M 5L + 4L
-        sum += 4L + 3L + 6L + 9L + (7L M 9L M 6L M (5L + 8L M 3L + 3L) M 4L + 3L)
-        sum += 2L M (9L + 9L) M 9L M 9L
-        sum += 5L M ((2L + 7L + 7L + 5L + 9L) M 4L) + 7L
-        sum += (6L + 6L M 9L + 3L) + (4L + 9L M 2L + 9L M 2L M 9L) + 7L
-        sum += (6L M 6L) M 7L + 9L M 2L M 2L M (4L + (8L + 7L + 9L + 7L + 4L M 2L) + 6L M 4L + 8L M 5L)
-        sum += ((9L M 7L M 9L) + 6L + 4L) M (6L M (3L + 5L) + 6L M 5L) + 6L + 3L M 2L
-        sum += 6L M 6L + (8L + 3L M 6L + 2L + 8L + 8L)
-        sum += 6L M 8L + ((9L + 3L + 7L M 2L) + 8L) + 3L + 7L
-        sum += 4L + (7L + (3L + 5L) + 6L) M (8L M 3L + 5L + 9L M 8L)
-        sum += 7L M (7L M 6L + (3L + 7L M 9L M 7L M 8L) M 4L + 5L M 3L) + 4L M 2L + 6L + (8L + 6L + 8L M (4L M 3L))
-        sum += 9L M 9L M 6L M ((6L + 9L + 7L) M 5L + 9L + (9L + 4L M 7L)) M 6L
-        sum += (3L + 9L) + ((9L + 3L + 9L + 9L) M 6L + (2L M 6L + 8L M 2L + 2L)) + 3L M 3L M 9L + 3L
-        sum += (2L M (9L M 9L + 9L) M 9L + 9L) M 2L + 2L
-        sum += 5L M 2L M 9L + (9L M 8L M 2L M (6L M 7L M 8L M 5L)) + (5L + 8L M (9L M 6L + 7L M 7L M 7L) M 3L) M 2L
-        sum += 6L M 2L + ((4L + 6L M 3L + 9L + 9L) + 9L + 2L M 7L M 8L)
-        sum += (2L M 8L M 5L M 2L + 5L) M 8L + 7L M 5L M ((5L + 8L M 9L M 4L M 2L) M (9L + 9L + 5L + 7L) + (8L + 6L + 3L M 8L + 7L) M 3L)
-        sum += 4L + 6L M (7L + (6L M 5L) M (5L M 2L M 9L + 4L) + 2L) M 9L
-        sum += 4L + 8L M (6L M 3L M 7L + (8L M 9L + 9L M 2L)) M 5L
-        sum += (2L + 9L) M (8L M 4L M 5L) M 9L
-        sum += (4L + 6L + 5L M 7L + (5L M 4L + 2L M 2L + 9L + 2L)) + 4L + 8L M 3L + 3L
-        sum += 7L + (5L M 5L M (2L M 2L M 8L) M 7L M 8L) M 4L M 6L + ((5L + 3L M 7L + 4L M 7L M 8L) + 2L M 6L M 9L + 8L)
-        sum += 5L + 3L M 7L + (6L + 4L M 9L + 3L)
-        sum += 3L M (2L + 6L + (3L M 7L M 2L + 9L M 9L M 8L) + 9L M 4L) + 6L M (4L M (5L + 2L + 2L M 3L) M 5L + 9L) + 5L
-        sum += 7L M 6L + 2L M ((2L M 9L M 6L + 3L + 2L) M 3L + (2L + 7L + 4L) M 8L)
-        sum += 2L + (3L + 9L) M 7L + 6L M 7L
-        sum += 2L M 5L M 9L M (2L + (5L M 8L M 4L M 4L + 8L + 7L) + 3L M (5L + 4L M 8L + 5L M 9L + 7L))
-        sum += ((4L + 5L + 7L + 4L M 3L) + (9L + 7L + 5L + 7L + 5L) + 8L M 9L + 7L) M 6L + 4L M (6L + 3L + (6L + 7L)) M 8L
-        sum += 9L + 3L + (8L + 4L M (8L + 3L) M 8L M 8L) M (8L M 2L M 9L) M 5L
-        sum += (8L M (3L + 2L M 7L + 2L + 6L) + 9L + 2L M 9L) + 3L M 5L
-        sum += 6L + 6L M 2L M 8L M 5L + 4L
-        sum += (6L + (7L + 2L M 6L + 3L) + (3L + 7L M 5L M 6L + 4L + 9L) M 5L M 3L) M 4L M (6L + 3L M 2L + 4L M (9L + 6L))
-        sum += 2L M ((7L M 6L M 3L + 9L + 9L + 9L) M 2L + 9L M 8L)
-        sum += 9L M (3L M 6L + (9L M 9L + 7L M 9L) + 8L) + 8L + 6L + 4L
-        sum += 4L + 4L M (4L M 8L + 4L M 2L M 2L + 3L) M 3L + 6L + 9L
-        sum += 9L M 9L M 2L + 4L M (2L M 7L M 5L M 2L + 3L)
-        sum += 7L M 4L M 6L M (3L + 2L) M 4L
-        sum += (6L + 3L + 8L M 6L + 8L) + ((6L M 5L M 8L M 8L) + 2L + 8L + 2L M 6L) + 5L + (2L M (6L + 5L + 9L M 9L + 3L) + 2L M 7L) M 6L + ((2L M 8L M 2L M 9L) + 9L)
-        sum += 5L + 3L M ((2L M 7L + 9L M 2L) M 3L) M 6L M 6L + 8L
-        sum += (6L + 3L + (2L + 7L + 4L) + 4L) M 4L M 4L M (9L M 2L M 7L M (9L + 3L + 8L + 5L) M 3L) + 8L
-        sum += 8L + ((9L M 4L M 4L M 3L + 9L) M 3L + (9L + 6L) M 3L) M (9L + 9L) + 6L
-        sum += (9L + (3L + 7L + 9L M 2L M 8L) + 3L M 5L M 7L M 2L) M 6L + 8L M 7L + (5L + 7L + 4L M 5L M 4L)
-        sum += 8L M 2L + ((5L + 9L) + 2L + 8L + (8L M 2L) M 3L + 8L) M 9L + (2L + 8L M (8L + 4L + 7L M 9L) M 4L + 7L + 6L)
-        sum += ((8L M 8L + 7L M 7L + 3L) M 8L M (4L + 8L M 4L + 4L + 4L + 4L)) + 9L M 2L + 8L
-        sum += 5L M (6L M 3L + 4L M 2L + 7L M 5L) M (3L M 7L M 8L M 3L + 3L + 6L) + 6L + 4L + ((4L M 6L + 3L M 8L + 4L + 5L) + (3L M 5L + 8L) + 6L)
-        sum += 6L + (9L M (5L M 2L + 9L + 6L M 2L + 2L) + (4L + 3L + 6L + 5L) M 2L + 5L)
-        sum += 4L + ((3L + 2L M 6L M 3L) M 5L + 8L M (5L M 7L M 4L + 7L M 6L + 6L) + 3L + 7L) + 9L + 8L M 5L
-        sum += 7L M (5L M 5L + 5L M (7L + 6L + 6L + 5L + 2L + 6L) + 6L) + 7L M 8L
-        sum += 9L M ((2L + 9L) M 5L M 7L M 4L) + 9L + 7L M 5L
-        sum += (8L + 9L + (7L M 7L M 5L + 6L) M 4L + (5L M 5L M 4L) + 5L) M 6L + 8L M 6L M 9L M 9L
-        sum += 4L M ((5L M 4L) + 7L) + 2L
-        sum += 2L + (3L M 5L + 7L)
-        sum += 3L + 8L M 5L + 2L M (8L + 4L + 8L M 2L + (8L M 4L M 9L M 3L + 6L) M 4L) M 5L
-        sum += 8L + 2L M 6L M 5L + 8L M (2L + 9L M 7L)
-        sum += (5L + 4L M 5L M 5L M 5L) M 6L + ((9L + 9L) M 7L + 6L + 7L) + 5L M 8L M 7L
-        sum += 4L + (4L M (9L + 3L + 8L) + 4L + (9L M 6L M 2L) + 8L) M 2L
-        sum += (4L M 6L + 5L M 8L M 9L M 7L) M 8L M 7L M ((8L + 6L M 7L + 4L M 9L M 3L) + 7L)
-        sum += 9L + 5L M 2L M ((7L M 9L) + 4L M 4L)
-        sum += 5L M 5L M (4L M 8L + (5L + 8L) + 9L M 6L M 5L)
-        sum += 7L + (7L M 2L) + (4L + 7L M 5L M 5L M 4L)
-        sum += 6L + 4L + 2L + 8L M (6L + 3L M 7L M (5L M 2L M 2L + 5L)) + (7L M 9L M 4L + (2L + 5L + 3L + 5L) + 9L M 9L)
-        sum += (4L M 2L + 9L M 7L M 3L) M (5L M 4L M 2L M 4L M (9L + 4L)) M 2L
-        sum += ((4L + 6L + 5L) M 2L) + 8L M (7L + 9L + 3L M 8L) M 3L M 4L
-        sum += 4L M (9L + 4L M 8L) + 2L M 4L + 9L
-        sum += 4L + (4L + 5L) + 5L M 3L + 9L M 8L
-        sum += 8L + 8L M (6L + 9L + 7L) + (4L M (2L + 5L) + 2L M (6L + 5L + 6L M 8L + 3L M 3L) + 2L) + 7L M (9L + 2L + 2L M (2L M 7L) M 2L)
-        sum += ((9L M 8L M 7L) M 3L M (5L + 6L M 7L + 4L) + 9L + 7L + 4L) M 9L M (7L M 3L M 8L M 7L M 4L) M 7L M 2L
-        sum += (2L M 5L M (8L + 2L) + (2L M 3L M 7L + 6L + 9L) + 6L M 3L) + 5L M 2L M 5L
-        sum += 3L M 4L + (9L M 6L + 2L + 6L + 7L M 2L) + 5L + 6L
-        sum += 3L + ((4L M 6L + 4L) M 4L M (9L M 3L + 5L + 7L M 3L) + 3L) M 6L M 9L + 9L
-        sum += 5L M 4L + ((7L + 9L + 6L + 9L M 7L) + 7L)
-        sum += ((3L + 9L M 2L + 7L M 8L) M 4L + 3L) + (9L + 9L + 5L M (3L M 5L + 7L) + 8L + 9L)
-        sum += 4L + (3L + 4L + 4L M 8L M 6L M 5L) M (7L M 5L M 9L + 7L + 8L)
-        sum += (8L M (3L M 8L + 4L M 4L + 4L)) + 7L M 9L
-        sum += (2L M 2L + 9L) M 5L + (8L + 3L M 3L + 2L) + 7L
-        sum += 2L + 7L
-        sum += 5L + (3L M 2L M 5L + 4L) M (5L M 4L M 9L + 5L) M 8L M 6L M 4L
-        sum += 8L M 7L M 6L + (2L M 7L M (8L + 2L M 3L M 5L) M 5L) + 6L
-        sum += 8L M 5L M (2L M 2L M 6L) M 3L + 7L + 9L
-        sum += ((4L + 4L + 9L) M 5L) M (6L M (6L + 3L)) + 2L M (7L M 6L + 3L)
-        sum += (6L M (3L M 9L M 4L) + 6L M 5L + 5L + 7L) M (7L M 5L) M 2L M 2L M (5L + 5L) M 4L
-        sum += 3L + 7L M (3L + 9L)
-        sum += (9L M 2L M (4L M 6L)) + 9L
-        sum += ((3L M 6L + 5L M 6L + 9L + 6L) M 9L + 9L) M 5L + 3L + 4L
-        sum += (8L + (5L M 7L M 2L + 2L) + 9L M 6L M 9L) M 4L + 4L M 9L + 8L M 5L
-        sum += 8L + 5L + 7L + 8L + 7L
-        sum += 9L + (9L M 7L M 9L M 2L + 9L + 9L) + 7L
-        sum += 3L + 4L + 8L + 5L M (3L + (3L + 7L + 3L)) + 7L
-        sum += 6L + (5L M (2L M 9L M 6L) M 2L M 4L + 9L)
-        sum += 5L + 7L + (8L M 5L M 4L) M 7L
-        sum += 6L + (3L M 7L M 9L + 6L M 2L + 3L) + 2L M 6L M 2L + 5L
-        sum += (9L + 7L + 8L M 7L M 9L) + (5L + 7L M 8L + 3L) M 2L + 3L + (2L M 8L + 9L + (6L M 2L)) + 2L
-        sum += (9L + 5L) + 8L + (5L M 8L + 5L M 2L + 8L) + 2L
-        sum += 2L M (2L M 5L) M (8L + 8L M (2L M 5L + 9L + 9L) + 5L M 8L + 2L) + 6L M 9L
-        sum += (6L M (4L M 5L) + (4L M 5L + 3L M 7L M 2L + 4L)) M 2L M 8L M 2L
-        sum += 8L M 8L + (5L M (3L M 4L M 2L M 2L) + 2L) + 5L
-        sum += 3L + 4L + 9L M 7L + 5L + 3L
-        sum += 3L + 7L + (8L M 5L + 7L M 6L)
-        sum += 9L + 5L M 8L + (6L M (2L + 9L) M 7L + 7L + 8L) + 6L
-        sum += 9L M 4L M (5L M (6L M 6L)) + 7L M (6L + 7L + 5L M 3L M 9L + 4L)
-        sum += 5L + 9L M 7L M (6L + 2L)
-        sum += 8L + (9L + 6L M 5L M (6L + 9L) M 5L) M (3L + 6L + 8L)
-        sum += 2L + (7L M 4L M (9L M 4L M 5L M 2L)) + (8L + 2L) M 4L M (3L + 8L)
-        sum += (5L M 8L M (2L + 7L M 2L) M (6L + 4L M 9L M 8L + 3L + 2L) M 7L) M 8L
-        sum += (8L M (5L M 2L + 5L M 4L + 4L) + 8L) M 4L M 4L M (6L + 6L) + 7L + 9L
-        sum += (7L M 2L + 2L + 9L + 7L) M ((6L + 5L) M 3L) + (2L M 4L + (8L M 7L M 9L M 7L) + 5L + 6L M 9L) + 3L + 4L + 2L
-        sum += 5L + 7L + 4L
-        sum += 4L + 8L M 6L M (9L + 4L M 6L + (9L M 8L) + 5L)
-        sum += 4L + 9L M 2L
-        sum += 2L + (7L M 7L M 2L + 2L M 3L + (6L + 9L M 7L M 4L)) + 5L M 4L
-        sum += (5L + 9L M 9L) M 3L M 2L + 5L + 6L
-        sum += (3L M 6L + 5L + 8L) M 9L + 9L M 7L M 3L + 7L
-        sum += ((7L M 5L + 9L + 8L M 8L) M 5L M 2L M 7L) + (2L + 8L + 5L) M 3L
-        println(sum)
+        val fw = FileWriter("C:\\Projects\\AdventOfCode\\cheatOutput.txt")
+        fw.write("${(5L M (5L M 7L M 6L M 7L + 2L) M 5L + 7L) + 3L M 2L M 8L + 8L}\n")
+        fw.write("${8L M 6L + (5L M (3L + 2L M 8L + 2L + 7L + 4L) + (7L + 5L M 6L) M 9L)}\n")
+        fw.write("${(6L + (2L M 3L)) + (3L M (8L M 6L) + 4L M 5L + 9L) + (7L M 8L M 2L + (2L M 3L M 6L + 2L) M 4L) M 7L + 8L M 4L}\n")
+        fw.write("${5L M (2L M (7L + 9L) M 5L) + 5L + 6L M 7L}\n")
+        fw.write("${7L + (4L M 2L + 5L) + 6L}\n")
+        fw.write("${9L + (7L M (4L + 7L) + 4L M 9L) + 3L + 9L M 5L}\n")
+        fw.write("${(9L + 8L) M 9L + ((9L M 3L M 7L + 9L + 5L) M 2L M 7L M 7L) + 3L M 5L}\n")
+        fw.write("${5L M (8L M (2L + 6L) M 5L M 8L) + 4L}\n")
+        fw.write("${(2L + 9L + 9L + 8L M 6L M 7L) + 9L + 7L + 6L}\n")
+        fw.write("${((9L + 3L M 7L) + 4L + 6L M 6L M 4L + (8L M 7L M 5L + 9L)) M 8L + 7L + 4L + (7L + 7L) M 3L}\n")
+        fw.write("${(2L M 5L) M 2L M (4L + 7L + 2L) + 7L}\n")
+        fw.write("${((8L + 2L) M 2L + 5L M (3L + 6L M 6L) M 2L M (6L + 9L + 9L M 7L)) + 5L + (2L + 8L) M (9L + 6L + 5L + (5L M 5L + 7L M 7L + 7L) M 9L)}\n")
+        fw.write("${5L M (2L + 5L + 8L + 3L + 3L) M (6L M 3L M 6L M 2L M 7L) + 7L}\n")
+        fw.write("${(6L + (9L + 8L M 5L M 8L)) M 8L + 7L M 4L}\n")
+        fw.write("${(3L + 4L M 8L + 7L M 9L M 2L) M 2L + (3L M (4L M 6L M 4L M 9L))}\n")
+        fw.write("${(3L M 4L) M 7L M (5L + 4L M 9L) M ((4L M 7L + 2L) + 9L + 7L M 7L + (3L + 5L M 3L + 7L) M 5L) + 7L M (7L M 7L + 6L + 5L M (4L M 7L M 6L + 4L + 2L) M 7L)}\n")
+        fw.write("${(2L M (5L M 5L + 2L M 3L M 4L M 5L) + (9L M 9L M 9L + 2L) + 9L M 8L + 2L) + 8L}\n")
+        fw.write("${(6L M 3L + (9L M 9L + 2L M 9L)) M (3L M 6L + 5L + 7L M 7L) + 8L M 3L}\n")
+        fw.write("${4L + 3L}\n")
+        fw.write("${(7L + (9L M 2L + 7L + 7L M 5L) M 4L M 8L) + (3L + 4L + (7L + 8L + 6L M 2L + 9L + 3L)) + 6L + (5L + 6L + 7L M 6L + 8L + 5L) M (8L + (7L + 9L M 6L M 7L + 8L) + (4L + 9L M 9L + 2L M 6L))}\n")
+        fw.write("${5L + (9L + 4L M (4L + 6L) M 4L + 5L M 8L) M 2L + 4L + (7L + 2L + 4L M 4L + (8L M 6L + 4L + 4L) M 6L)}\n")
+        fw.write("${(6L M (7L + 5L M 9L M 5L M 6L M 4L)) + (9L + 3L M 5L) + 3L + 4L + 8L + 8L}\n")
+        fw.write("${2L M (7L M 6L M 7L M 7L) M 2L M 5L + 2L}\n")
+        fw.write("${5L + 5L M 2L + (8L + (9L + 2L + 2L + 3L + 5L M 4L) + 7L M 3L M 4L + (8L + 5L M 6L + 5L M 6L M 3L))}\n")
+        fw.write("${9L + 6L}\n")
+        fw.write("${(9L M 3L M 7L + 5L + 7L M 4L) + 2L M 4L + 5L M 8L M (5L + 6L M (3L + 8L + 4L + 4L M 7L) M 9L M 2L + 8L)}\n")
+        fw.write("${(9L M 7L + (3L + 4L + 8L + 7L M 7L)) + 3L + 9L}\n")
+        fw.write("${5L M 4L M 4L + (7L + 7L M (6L M 8L M 7L) + 5L)}\n")
+        fw.write("${(9L M 5L) + (7L + 4L) + (4L M (3L + 8L M 4L M 7L M 6L) M 8L) + (4L + 2L M (6L + 3L) + 2L) + 8L}\n")
+        fw.write("${(2L + 3L) M (9L M 9L M 9L + 4L M (6L M 4L + 4L M 3L)) M 7L M 8L}\n")
+        fw.write("${7L + 3L + 5L + (3L + 3L + 8L + (6L M 3L + 9L + 5L) M (5L M 7L M 8L + 5L) + (3L + 4L M 8L M 8L M 8L + 3L)) M ((3L M 9L) + 3L)}\n")
+        fw.write("${(6L M (3L M 2L) M (8L + 3L + 2L M 3L + 6L) + 9L + 7L) + (5L M (8L M 7L) + 2L M 4L) M 6L + ((3L + 4L) + 8L M (9L + 6L M 4L + 5L)) M 5L}\n")
+        fw.write("${3L + ((5L M 3L M 6L M 3L + 2L M 7L) M 7L) + 2L M 4L}\n")
+        fw.write("${(7L M 5L) M (3L M 3L)}\n")
+        fw.write("${8L + 3L M 3L M (6L + (6L + 9L M 9L) + 8L + 7L) M 2L}\n")
+        fw.write("${5L M (8L + 3L) + 5L + (4L + (7L M 7L) + 7L + 5L) M ((6L + 5L + 3L + 9L + 5L) + 8L + 3L + 4L) M 9L}\n")
+        fw.write("${7L + (4L M 6L M (4L + 8L + 9L M 2L M 3L + 4L) M (5L + 9L M 8L M 7L M 9L) + (5L M 3L M 9L M 2L M 9L) M 2L) M 2L M 6L}\n")
+        fw.write("${8L M (5L M 5L M (2L M 5L M 2L + 4L M 6L) + (7L + 8L) + 5L + 8L) + 9L}\n")
+        fw.write("${5L M 4L M (7L + 4L + 9L + (5L M 2L + 9L) + 7L M 3L)}\n")
+        fw.write("${9L M (8L + (5L + 6L + 2L) M (6L M 7L M 9L) + 8L M 5L) M (3L M 8L) + 7L + 8L}\n")
+        fw.write("${6L + 4L + 6L M 4L M 6L}\n")
+        fw.write("${((2L + 5L + 8L) M (7L + 2L M 8L + 8L + 4L M 3L) + 4L M 9L) M 5L M ((6L + 2L + 9L + 2L M 9L) M 5L M 6L M 3L M 6L + 8L) M 6L + 5L}\n")
+        fw.write("${5L M 5L M 7L M (6L M 6L) M (5L M (8L M 4L M 2L M 9L M 2L))}\n")
+        fw.write("${3L + 6L + 9L M 6L M (6L + 5L + 8L) + (3L M 5L + 6L M 2L + 6L)}\n")
+        fw.write("${((7L + 3L + 9L M 4L + 7L M 7L) M 2L M 5L M 9L M 7L) M 9L M ((5L M 7L + 8L) + 8L M (4L + 4L M 6L M 7L M 6L))}\n")
+        fw.write("${(7L + 6L + (8L + 3L) + 5L + 8L M 2L) M 3L}\n")
+        fw.write("${4L M (8L + 4L M 2L + 3L M 7L) + (7L + (5L + 3L M 9L M 4L) M 5L + 2L) + 6L}\n")
+        fw.write("${8L M 5L M 3L M 3L}\n")
+        fw.write("${8L + 6L + (9L + 6L + 6L + 2L M 8L M 8L) + 8L M (5L M 3L) + 4L}\n")
+        fw.write("${4L M ((3L + 9L) + 4L + 3L M (7L M 3L + 3L) + 3L + 3L) M 9L M (7L + 4L) M 4L M 8L}\n")
+        fw.write("${(8L + 3L + 8L + 3L) + (3L M 8L M 7L + 7L M 3L + 9L) + 5L + 6L}\n")
+        fw.write("${(9L M 7L) + 3L M 4L + 9L M 7L + (9L M 9L M 3L M 7L)}\n")
+        fw.write("${3L + 2L + 4L + 4L M 3L M (6L + 2L M 2L M (5L M 5L M 5L M 8L M 9L) + 5L)}\n")
+        fw.write("${5L + (5L + 3L + (6L M 9L M 9L + 2L + 2L + 4L)) + 8L M (9L M 3L M (7L + 2L M 5L M 7L + 8L M 3L) M (7L M 8L) M (7L M 7L M 5L + 2L + 4L)) M 9L + 2L}\n")
+        fw.write("${7L + 2L M 3L + 5L + (7L M 6L) + 2L}\n")
+        fw.write("${7L + 3L M 9L + 8L M 4L + (5L M 5L M 5L + 8L M 5L)}\n")
+        fw.write("${7L M 7L M ((9L + 3L) M 8L + 5L M 5L + (4L M 5L M 5L + 6L + 4L + 9L)) M 2L + 2L + 8L}\n")
+        fw.write("${(2L + 3L + (2L + 6L) + 7L + 7L M 8L) M 9L + (6L + 5L)}\n")
+        fw.write("${9L + (5L + 4L) M 2L}\n")
+        fw.write("${6L M 6L M 6L M (4L + 7L) M (8L M 8L + 7L + 5L + 6L) M 6L}\n")
+        fw.write("${2L M 6L + (2L + 4L M 4L + 3L) M 5L + 8L}\n")
+        fw.write("${((7L + 8L M 7L) M 7L M 6L + (6L M 7L M 9L + 5L M 6L + 7L) + (4L M 3L M 2L M 7L M 4L + 5L)) + (6L + (6L + 3L)) + 8L}\n")
+        fw.write("${7L + (7L M 9L M 3L + 6L + 5L) + 5L M 2L + 2L + 9L}\n")
+        fw.write("${3L + 3L M (5L M 4L M 7L M 8L) + (8L M 9L + 2L M 6L) + 5L M 7L}\n")
+        fw.write("${(2L + (6L + 9L + 6L) + (4L M 6L M 7L M 7L M 3L) + 8L + (8L + 3L + 9L) M 7L) M (8L + 3L M 9L + 7L M 8L) M 5L M 9L + 3L}\n")
+        fw.write("${((2L M 4L + 8L + 6L M 5L + 7L) + 7L M 5L + (4L + 5L + 5L M 4L) + 2L + 7L) M 4L M 7L M 7L}\n")
+        fw.write("${5L M ((3L + 5L M 2L M 8L M 3L + 6L) + 8L) M 2L}\n")
+        fw.write("${4L + 2L + 4L + (5L + 2L M 7L + 7L M (9L M 3L + 4L) + 4L)}\n")
+        fw.write("${7L + (5L + (4L + 8L) + (3L M 5L + 6L M 7L M 3L M 4L) + 7L)}\n")
+        fw.write("${(4L + 7L M 7L M 9L + (6L + 2L M 3L + 3L M 8L M 3L)) + 9L + (5L + 4L M 7L + 5L + (5L M 5L + 9L + 3L M 3L)) + 6L}\n")
+        fw.write("${6L + 5L M 4L}\n")
+        fw.write("${((5L M 8L + 9L M 7L) M 8L M 5L M 8L + 3L M 5L) + 5L + ((7L M 3L M 7L + 4L M 4L) + 4L + (6L M 3L M 8L M 5L + 5L) M 2L + 7L)}\n")
+        fw.write("${7L + 3L M 9L M 3L + 8L M (4L M 3L M 5L + 7L)}\n")
+        fw.write("${7L M 3L}\n")
+        fw.write("${(4L + 9L) M 4L M ((4L M 9L + 7L M 6L) M 7L + 6L) + 3L}\n")
+        fw.write("${(8L M 9L + 8L) M 3L + 2L}\n")
+        fw.write("${7L + (2L M 8L + 8L M 5L M 2L M 8L)}\n")
+        fw.write("${(2L M (7L M 3L + 3L + 2L + 7L + 6L) M 6L M 4L + 2L M 5L) M 6L}\n")
+        fw.write("${6L + 8L M (4L + 5L + 6L M 3L) M 6L}\n")
+        fw.write("${3L M 8L M 6L M (8L + 6L M 7L + 7L) M 2L + 6L}\n")
+        fw.write("${4L M 9L + 4L M (7L + 5L + 4L M 8L M (9L M 4L)) + (2L + 8L + 3L + 9L + 7L + 6L)}\n")
+        fw.write("${(2L + 3L M 9L M (9L + 5L + 2L M 2L M 6L M 2L) + 3L M 3L) M 6L}\n")
+        fw.write("${9L + (6L + 3L + 9L M 3L) + (9L + 8L M 8L + 8L M 7L M (8L M 2L M 4L + 2L))}\n")
+        fw.write("${2L + (8L + (7L + 2L) + 7L + 8L M 8L) + 9L + (4L M 3L M 8L + 3L M (5L + 9L + 3L)) M ((4L M 5L + 2L M 3L M 4L) + 9L M 3L) M 3L}\n")
+        fw.write("${3L + 6L M (6L + (9L + 3L + 6L + 5L M 9L M 7L) + 9L + 4L + 3L)}\n")
+        fw.write("${5L + 8L + 5L M (2L + (2L M 3L M 2L + 7L + 2L) M 6L + 7L)}\n")
+        fw.write("${4L + (8L M 2L + 2L + (8L + 5L M 5L M 4L + 4L + 2L) + 7L + (7L + 5L M 5L + 6L + 8L + 4L)) M 3L M 4L + (9L M 8L + 3L M 6L + (7L M 7L M 4L + 9L M 2L + 8L) + 8L) M 6L}\n")
+        fw.write("${(4L M 9L M 3L M 3L) + (8L M 8L M 3L + 6L M 9L) M 8L}\n")
+        fw.write("${7L M 6L + (8L M 8L + 9L + 8L M 9L + 7L) + ((8L + 5L M 5L) + 3L + (6L + 6L M 5L M 8L M 4L + 5L) M (9L + 2L + 6L + 9L + 6L) + (5L M 2L + 5L M 4L M 9L) M 9L) + 3L}\n")
+        fw.write("${5L M 8L + 4L M 7L + 5L M ((3L + 7L M 3L + 7L) + 2L + 7L)}\n")
+        fw.write("${5L M ((8L M 9L M 5L + 8L M 4L M 4L) M 7L + (3L M 7L M 9L) M (8L + 8L + 2L M 4L + 4L))}\n")
+        fw.write("${8L + 6L M 9L M (2L + 3L) + (4L M (2L M 3L M 8L)) M 2L}\n")
+        fw.write("${(5L M 2L M 6L + 7L) + (7L + 2L M (5L + 3L M 5L M 7L M 8L + 3L) + 4L + 3L) M 7L}\n")
+        fw.write("${9L + 9L + 3L M (9L + 7L M 2L) + 6L}\n")
+        fw.write("${5L M 4L + 7L M (7L + 8L + 4L) + 4L M 9L}\n")
+        fw.write("${5L M 7L + 2L + 7L + (4L + 7L M 4L M 6L)}\n")
+        fw.write("${((4L + 3L + 2L + 4L M 5L + 8L) + (5L + 8L) + (3L M 6L + 2L + 7L + 7L) M 8L) + 2L + 8L}\n")
+        fw.write("${4L M 8L + 8L + (5L M 5L + 2L + 4L) + (9L + 3L + 9L + 6L M 9L) + 7L}\n")
+        fw.write("${4L + (4L M 7L M 2L M 7L) M 6L M 2L}\n")
+        fw.write("${7L M (4L + 2L + 7L) M (2L + 4L M (4L M 4L + 8L M 3L) M 2L M 7L) + (3L + 8L) M 4L}\n")
+        fw.write("${5L + 2L + 2L M 5L M (3L + (8L + 7L + 5L) + 4L M (2L + 3L) M 7L) M 8L}\n")
+        fw.write("${6L + 4L + (2L + 8L M (4L + 6L) + 5L M 5L) + 6L + (6L + 2L + 2L M 3L + 4L) + 7L}\n")
+        fw.write("${(7L M 6L M 6L) M (9L + (5L M 4L M 3L + 5L + 8L)) M 2L M 2L + 6L}\n")
+        fw.write("${((5L + 8L) + 5L) + 8L + 6L M 8L}\n")
+        fw.write("${4L M (4L M (6L + 5L) + 8L + 5L + (2L + 7L + 2L M 4L M 7L))}\n")
+        fw.write("${(8L M 7L) + 8L}\n")
+        fw.write("${7L + ((2L M 6L M 3L) + 8L + (7L M 4L) M (7L M 2L + 6L + 9L + 8L) M 2L) + 7L}\n")
+        fw.write("${((7L M 8L M 3L + 8L + 4L) + 4L M (5L + 9L M 4L + 3L M 8L) + (7L M 8L) M (5L M 7L + 9L + 5L)) + 2L M 3L + 2L M 6L + 7L}\n")
+        fw.write("${9L M ((3L M 2L + 8L + 5L) M 9L + 5L)}\n")
+        fw.write("${6L M 9L + 3L M 7L + 8L}\n")
+        fw.write("${6L M 8L + 9L M 9L M 4L M ((9L M 9L M 2L + 5L) + 7L)}\n")
+        fw.write("${(8L M 9L + 8L M (4L + 4L + 3L M 6L + 4L M 7L)) M 3L + 7L + (5L + (5L + 4L + 6L + 2L + 2L) + 5L)}\n")
+        fw.write("${7L M 7L M 2L}\n")
+        fw.write("${5L M (9L M 4L M 5L M (4L + 2L + 3L M 2L + 3L M 8L) M 3L) M 3L M 4L M ((9L + 2L) + 7L M (5L + 4L) M 4L M 4L + 7L)}\n")
+        fw.write("${((2L + 3L + 2L M 6L) M (8L M 2L + 3L M 2L + 6L M 6L) M 9L + 2L + (4L M 2L M 3L) M 4L) M 4L + 6L}\n")
+        fw.write("${4L M 5L M 5L M 2L M 9L + 6L}\n")
+        fw.write("${3L M 4L M (3L + (3L M 7L M 2L + 9L) M 7L + 3L M 6L M 4L) M 5L}\n")
+        fw.write("${6L + (6L + 3L + 3L M 5L) + 9L}\n")
+        fw.write("${9L M 2L M 2L + (5L + 7L M 9L) M 8L + (6L + 6L)}\n")
+        fw.write("${3L M 3L + 6L M 5L}\n")
+        fw.write("${(4L + 7L + 5L) + 6L + 2L + 9L M 6L M ((2L M 2L M 7L + 9L) M 6L)}\n")
+        fw.write("${2L M 4L + 3L + 4L + 8L M (5L M 3L)}\n")
+        fw.write("${7L + 6L M 9L M 8L + (5L + 2L + (2L + 7L M 6L M 9L + 4L M 5L))}\n")
+        fw.write("${7L M 3L M ((2L M 9L + 5L + 5L) + 7L + 5L + (6L M 2L + 5L + 3L M 6L))}\n")
+        fw.write("${4L + 9L + (4L + (7L M 7L M 5L) + 3L)}\n")
+        fw.write("${(8L + 6L + 5L M 9L M 9L + 6L) + 6L + 5L + 5L + 4L}\n")
+        fw.write("${(3L + 8L + 4L + 2L) + 6L M 5L + 4L M (7L M 5L M 6L) M 8L}\n")
+        fw.write("${7L M (6L + (4L M 5L + 8L M 9L + 3L) + 7L M 6L M 8L) M 9L + 7L}\n")
+        fw.write("${3L + (2L + 9L + 3L + 6L + 2L) M 3L M (6L M 5L + (2L M 6L + 5L + 6L M 3L) + 4L)}\n")
+        fw.write("${(7L + 6L + (2L + 8L + 5L M 5L M 3L M 8L) M 3L + (7L M 4L + 5L) M 7L) M 3L + ((4L + 3L) M 2L + (8L M 2L + 3L M 2L)) + 8L}\n")
+        fw.write("${(9L + 3L M 6L + (7L + 3L M 8L + 7L) M (5L M 5L M 6L + 8L M 6L M 8L) + 2L) + 6L + 9L}\n")
+        fw.write("${((7L M 4L) + 5L + 6L) M (6L M 6L M 2L) M (3L + (6L + 5L M 6L M 5L M 6L) + 4L)}\n")
+        fw.write("${9L M (8L M 2L + 9L) M (7L + 7L + (9L M 9L + 3L M 8L M 2L + 7L))}\n")
+        fw.write("${(6L + 5L + 9L + (3L + 2L + 9L + 5L M 4L M 7L)) M 5L + ((4L + 4L + 7L) + 6L) + 7L + 3L + (3L + 3L M 5L)}\n")
+        fw.write("${(4L M 5L M 3L) M 8L M 6L + ((7L + 9L + 5L + 5L + 3L) M (9L M 2L M 9L M 4L + 9L + 4L) M (3L + 6L + 3L + 7L M 9L + 5L)) + ((4L + 6L + 8L) M 9L + 3L + 6L + 8L)}\n")
+        fw.write("${4L + ((9L + 2L + 3L + 6L M 4L + 9L) + 3L + 7L) + 5L + 8L + (8L + 5L + 8L)}\n")
+        fw.write("${(7L + 2L) M 4L M 5L}\n")
+        fw.write("${6L M 2L M (8L + 4L + 6L M 3L + (4L M 4L + 8L M 7L M 6L M 2L) + 6L) M 9L M 8L}\n")
+        fw.write("${2L M 2L M (8L M 9L + 4L M 9L + (5L + 4L + 5L) + 3L) M (8L + 7L) + 8L}\n")
+        fw.write("${6L + 4L M 9L M 3L M ((8L + 9L M 7L) M 5L) M ((7L + 7L M 4L + 7L) M (9L M 6L M 9L M 4L) + (5L M 7L) M (8L M 5L + 4L) M 6L)}\n")
+        fw.write("${3L M (5L M 9L M 7L + (4L M 6L M 6L + 8L + 8L M 8L) M 8L M (2L M 8L + 5L)) + 7L + 8L M 6L + 9L}\n")
+        fw.write("${6L + ((2L + 3L + 7L + 9L) M 5L M 2L + 5L M 9L) + 8L M 8L M 8L}\n")
+        fw.write("${5L + 6L M 5L + 4L + 5L M (4L M (3L + 4L + 3L M 7L M 9L + 5L) M (9L + 8L + 2L + 7L))}\n")
+        fw.write("${8L M 7L M 4L + 2L M 7L M (9L M 5L + 6L M 8L + 7L + 6L)}\n")
+        fw.write("${((3L + 8L M 2L + 5L M 9L M 5L) M (7L + 6L M 6L M 7L M 7L + 6L)) M 4L}\n")
+        fw.write("${(2L + (5L M 5L + 5L) M (5L M 3L M 7L + 5L) M 4L + 2L M 9L) M 3L + 9L M 3L + 4L + 7L}\n")
+        fw.write("${4L M 5L M (3L M 4L + 7L + (3L + 9L M 5L + 6L + 3L + 6L)) + (3L + 9L + (7L + 6L M 7L + 6L) + 4L) + 7L}\n")
+        fw.write("${5L M ((5L M 4L + 8L + 7L) M 7L M 3L + 6L M (8L + 2L)) + 3L M (5L M 7L)}\n")
+        fw.write("${8L M 2L M (6L + 5L + 5L) + (9L M 4L M (7L + 9L) M 4L + 6L + 3L) + (7L M 6L + (5L M 5L M 5L + 6L + 3L + 5L) M 5L + 3L) + 4L}\n")
+        fw.write("${(6L M 7L M 8L M (2L M 9L) + 9L + 2L) + 2L M 7L + 5L}\n")
+        fw.write("${3L M 3L + 5L + 6L}\n")
+        fw.write("${8L M (3L M 3L) + 8L M (9L M 6L M (6L + 9L M 4L M 9L + 6L))}\n")
+        fw.write("${3L M 3L + (9L + 6L) + 2L + 6L}\n")
+        fw.write("${8L + 8L + 2L + 2L M 6L M 7L}\n")
+        fw.write("${4L M (6L + 7L) M (2L M 8L + 6L + 6L) M 2L M 2L M 7L}\n")
+        fw.write("${5L M 5L M 6L + 3L M (7L M 5L + 6L M 6L) M 9L}\n")
+        fw.write("${3L + 6L + 9L M (8L M 3L M 6L M 6L M (7L + 2L M 9L M 8L + 2L + 2L))}\n")
+        fw.write("${7L M 5L + (7L M 4L + 4L M 3L + (7L + 6L))}\n")
+        fw.write("${8L + (8L M 8L M 2L) M 6L + 4L M (6L + (2L M 6L + 2L + 8L) M 3L M 3L)}\n")
+        fw.write("${3L + 7L + (2L + 2L + 3L M (2L M 5L M 7L + 9L + 2L) + 7L + 5L)}\n")
+        fw.write("${3L + (2L + (5L + 5L + 3L M 2L)) + 2L}\n")
+        fw.write("${9L + 8L + 7L + 3L + (8L + 5L + 3L + 3L M 6L) M 3L}\n")
+        fw.write("${4L M 9L + 4L + 7L + 6L}\n")
+        fw.write("${9L + 7L M 8L M 2L M 6L + (5L M 2L + 9L + (7L + 7L + 9L + 9L))}\n")
+        fw.write("${(3L + (5L M 9L) M (8L M 9L M 3L + 4L + 2L + 5L)) + 5L M (7L M 4L) + 3L + ((9L + 3L) M 5L M (7L + 4L) + 6L)}\n")
+        fw.write("${6L + 8L + 9L}\n")
+        fw.write("${((2L + 9L + 9L) + 2L M 9L M 9L) + 8L + 3L + ((6L + 2L + 4L M 8L + 7L M 2L) + 5L)}\n")
+        fw.write("${(3L + 9L + 2L M 8L + 5L + 3L) M 8L}\n")
+        fw.write("${8L + (6L M (2L + 4L M 5L + 6L + 7L) M 6L M 7L) M 8L + 8L + 9L}\n")
+        fw.write("${((8L M 9L + 6L M 3L + 6L M 7L) M 6L M 4L + 6L) M ((5L + 2L + 9L + 6L + 2L M 5L) M (3L + 8L M 7L) + 5L M 8L) + 8L + 3L M 8L}\n")
+        fw.write("${4L + 7L M (6L + 3L) + 5L}\n")
+        fw.write("${(4L + (2L + 4L M 3L M 4L) M (5L + 7L M 2L + 7L M 8L)) M 3L}\n")
+        fw.write("${(2L + 7L + (7L M 4L + 8L M 3L)) M 4L + 4L + 6L + (5L M 4L M 4L + 3L)}\n")
+        fw.write("${(2L + 4L) + (5L M 8L + 2L + (4L + 4L + 2L M 9L + 5L + 7L) M (4L + 6L + 6L)) + 3L M 3L + 8L M 8L}\n")
+        fw.write("${6L + 7L M 4L M 9L + 3L}\n")
+        fw.write("${7L + 9L + ((2L + 2L) M 3L + 9L) M 8L}\n")
+        fw.write("${9L M 2L M 8L M (3L M 7L M 4L + 5L M 4L)}\n")
+        fw.write("${5L M 3L}\n")
+        fw.write("${4L M 5L + 4L M (7L M 3L M 7L M (8L M 5L) M 9L) M 5L}\n")
+        fw.write("${9L M (4L + 8L) M 9L + 3L M (5L + 7L)}\n")
+        fw.write("${6L + ((9L M 8L) + 3L M 8L + (3L + 4L M 9L + 8L M 6L M 4L)) + 6L M 9L M 5L M 3L}\n")
+        fw.write("${((6L M 9L M 8L M 6L + 7L M 6L) M 8L M 6L) M (3L M (8L M 6L + 3L + 7L M 4L M 9L) M 4L M 3L) + 5L}\n")
+        fw.write("${(7L + 3L) + 9L M (3L M 9L) M (5L M 3L + 2L + 2L + 4L) M 6L + 7L}\n")
+        fw.write("${(2L + (4L + 4L)) M (6L + 7L) M 5L M 9L + 3L}\n")
+        fw.write("${3L + (4L + 6L) + 3L M 8L M (4L M 5L + 6L M 5L) + (5L + 2L + 6L + 7L M 5L)}\n")
+        fw.write("${((5L M 6L + 9L) M 2L M (8L M 5L + 5L M 5L + 7L) M 9L M 2L + 6L) + 2L M 9L M (2L + 4L M 5L + 6L + 6L)}\n")
+        fw.write("${6L M 9L + 9L + 5L M ((3L + 6L M 3L M 9L + 9L) M 2L M (7L + 6L + 9L M 8L) M (5L M 8L) + 9L M 2L)}\n")
+        fw.write("${(9L + 3L + 8L) + 7L M 5L M (4L + (3L + 4L M 2L + 5L + 9L) M 2L + 9L + 8L) M 8L}\n")
+        fw.write("${(5L M 4L + 4L + 8L + (2L M 2L + 5L + 3L M 7L) M 3L) M (7L M 5L + 4L + 4L M 5L M 2L) + 9L M (3L M (3L + 7L M 3L) M 9L M 5L + 7L) M 9L + 8L}\n")
+        fw.write("${(4L M 9L + 5L + 5L M 4L M (4L + 7L M 3L + 3L M 3L M 6L)) M 3L M 9L M 3L}\n")
+        fw.write("${5L + 9L + (5L + 8L) + (4L M 7L M 3L + 6L)}\n")
+        fw.write("${2L + 4L + ((5L + 7L) M 3L M 5L) M (5L M 7L + (7L M 9L M 9L + 7L + 5L) M 4L) + 4L}\n")
+        fw.write("${(3L + 6L M 4L) + 2L}\n")
+        fw.write("${(2L + 9L) + (9L + 7L + 4L M 4L) + 5L + 8L}\n")
+        fw.write("${7L M 7L + ((2L + 6L + 5L) M 2L + (9L M 9L M 7L M 5L) + 7L + 7L) M 3L}\n")
+        fw.write("${((4L + 5L M 8L) + 6L M 6L + 5L + (5L + 6L)) M 8L M 2L + 5L M 4L M 7L}\n")
+        fw.write("${3L M ((2L M 5L M 7L M 7L + 2L) + 7L + (8L + 7L + 2L + 2L M 4L) + 6L) M 8L M (9L M (9L M 9L) + 6L M 6L M 5L + 7L) + 4L}\n")
+        fw.write("${9L M ((8L M 3L M 6L + 8L + 5L) M 8L M 6L + 4L + 8L + 8L) + 6L M ((6L M 9L M 4L + 4L M 8L) M (2L + 6L M 3L + 6L + 4L M 9L))}\n")
+        fw.write("${(4L M (5L + 5L + 4L M 8L + 3L)) M 5L M (7L M 3L M 2L) M 2L}\n")
+        fw.write("${2L M 9L + 8L M ((9L M 4L M 7L + 4L + 6L + 8L) + 6L M 3L M 7L M 5L + 2L) M 7L}\n")
+        fw.write("${3L M (4L + 9L M 8L M (3L + 3L + 3L + 3L + 5L) M 4L) + 6L}\n")
+        fw.write("${9L + 9L M 5L M 9L + ((7L M 8L M 8L M 8L) + 5L + 3L)}\n")
+        fw.write("${((6L + 4L M 2L M 7L) M 3L M (5L M 9L M 5L M 2L M 3L M 6L) M 7L M (6L + 8L)) M (2L + 3L M 3L M (5L + 4L + 2L)) + 8L M 9L M 9L}\n")
+        fw.write("${8L + 9L + 5L + 6L}\n")
+        fw.write("${(5L + (2L M 9L + 8L M 4L + 5L M 2L) + 5L) + 3L M 9L M 2L + (9L M 4L M 8L)}\n")
+        fw.write("${6L + (8L + 5L M 6L M 5L + (2L M 6L))}\n")
+        fw.write("${2L M ((5L + 4L + 6L + 7L + 4L + 2L) M 6L M 4L) + 2L + 3L + 8L + 6L}\n")
+        fw.write("${((3L M 8L + 8L M 5L M 4L) M (5L M 9L + 3L) M (2L M 6L + 4L + 3L) + 3L + (4L M 9L + 9L)) M 7L + ((9L + 5L + 5L) + 3L + 9L + 5L) + 8L}\n")
+        fw.write("${5L M 5L M 7L + 2L + 4L + 6L}\n")
+        fw.write("${2L M 4L + (2L + 7L M 3L + 9L + 5L) + (8L + 8L M 4L) M 7L}\n")
+        fw.write("${(8L + (2L + 8L) M 9L M 8L M 4L) + 8L M 8L M 6L}\n")
+        fw.write("${8L M (3L + 4L M 4L M (2L + 7L M 2L + 5L M 8L)) M 3L}\n")
+        fw.write("${((2L M 8L + 3L) + 3L M 4L + (3L M 9L + 5L M 6L M 6L + 3L) M (5L + 3L M 4L + 6L + 3L M 5L) + 3L) M 6L + 6L + 8L M 2L}\n")
+        fw.write("${4L + 6L + ((9L M 5L + 2L M 8L) + 2L M 3L) + (2L M 7L M (3L M 2L M 4L M 2L) + 6L M (6L + 8L M 8L M 8L + 5L M 9L))}\n")
+        fw.write("${3L + 6L + ((5L M 7L M 9L M 2L M 9L M 3L) + 3L + (3L M 4L + 3L + 7L M 8L) M (3L + 4L))}\n")
+        fw.write("${(9L + (4L + 8L M 3L + 7L M 6L M 9L)) M 4L}\n")
+        fw.write("${5L + (7L M 2L M 4L + 8L) M 9L M ((9L + 8L M 8L M 7L + 5L) M 6L M (3L + 7L + 8L M 3L + 7L))}\n")
+        fw.write("${(4L M 5L M (9L M 8L)) M 9L M 8L M (4L + 8L M 9L + 9L + 6L) M 6L + 7L}\n")
+        fw.write("${(4L M 3L M 8L M 2L M 7L) M 4L}\n")
+        fw.write("${2L + (5L + 5L + (9L M 4L + 8L + 9L + 8L) M 4L + 3L) + 9L + 6L M 7L + 5L}\n")
+        fw.write("${(7L M 4L) M 7L M (5L M 9L + 5L + 6L + 6L) M 3L M 9L M 9L}\n")
+        fw.write("${7L + (6L + 7L M 2L M 7L M (5L M 7L + 2L + 6L M 6L)) M 8L}\n")
+        fw.write("${2L M 3L + (3L M 2L M 7L M (7L M 7L + 9L M 7L + 6L)) + 3L + 9L}\n")
+        fw.write("${((3L M 9L + 6L M 6L + 9L) + 2L M 5L + (9L + 8L + 6L M 6L + 6L) M 7L) M (6L + 2L + 5L) + (4L M 5L + 6L) M ((6L M 8L + 8L + 3L) M 7L M 7L M 6L + 4L) M 3L M 6L}\n")
+        fw.write("${3L + (9L + 7L + 2L M 7L + 5L)}\n")
+        fw.write("${2L M 6L + 2L + (9L M 9L) M 9L M 4L}\n")
+        fw.write("${((3L + 8L M 3L M 9L + 6L) M 5L) M 6L M 3L + 6L M 5L + 6L}\n")
+        fw.write("${5L + (7L + 8L)}\n")
+        fw.write("${6L M 4L + (5L M 5L) M ((4L M 3L + 9L + 6L + 3L) + 2L M 3L + 4L) + 9L M (6L M 7L M 4L + 5L)}\n")
+        fw.write("${4L + (6L + (9L M 5L M 7L + 7L + 9L) + 7L) + 7L + 6L + 3L}\n")
+        fw.write("${3L M 4L + (2L + (4L + 8L M 5L M 9L M 7L)) + 4L M 6L}\n")
+        fw.write("${3L + 7L M 3L M (2L + 9L M 2L + 5L) M 5L}\n")
+        fw.write("${2L M 2L + (4L + (5L M 5L)) M 3L}\n")
+        fw.write("${((3L + 6L M 7L + 6L) + 6L + 9L + (7L M 7L + 6L) + 9L M 6L) + (3L M 5L) + 8L + 8L}\n")
+        fw.write("${9L M (3L + 4L M 8L) M 5L + ((8L M 7L M 5L + 2L M 6L + 7L) + 4L M 8L M 5L + 5L) M 8L}\n")
+        fw.write("${((5L M 9L) + 6L + 6L) + 5L}\n")
+        fw.write("${(2L M 3L) + (8L M (8L M 3L + 7L M 6L + 3L) + (7L M 7L + 6L + 6L M 8L M 7L) + (3L + 8L M 4L) M 6L) M 9L}\n")
+        fw.write("${5L M 3L M (5L + 8L M 3L + 8L + 8L + 2L) + (7L + 7L M 8L)}\n")
+        fw.write("${2L M 4L M ((9L + 8L M 9L M 6L) M 4L M (5L + 7L + 5L M 3L) M 7L M 2L + (8L M 7L M 3L M 5L))}\n")
+        fw.write("${8L + 6L + 9L M (9L + 9L + (7L + 2L + 3L + 3L + 6L)) M (3L + (4L + 9L M 2L M 3L)) + 4L}\n")
+        fw.write("${(4L + 7L + 5L M 8L) M 3L M 3L + 6L M 3L}\n")
+        fw.write("${(9L M 8L M 6L + 9L) M 5L M (3L M (8L + 5L M 9L M 4L + 2L M 2L) + 6L M (5L + 7L) M 9L + 6L) + 6L + 4L}\n")
+        fw.write("${7L M 2L M (8L + 5L M 9L M 6L + 9L + (6L + 8L)) M 6L + 3L}\n")
+        fw.write("${2L M 4L M (3L M 8L + 9L)}\n")
+        fw.write("${7L + ((3L M 4L M 3L + 6L + 2L) M 7L M (4L M 4L + 2L)) M 7L M 4L + 3L + 3L}\n")
+        fw.write("${6L M (5L M 8L M 2L M 4L M 3L M 4L) + 4L M 2L + 9L + (7L + 8L M 2L M 3L + (5L M 7L + 6L + 5L) + (5L + 8L))}\n")
+        fw.write("${(3L M 4L M 7L + 5L + 7L) + 6L + ((4L M 7L M 8L M 9L + 4L) + 4L M 8L) M 6L M 7L}\n")
+        fw.write("${9L M (7L + 5L M 5L M 9L) + (4L + (2L M 9L M 8L) + 2L M 5L)}\n")
+        fw.write("${6L M 7L M 4L + (4L + 9L M (4L + 2L + 4L M 6L) M 5L) M 3L + ((3L M 3L M 6L M 5L M 9L) + 4L M 2L)}\n")
+        fw.write("${9L M (5L M 3L M 8L + 8L M 4L M 5L) + 2L + (2L M 8L + (6L M 3L + 7L + 9L) + 5L + 3L) M 8L}\n")
+        fw.write("${3L M 4L M 4L + 9L M 4L + (9L + 5L + 8L M (5L + 3L + 5L) M (8L M 6L M 2L) + 2L)}\n")
+        fw.write("${5L M 5L + 2L M 2L}\n")
+        fw.write("${5L + 3L M (7L M (2L + 2L + 6L M 3L M 5L + 5L) + 9L M 3L M (6L M 3L + 6L M 4L)) + 3L}\n")
+        fw.write("${(2L + (2L M 6L + 7L M 6L) + (6L + 4L + 7L M 9L M 4L M 8L) + 3L) + 9L + 5L + 3L M 2L}\n")
+        fw.write("${7L + ((2L + 2L + 8L + 3L M 6L) + 2L)}\n")
+        fw.write("${3L M 9L + (5L + 7L + 3L + 9L + 6L) M 8L}\n")
+        fw.write("${2L M ((7L M 9L M 3L) M 7L M 6L) M 8L M 3L}\n")
+        fw.write("${9L M 7L + 7L + 6L + 3L M ((9L + 3L + 6L + 3L M 4L M 2L) + 4L M (3L M 2L) M (6L + 6L M 2L M 4L M 8L + 7L) + 2L M 6L)}\n")
+        fw.write("${((8L + 9L + 8L + 3L M 4L) M 9L M (3L M 6L + 5L) M 6L + (2L M 3L M 4L + 9L)) + 5L + 2L + (4L + (7L M 8L + 4L + 4L M 7L + 8L)) M 5L + 4L}\n")
+        fw.write("${4L + 3L + 6L + 9L + (7L M 9L M 6L M (5L + 8L M 3L + 3L) M 4L + 3L)}\n")
+        fw.write("${2L M (9L + 9L) M 9L M 9L}\n")
+        fw.write("${5L M ((2L + 7L + 7L + 5L + 9L) M 4L) + 7L}\n")
+        fw.write("${(6L + 6L M 9L + 3L) + (4L + 9L M 2L + 9L M 2L M 9L) + 7L}\n")
+        fw.write("${(6L M 6L) M 7L + 9L M 2L M 2L M (4L + (8L + 7L + 9L + 7L + 4L M 2L) + 6L M 4L + 8L M 5L)}\n")
+        fw.write("${((9L M 7L M 9L) + 6L + 4L) M (6L M (3L + 5L) + 6L M 5L) + 6L + 3L M 2L}\n")
+        fw.write("${6L M 6L + (8L + 3L M 6L + 2L + 8L + 8L)}\n")
+        fw.write("${6L M 8L + ((9L + 3L + 7L M 2L) + 8L) + 3L + 7L}\n")
+        fw.write("${4L + (7L + (3L + 5L) + 6L) M (8L M 3L + 5L + 9L M 8L)}\n")
+        fw.write("${7L M (7L M 6L + (3L + 7L M 9L M 7L M 8L) M 4L + 5L M 3L) + 4L M 2L + 6L + (8L + 6L + 8L M (4L M 3L))}\n")
+        fw.write("${9L M 9L M 6L M ((6L + 9L + 7L) M 5L + 9L + (9L + 4L M 7L)) M 6L}\n")
+        fw.write("${(3L + 9L) + ((9L + 3L + 9L + 9L) M 6L + (2L M 6L + 8L M 2L + 2L)) + 3L M 3L M 9L + 3L}\n")
+        fw.write("${(2L M (9L M 9L + 9L) M 9L + 9L) M 2L + 2L}\n")
+        fw.write("${5L M 2L M 9L + (9L M 8L M 2L M (6L M 7L M 8L M 5L)) + (5L + 8L M (9L M 6L + 7L M 7L M 7L) M 3L) M 2L}\n")
+        fw.write("${6L M 2L + ((4L + 6L M 3L + 9L + 9L) + 9L + 2L M 7L M 8L)}\n")
+        fw.write("${(2L M 8L M 5L M 2L + 5L) M 8L + 7L M 5L M ((5L + 8L M 9L M 4L M 2L) M (9L + 9L + 5L + 7L) + (8L + 6L + 3L M 8L + 7L) M 3L)}\n")
+        fw.write("${4L + 6L M (7L + (6L M 5L) M (5L M 2L M 9L + 4L) + 2L) M 9L}\n")
+        fw.write("${4L + 8L M (6L M 3L M 7L + (8L M 9L + 9L M 2L)) M 5L}\n")
+        fw.write("${(2L + 9L) M (8L M 4L M 5L) M 9L}\n")
+        fw.write("${(4L + 6L + 5L M 7L + (5L M 4L + 2L M 2L + 9L + 2L)) + 4L + 8L M 3L + 3L}\n")
+        fw.write("${7L + (5L M 5L M (2L M 2L M 8L) M 7L M 8L) M 4L M 6L + ((5L + 3L M 7L + 4L M 7L M 8L) + 2L M 6L M 9L + 8L)}\n")
+        fw.write("${5L + 3L M 7L + (6L + 4L M 9L + 3L)}\n")
+        fw.write("${3L M (2L + 6L + (3L M 7L M 2L + 9L M 9L M 8L) + 9L M 4L) + 6L M (4L M (5L + 2L + 2L M 3L) M 5L + 9L) + 5L}\n")
+        fw.write("${7L M 6L + 2L M ((2L M 9L M 6L + 3L + 2L) M 3L + (2L + 7L + 4L) M 8L)}\n")
+        fw.write("${2L + (3L + 9L) M 7L + 6L M 7L}\n")
+        fw.write("${2L M 5L M 9L M (2L + (5L M 8L M 4L M 4L + 8L + 7L) + 3L M (5L + 4L M 8L + 5L M 9L + 7L))}\n")
+        fw.write("${((4L + 5L + 7L + 4L M 3L) + (9L + 7L + 5L + 7L + 5L) + 8L M 9L + 7L) M 6L + 4L M (6L + 3L + (6L + 7L)) M 8L}\n")
+        fw.write("${9L + 3L + (8L + 4L M (8L + 3L) M 8L M 8L) M (8L M 2L M 9L) M 5L}\n")
+        fw.write("${(8L M (3L + 2L M 7L + 2L + 6L) + 9L + 2L M 9L) + 3L M 5L}\n")
+        fw.write("${6L + 6L M 2L M 8L M 5L + 4L}\n")
+        fw.write("${(6L + (7L + 2L M 6L + 3L) + (3L + 7L M 5L M 6L + 4L + 9L) M 5L M 3L) M 4L M (6L + 3L M 2L + 4L M (9L + 6L))}\n")
+        fw.write("${2L M ((7L M 6L M 3L + 9L + 9L + 9L) M 2L + 9L M 8L)}\n")
+        fw.write("${9L M (3L M 6L + (9L M 9L + 7L M 9L) + 8L) + 8L + 6L + 4L}\n")
+        fw.write("${4L + 4L M (4L M 8L + 4L M 2L M 2L + 3L) M 3L + 6L + 9L}\n")
+        fw.write("${9L M 9L M 2L + 4L M (2L M 7L M 5L M 2L + 3L)}\n")
+        fw.write("${7L M 4L M 6L M (3L + 2L) M 4L}\n")
+        fw.write("${(6L + 3L + 8L M 6L + 8L) + ((6L M 5L M 8L M 8L) + 2L + 8L + 2L M 6L) + 5L + (2L M (6L + 5L + 9L M 9L + 3L) + 2L M 7L) M 6L + ((2L M 8L M 2L M 9L) + 9L)}\n")
+        fw.write("${5L + 3L M ((2L M 7L + 9L M 2L) M 3L) M 6L M 6L + 8L}\n")
+        fw.write("${(6L + 3L + (2L + 7L + 4L) + 4L) M 4L M 4L M (9L M 2L M 7L M (9L + 3L + 8L + 5L) M 3L) + 8L}\n")
+        fw.write("${8L + ((9L M 4L M 4L M 3L + 9L) M 3L + (9L + 6L) M 3L) M (9L + 9L) + 6L}\n")
+        fw.write("${(9L + (3L + 7L + 9L M 2L M 8L) + 3L M 5L M 7L M 2L) M 6L + 8L M 7L + (5L + 7L + 4L M 5L M 4L)}\n")
+        fw.write("${8L M 2L + ((5L + 9L) + 2L + 8L + (8L M 2L) M 3L + 8L) M 9L + (2L + 8L M (8L + 4L + 7L M 9L) M 4L + 7L + 6L)}\n")
+        fw.write("${((8L M 8L + 7L M 7L + 3L) M 8L M (4L + 8L M 4L + 4L + 4L + 4L)) + 9L M 2L + 8L}\n")
+        fw.write("${5L M (6L M 3L + 4L M 2L + 7L M 5L) M (3L M 7L M 8L M 3L + 3L + 6L) + 6L + 4L + ((4L M 6L + 3L M 8L + 4L + 5L) + (3L M 5L + 8L) + 6L)}\n")
+        fw.write("${6L + (9L M (5L M 2L + 9L + 6L M 2L + 2L) + (4L + 3L + 6L + 5L) M 2L + 5L)}\n")
+        fw.write("${4L + ((3L + 2L M 6L M 3L) M 5L + 8L M (5L M 7L M 4L + 7L M 6L + 6L) + 3L + 7L) + 9L + 8L M 5L}\n")
+        fw.write("${7L M (5L M 5L + 5L M (7L + 6L + 6L + 5L + 2L + 6L) + 6L) + 7L M 8L}\n")
+        fw.write("${9L M ((2L + 9L) M 5L M 7L M 4L) + 9L + 7L M 5L}\n")
+        fw.write("${(8L + 9L + (7L M 7L M 5L + 6L) M 4L + (5L M 5L M 4L) + 5L) M 6L + 8L M 6L M 9L M 9L}\n")
+        fw.write("${4L M ((5L M 4L) + 7L) + 2L}\n")
+        fw.write("${2L + (3L M 5L + 7L)}\n")
+        fw.write("${3L + 8L M 5L + 2L M (8L + 4L + 8L M 2L + (8L M 4L M 9L M 3L + 6L) M 4L) M 5L}\n")
+        fw.write("${8L + 2L M 6L M 5L + 8L M (2L + 9L M 7L)}\n")
+        fw.write("${(5L + 4L M 5L M 5L M 5L) M 6L + ((9L + 9L) M 7L + 6L + 7L) + 5L M 8L M 7L}\n")
+        fw.write("${4L + (4L M (9L + 3L + 8L) + 4L + (9L M 6L M 2L) + 8L) M 2L}\n")
+        fw.write("${(4L M 6L + 5L M 8L M 9L M 7L) M 8L M 7L M ((8L + 6L M 7L + 4L M 9L M 3L) + 7L)}\n")
+        fw.write("${9L + 5L M 2L M ((7L M 9L) + 4L M 4L)}\n")
+        fw.write("${5L M 5L M (4L M 8L + (5L + 8L) + 9L M 6L M 5L)}\n")
+        fw.write("${7L + (7L M 2L) + (4L + 7L M 5L M 5L M 4L)}\n")
+        fw.write("${6L + 4L + 2L + 8L M (6L + 3L M 7L M (5L M 2L M 2L + 5L)) + (7L M 9L M 4L + (2L + 5L + 3L + 5L) + 9L M 9L)}\n")
+        fw.write("${(4L M 2L + 9L M 7L M 3L) M (5L M 4L M 2L M 4L M (9L + 4L)) M 2L}\n")
+        fw.write("${((4L + 6L + 5L) M 2L) + 8L M (7L + 9L + 3L M 8L) M 3L M 4L}\n")
+        fw.write("${4L M (9L + 4L M 8L) + 2L M 4L + 9L}\n")
+        fw.write("${4L + (4L + 5L) + 5L M 3L + 9L M 8L}\n")
+        fw.write("${8L + 8L M (6L + 9L + 7L) + (4L M (2L + 5L) + 2L M (6L + 5L + 6L M 8L + 3L M 3L) + 2L) + 7L M (9L + 2L + 2L M (2L M 7L) M 2L)}\n")
+        fw.write("${((9L M 8L M 7L) M 3L M (5L + 6L M 7L + 4L) + 9L + 7L + 4L) M 9L M (7L M 3L M 8L M 7L M 4L) M 7L M 2L}\n")
+        fw.write("${(2L M 5L M (8L + 2L) + (2L M 3L M 7L + 6L + 9L) + 6L M 3L) + 5L M 2L M 5L}\n")
+        fw.write("${3L M 4L + (9L M 6L + 2L + 6L + 7L M 2L) + 5L + 6L}\n")
+        fw.write("${3L + ((4L M 6L + 4L) M 4L M (9L M 3L + 5L + 7L M 3L) + 3L) M 6L M 9L + 9L}\n")
+        fw.write("${5L M 4L + ((7L + 9L + 6L + 9L M 7L) + 7L)}\n")
+        fw.write("${((3L + 9L M 2L + 7L M 8L) M 4L + 3L) + (9L + 9L + 5L M (3L M 5L + 7L) + 8L + 9L)}\n")
+        fw.write("${4L + (3L + 4L + 4L M 8L M 6L M 5L) M (7L M 5L M 9L + 7L + 8L)}\n")
+        fw.write("${(8L M (3L M 8L + 4L M 4L + 4L)) + 7L M 9L}\n")
+        fw.write("${(2L M 2L + 9L) M 5L + (8L + 3L M 3L + 2L) + 7L}\n")
+        fw.write("${2L + 7L}\n")
+        fw.write("${5L + (3L M 2L M 5L + 4L) M (5L M 4L M 9L + 5L) M 8L M 6L M 4L}\n")
+        fw.write("${8L M 7L M 6L + (2L M 7L M (8L + 2L M 3L M 5L) M 5L) + 6L}\n")
+        fw.write("${8L M 5L M (2L M 2L M 6L) M 3L + 7L + 9L}\n")
+        fw.write("${((4L + 4L + 9L) M 5L) M (6L M (6L + 3L)) + 2L M (7L M 6L + 3L)}\n")
+        fw.write("${(6L M (3L M 9L M 4L) + 6L M 5L + 5L + 7L) M (7L M 5L) M 2L M 2L M (5L + 5L) M 4L}\n")
+        fw.write("${3L + 7L M (3L + 9L)}\n")
+        fw.write("${(9L M 2L M (4L M 6L)) + 9L}\n")
+        fw.write("${((3L M 6L + 5L M 6L + 9L + 6L) M 9L + 9L) M 5L + 3L + 4L}\n")
+        fw.write("${(8L + (5L M 7L M 2L + 2L) + 9L M 6L M 9L) M 4L + 4L M 9L + 8L M 5L}\n")
+        fw.write("${8L + 5L + 7L + 8L + 7L}\n")
+        fw.write("${9L + (9L M 7L M 9L M 2L + 9L + 9L) + 7L}\n")
+        fw.write("${3L + 4L + 8L + 5L M (3L + (3L + 7L + 3L)) + 7L}\n")
+        fw.write("${6L + (5L M (2L M 9L M 6L) M 2L M 4L + 9L)}\n")
+        fw.write("${5L + 7L + (8L M 5L M 4L) M 7L}\n")
+        fw.write("${6L + (3L M 7L M 9L + 6L M 2L + 3L) + 2L M 6L M 2L + 5L}\n")
+        fw.write("${(9L + 7L + 8L M 7L M 9L) + (5L + 7L M 8L + 3L) M 2L + 3L + (2L M 8L + 9L + (6L M 2L)) + 2L}\n")
+        fw.write("${(9L + 5L) + 8L + (5L M 8L + 5L M 2L + 8L) + 2L}\n")
+        fw.write("${2L M (2L M 5L) M (8L + 8L M (2L M 5L + 9L + 9L) + 5L M 8L + 2L) + 6L M 9L}\n")
+        fw.write("${(6L M (4L M 5L) + (4L M 5L + 3L M 7L M 2L + 4L)) M 2L M 8L M 2L}\n")
+        fw.write("${8L M 8L + (5L M (3L M 4L M 2L M 2L) + 2L) + 5L}\n")
+        fw.write("${3L + 4L + 9L M 7L + 5L + 3L}\n")
+        fw.write("${3L + 7L + (8L M 5L + 7L M 6L)}\n")
+        fw.write("${9L + 5L M 8L + (6L M (2L + 9L) M 7L + 7L + 8L) + 6L}\n")
+        fw.write("${9L M 4L M (5L M (6L M 6L)) + 7L M (6L + 7L + 5L M 3L M 9L + 4L)}\n")
+        fw.write("${5L + 9L M 7L M (6L + 2L)}\n")
+        fw.write("${8L + (9L + 6L M 5L M (6L + 9L) M 5L) M (3L + 6L + 8L)}\n")
+        fw.write("${2L + (7L M 4L M (9L M 4L M 5L M 2L)) + (8L + 2L) M 4L M (3L + 8L)}\n")
+        fw.write("${(5L M 8L M (2L + 7L M 2L) M (6L + 4L M 9L M 8L + 3L + 2L) M 7L) M 8L}\n")
+        fw.write("${(8L M (5L M 2L + 5L M 4L + 4L) + 8L) M 4L M 4L M (6L + 6L) + 7L + 9L}\n")
+        fw.write("${(7L M 2L + 2L + 9L + 7L) M ((6L + 5L) M 3L) + (2L M 4L + (8L M 7L M 9L M 7L) + 5L + 6L M 9L) + 3L + 4L + 2L}\n")
+        fw.write("${5L + 7L + 4L}\n")
+        fw.write("${4L + 8L M 6L M (9L + 4L M 6L + (9L M 8L) + 5L)}\n")
+        fw.write("${4L + 9L M 2L}\n")
+        fw.write("${2L + (7L M 7L M 2L + 2L M 3L + (6L + 9L M 7L M 4L)) + 5L M 4L}\n")
+        fw.write("${(5L + 9L M 9L) M 3L M 2L + 5L + 6L}\n")
+        fw.write("${(3L M 6L + 5L + 8L) M 9L + 9L M 7L M 3L + 7L}\n")
+        fw.write("${((7L M 5L + 9L + 8L M 8L) M 5L M 2L M 7L) + (2L + 8L + 5L) M 3L}\n")
+        fw.close()
     }
 
 }
