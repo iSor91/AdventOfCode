@@ -16,7 +16,7 @@ fun main() {
 class Day6_2 : AOC_Runner(){
 
     override fun executeGoal_1() {
-        val groups = allLines.map { it.sort().trim().toCharArray().toSet() }
+        val groups = allLines.map { it.sort().trim().toSet() }
         println(groups.sumBy { it.size })
     }
 
