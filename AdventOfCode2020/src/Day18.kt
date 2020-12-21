@@ -12,45 +12,6 @@ class Day18 : AOC_Runner() {
 
     val elementRegex = Regex("\\d+||\\+|\\*")
 
-    private fun buildAst(it: String, vararg precedence: String) : Ast {
-        val root = Ast(null)
-        var currentAst =root
-        var bracketAst =root
-        var astElement = currentAst.addElement("+")
-        val elementStrings = it.split(" ")
-        for (element in elementStrings) {
-            var currentElement = element
-            var stepup = 0
-            while (!elementRegex.matches(currentElement)) {
-                if (currentElement.startsWith("(")) {
-                    currentElement = currentElement.substring(1)
-                    astElement = currentAst.addElement("?")
-                    currentAst = astElement.addSubAst()
-                    bracketAst = currentAst
-                } else {
-                    currentElement = currentElement.substring(0, currentElement.length - 1)
-                    stepup++
-                }
-            }
-            if(precedence.contains(currentElement)) {
-                val tmp = astElement.element
-                astElement.element = ""
-                currentAst = astElement.addSubAst()
-                currentAst.setPrecedence()
-                astElement.subAst!!.addElement(tmp)
-            } else if(!AstElement(null, currentElement).isNumeric() ) {
-                currentAst = bracketAst
-            }
-            astElement = currentAst.addElement(currentElement)
-            repeat(stepup) {
-                astElement = bracketAst.getNonPrecedenceParent()
-                bracketAst = astElement.parent!!
-                currentAst = bracketAst
-            }
-        }
-        return root
-    }
-
     override fun executeGoal_1() {
         val asts = allLines.map { buildAst(it) }
         asts.forEach { println(it.eval()) }
@@ -75,6 +36,47 @@ class Day18 : AOC_Runner() {
 //        fw.close()
         println(sum)
         //171259538712010 -should be
+    }
+
+    private fun buildAst(it: String, vararg precedence: String) : Ast {
+        val root = Ast(null)
+        var currentAst =root
+        var bracketAst =root
+        var astElement = currentAst.addElement("+")
+        val elementStrings = it.split(" ")
+        for (element in elementStrings) {
+            var currentElement = element
+            var stepup = 0
+            while (!elementRegex.matches(currentElement)) {
+                if (currentElement.startsWith("(")) {
+                    currentElement = currentElement.substring(1)
+                    astElement = currentAst.addElement("?")
+                    currentAst = astElement.addSubAst()
+                    bracketAst = currentAst
+                } else {
+                    currentElement = currentElement.substring(0, currentElement.length - 1)
+                    stepup++
+                }
+            }
+            if(precedence.contains(currentElement)) {
+                if(!currentAst.precedenceAst) { //with this any number of precedence operator with same precendence can be used (if the precendence boolean is changed to precendence level, multiple precendence level could be handled
+                    val tmp = astElement.element
+                    astElement.element = ""
+                    currentAst = astElement.addSubAst()
+                    currentAst.setPrecedence()
+                    astElement.subAst!!.addElement(tmp)
+                }
+            } else if(!AstElement(null, currentElement).isNumeric() ) {
+                currentAst = bracketAst
+            }
+            astElement = currentAst.addElement(currentElement)
+            repeat(stepup) {
+                astElement = bracketAst.getNonPrecedenceParent()
+                bracketAst = astElement.parent!!
+                currentAst = bracketAst
+            }
+        }
+        return root
     }
 
     class Ast (val parent: AstElement?){

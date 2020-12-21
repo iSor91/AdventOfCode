@@ -5,6 +5,10 @@ import kotlin.math.roundToInt
 import kotlin.math.sin
 
 
+fun List<List<Char>>.getColumn(col: Int) : String {
+    return this.map { it.elementAt(col) }.joinToString ("")
+}
+
 open class AOC_Utility {
 
     protected val <E> List<E>.copy: MutableList<E>
