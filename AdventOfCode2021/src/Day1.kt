@@ -92,7 +92,7 @@ Your puzzle answer was 1653.
  */
 //@TestResources
 @Year(2021)
-class Day1: AOC_Runner() {
+class Day1 : AOC_Runner() {
 
     override fun executeGoal_1() {
         val map = allLines.map { s -> s.toInt() }
@@ -101,7 +101,7 @@ class Day1: AOC_Runner() {
     }
 
     private fun calculate(map: List<Int>): List<Int> {
-        val numberOfIncrease = map.mapIndexed { index, s ->
+        val numberOfIncrease = map.mapIndexed { index, _ ->
             if (index == 0) 0 else {
                 if (map[index - 1] < map[index]) 1 else 0
             }
@@ -111,7 +111,8 @@ class Day1: AOC_Runner() {
 
     override fun executeGoal_2() {
         val map = allLines.map { l -> l.toInt() }
-        val subList = map.mapIndexed { i, d -> if(i < map.size - 2) map.subList(i, i+3).sum() else 0 }.subList(0, map.size - 1)
+        val subList =
+            map.mapIndexed { i, _ -> if (i < map.size - 2) map.subList(i, i + 3).sum() else 0 }.subList(0, map.size - 1)
         println(calculate(subList).sum())
     }
 }
