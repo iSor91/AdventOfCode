@@ -1,12 +1,8 @@
 package com.isor.aoc2021
 
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
 
-fun main() {
-    Day1().executeGoals()
-}
 
 /**
  *
@@ -90,29 +86,24 @@ Consider sums of a three-measurement sliding window. How many sums are larger th
 
 Your puzzle answer was 1653.
  */
+
+fun main() {
+    Day1().executeGoals()
+}
+
 //@TestResources
 @Year(2021)
 class Day1 : AOC_Runner() {
 
     override fun executeGoal_1() {
-        val map = allLines.map { s -> s.toInt() }
-        val numberOfIncrease = calculate(map)
-        println(numberOfIncrease.sum())
+        println(calculate(allLines.map { s -> s.toInt() }))
     }
 
-    private fun calculate(map: List<Int>): List<Int> {
-        val numberOfIncrease = map.mapIndexed { index, _ ->
-            if (index == 0) 0 else {
-                if (map[index - 1] < map[index]) 1 else 0
-            }
-        }
-        return numberOfIncrease
+    private fun calculate(map: List<Int>): Int {
+        return map.windowed(2) { w -> w[0] < w[1] }.count{it}
     }
 
     override fun executeGoal_2() {
-        val map = allLines.map { l -> l.toInt() }
-        val subList =
-            map.mapIndexed { i, _ -> if (i < map.size - 2) map.subList(i, i + 3).sum() else 0 }.subList(0, map.size - 1)
-        println(calculate(subList).sum())
+        println(calculate(allLines.map { l -> l.toInt() }.windowed(3, 1, false) { w -> w.sum() }))
     }
 }
