@@ -1,9 +1,12 @@
 package com.isor.aoc2021
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
 import java.util.function.BiFunction
 import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 /**
 --- Day 7: The Treachery of Whales ---
@@ -81,7 +84,10 @@ class Day7: AOC_Runner() {
     }
 
     override fun executeGoal_2() {
-        val consumptionMap = calculateFuelConsumptionMap { aimPos: Int, currPos: Int -> (1..abs(aimPos - currPos)).sum() }
+        val consumptionMap = calculateFuelConsumptionMap { aimPos: Int, currPos: Int ->
+            val maxDistance = abs(aimPos - currPos)
+            (maxDistance/2.0 * (maxDistance+1)).toInt() //arithmetic sequence with maxDistance+1 elements
+        }
         println(consumptionMap.minByOrNull { it.value })
     }
 
