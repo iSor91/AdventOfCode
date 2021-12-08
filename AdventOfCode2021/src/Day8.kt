@@ -13,22 +13,22 @@ As your submarine slowly makes its way through the cave system, you notice that 
 Each digit of a seven-segment display is rendered by turning on or off any of seven segments named a through g:
 
 0:      1:      2:      3:      4:
- aaaa    ....    aaaa    aaaa    ....
+aaaa    ....    aaaa    aaaa    ....
 b    c  .    c  .    c  .    c  b    c
 b    c  .    c  .    c  .    c  b    c
- ....    ....    dddd    dddd    dddd
+....    ....    dddd    dddd    dddd
 e    f  .    f  e    .  .    f  .    f
 e    f  .    f  e    .  .    f  .    f
- gggg    ....    gggg    gggg    ....
+gggg    ....    gggg    gggg    ....
 
 5:      6:      7:      8:      9:
- aaaa    aaaa    aaaa    aaaa    aaaa
+aaaa    aaaa    aaaa    aaaa    aaaa
 b    .  b    .  .    c  b    c  b    c
 b    .  b    .  .    c  b    c  b    c
- dddd    dddd    ....    dddd    dddd
+dddd    dddd    ....    dddd    dddd
 .    f  e    f  .    f  e    f  .    f
 .    f  e    f  .    f  e    f  .    f
- gggg    gggg    ....    gggg    gggg
+gggg    gggg    ....    gggg    gggg
 
 So, to render a 1, only segments c and f would be turned on; the rest would be off. To render a 7, only segments a, c, and f would be turned on.
 
@@ -134,13 +134,13 @@ fun main() {
 }
 
 @Year(2021)
-//@TestResources
-class Day8: AOC_Runner() {
+@TestResources
+class Day8 : AOC_Runner() {
 
-    data class Display(val tries: List<List<String>>, val digits: List<List<String>>)
+    data class Display(val tries: List<Set<String>>, val digits: List<Set<String>>)
 
     private val displays: List<Display> = allLines.map {
-        val digits = "\\w+".toRegex().findAll(it).toList().map { f -> f.value.chunked(1) }
+        val digits = "\\w+".toRegex().findAll(it).toList().map { f -> f.value.chunked(1).toSet() }
         Display(digits.take(10), digits.takeLast(4))
     }
 
@@ -149,8 +149,8 @@ class Day8: AOC_Runner() {
     }
 
     override fun executeGoal_2() {
-        println(displays.sumOf { display ->
-            display.digits.map { s -> deductValue(s.toSet(), calculateWiring(display)) }.joinToString("").toInt()
+        println(displays.sumOf {
+            it.digits.map { s -> deductValue(s, calculateWiring(it)) }.joinToString("").toInt()
         })
     }
 
@@ -173,26 +173,23 @@ class Day8: AOC_Runner() {
      *  - 1/3 have the same value
      *  - 0 has one value
      */
-    private fun calculateWiring(display: Display) : Map<Int, Set<String>>{
+    private fun calculateWiring(display: Display): Map<Int, Set<String>> {
 
-        val digits = mutableMapOf<Int,Set<String>>()
-        val allDigits = display.digits + display.tries
-        val oneSegments = getSegments(allDigits, 2)
+        val digits = mutableMapOf<Int, Set<String>>()
+        val oneSegments = getSegments(display.tries, 2)
         digits[2] = oneSegments
-        val sevenSegments = getSegments(allDigits, 3)
+        val sevenSegments = getSegments(display.tries, 3)
         digits[0] = sevenSegments - oneSegments
-
-        val fourSegments = getSegments(allDigits, 4)
+        val fourSegments = getSegments(display.tries, 4)
         digits[1] = fourSegments - oneSegments
-
-        val eightSegments = getSegments(allDigits, 7)
-        digits[4] = eightSegments - oneSegments - sevenSegments - fourSegments
+        val eightSegments = getSegments(display.tries, 7)
+        digits[4] = eightSegments - fourSegments - sevenSegments
 
         return digits
     }
 
-    private fun getSegments(allDigits: List<List<String>>, length: Int) =
-            allDigits.filter { it.size == length }.flatten().toSet()
+    private fun getSegments(allDigits: List<Set<String>>, length: Int) =
+        allDigits.filter { it.size == length }.flatten().toSet()
 
     /**
      * Deducts the intended value of the String according these rules:
@@ -219,19 +216,19 @@ class Day8: AOC_Runner() {
      *  - 6 otherwise
      */
     private fun deductValue(s: Set<String>, segments: Map<Int, Set<String>>): Int {
-        return when(s.size) {
+        return when (s.size) {
             2 -> 1
             3 -> 7
             4 -> 4
             7 -> 8
             5 -> {
-                if((segments[1]!! - s).size == 1 && (segments[2]!!- s).size == 1)return 2
-                if((segments[4]!! - s).size == 1 && (segments[2]!!- s).size == 1)return 5
-                return 3
+                if (segments[2]!!.intersect(s).size == 2) return 3
+                if (segments[1]!!.intersect(s).size == 1) return 2
+                return 5
             }
             else -> {
-                if((segments[1]!!-s).size == 1) return 0
-                if((segments[4]!!-s).size == 1) return 9
+                if (segments[1]!!.intersect(s).size == 1) return 0
+                if (segments[4]!!.intersect(s).size == 1) return 9
                 return 6
             }
         }
