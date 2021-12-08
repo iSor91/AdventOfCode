@@ -63,7 +63,7 @@ open class AOC_Utility {
         return sb.toString()
     }
 
-    operator fun String.minus(toRemove : String) : String {
+    open operator fun String.minus(toRemove : String) : String {
         val sb = StringBuilder()
         if(this.length != toRemove.length) {
             return this
