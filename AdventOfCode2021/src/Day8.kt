@@ -1,7 +1,133 @@
 package com.isor.aoc2021
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
+
+/**
+--- Day 8: Seven Segment Search ---
+You barely reach the safety of the cave when the whale smashes into the cave mouth, collapsing it. Sensors indicate another exit to this cave at a much greater depth, so you have no choice but to press on.
+
+As your submarine slowly makes its way through the cave system, you notice that the four-digit seven-segment displays in your submarine are malfunctioning; they must have been damaged during the escape. You'll be in a lot of trouble without them, so you'd better figure out what's wrong.
+
+Each digit of a seven-segment display is rendered by turning on or off any of seven segments named a through g:
+
+0:      1:      2:      3:      4:
+ aaaa    ....    aaaa    aaaa    ....
+b    c  .    c  .    c  .    c  b    c
+b    c  .    c  .    c  .    c  b    c
+ ....    ....    dddd    dddd    dddd
+e    f  .    f  e    .  .    f  .    f
+e    f  .    f  e    .  .    f  .    f
+ gggg    ....    gggg    gggg    ....
+
+5:      6:      7:      8:      9:
+ aaaa    aaaa    aaaa    aaaa    aaaa
+b    .  b    .  .    c  b    c  b    c
+b    .  b    .  .    c  b    c  b    c
+ dddd    dddd    ....    dddd    dddd
+.    f  e    f  .    f  e    f  .    f
+.    f  e    f  .    f  e    f  .    f
+ gggg    gggg    ....    gggg    gggg
+
+So, to render a 1, only segments c and f would be turned on; the rest would be off. To render a 7, only segments a, c, and f would be turned on.
+
+The problem is that the signals which control the segments have been mixed up on each display. The submarine is still trying to display numbers by producing output on signal wires a through g, but those wires are connected to segments randomly. Worse, the wire/segment connections are mixed up separately for each four-digit display! (All of the digits within a display use the same connections, though.)
+
+So, you might know that only signal wires b and g are turned on, but that doesn't mean segments b and g are turned on: the only digit that uses two segments is 1, so it must mean segments c and f are meant to be on. With just that information, you still can't tell which wire (b/g) goes to which segment (c/f). For that, you'll need to collect more information.
+
+For each display, you watch the changing signals for a while, make a note of all ten unique signal patterns you see, and then write down a single four digit output value (your puzzle input). Using the signal patterns, you should be able to work out which pattern corresponds to which digit.
+
+For example, here is what you might see in a single entry in your notes:
+
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
+cdfeb fcadb cdfeb cdbaf
+(The entry is wrapped here to two lines so it fits; in your notes, it will all be on a single line.)
+
+Each entry consists of ten unique signal patterns, a | delimiter, and finally the four digit output value. Within an entry, the same wire/segment connections are used (but you don't know what the connections actually are). The unique signal patterns correspond to the ten different ways the submarine tries to render a digit using the current wire/segment connections. Because 7 is the only digit that uses three segments, dab in the above example means that to render a 7, signal lines d, a, and b are on. Because 4 is the only digit that uses four segments, eafb means that to render a 4, signal lines e, a, f, and b are on.
+
+Using this information, you should be able to work out which combination of signal wires corresponds to each of the ten digits. Then, you can decode the four digit output value. Unfortunately, in the above example, all of the digits in the output value (cdfeb fcadb cdfeb cdbaf) use five segments and are more difficult to deduce.
+
+For now, focus on the easy digits. Consider this larger example:
+
+be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |
+fdgacbe cefdb cefbgd gcbe
+edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |
+fcgedb cgb dgebacf gc
+fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |
+cg cg fdcagb cbg
+fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |
+efabcd cedba gadfec cb
+aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga |
+gecf egdcabf bgf bfgea
+fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf |
+gebdcfa ecba ca fadegcb
+dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf |
+cefg dcbef fcge gbcadfe
+bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd |
+ed bcgafe cdgba cbgef
+egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg |
+gbdfcae bgc cg cgb
+gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |
+fgae cfgab fg bagce
+Because the digits 1, 4, 7, and 8 each use a unique number of segments, you should be able to tell which combinations of signals correspond to those digits. Counting only digits in the output values (the part after | on each line), in the above example, there are 26 instances of digits that use a unique number of segments (highlighted above).
+
+In the output values, how many times do digits 1, 4, 7, or 8 appear?
+
+Your puzzle answer was 504.
+
+--- Part Two ---
+Through a little deduction, you should now be able to determine the remaining digits. Consider again the first example above:
+
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
+cdfeb fcadb cdfeb cdbaf
+After some careful analysis, the mapping between signal wires and segments only make sense in the following configuration:
+
+dddd
+e    a
+e    a
+ffff
+g    b
+g    b
+cccc
+So, the unique signal patterns would correspond to the following digits:
+
+acedgfb: 8
+cdfbe: 5
+gcdfa: 2
+fbcad: 3
+dab: 7
+cefabd: 9
+cdfgeb: 6
+eafb: 4
+cagedb: 0
+ab: 1
+Then, the four digits of the output value can be decoded:
+
+cdfeb: 5
+fcadb: 3
+cdfeb: 5
+cdbaf: 3
+Therefore, the output value for this entry is 5353.
+
+Following this same process for each entry in the second, larger example above, the output value of each entry can be determined:
+
+fdgacbe cefdb cefbgd gcbe: 8394
+fcgedb cgb dgebacf gc: 9781
+cg cg fdcagb cbg: 1197
+efabcd cedba gadfec cb: 9361
+gecf egdcabf bgf bfgea: 4873
+gebdcfa ecba ca fadegcb: 8418
+cefg dcbef fcge gbcadfe: 4548
+ed bcgafe cdgba cbgef: 1625
+gbdfcae bgc cg cgb: 8717
+fgae cfgab fg bagce: 4315
+Adding all of the output values in this larger example produces 61229.
+
+For each entry, determine all of the wire/segment connections and decode the four-digit output values. What do you get if you add up all of the output values?
+
+Your puzzle answer was 1073431.
+ */
 
 fun main() {
     Day8().executeGoals()
@@ -11,30 +137,27 @@ fun main() {
 //@TestResources
 class Day8: AOC_Runner() {
 
-    data class Display(val tries: List<String>, val digits: List<String>)
+    data class Display(val tries: List<List<String>>, val digits: List<List<String>>)
 
-    val displays: MutableList<Display> = mutableListOf()
-
-    init {
-        allLines.map {
-            val split = it.split(Regex("\\|"))
-            val tries = split[0].split(Regex(" ")).filter { tri -> tri.isNotBlank() }
-            val digits = split[1].split(Regex(" ")).filter { digit -> digit.isNotBlank() }
-            displays.add(Display(tries,digits))
-        }
+    private val displays: List<Display> = allLines.map {
+        val digits = "\\w+".toRegex().findAll(it).toList().map { f -> f.value.chunked(1) }
+        Display(digits.take(10), digits.takeLast(4))
     }
 
     override fun executeGoal_1() {
-        println(displays.map { it.digits.filter { d -> (d.length == 2) or (d.length == 4) or (d.length == 3) or (d.length == 7) }.count() }.sum())
+        println(displays.sumOf { it.digits.count { d -> (2..4).contains(d.size) or (d.size == 7) } })
     }
 
     override fun executeGoal_2() {
-        println(displays.map {display -> display.digits.map { s -> deductValue(s, calculateWiring(display)) }.joinToString("").toInt()}.sum())
+        println(displays.sumOf { display ->
+            display.digits.map { s -> deductValue(s.toSet(), calculateWiring(display)) }.joinToString("").toInt()
+        })
     }
 
     /**
-     * Calculates the possible wiring of the segments, and returns a list.
-     * The list contains the following 7 segment displays indexes with the possible wire representation as a String e.g. "abd".
+     * Calculates the possible wiring of the segments, and returns a map.
+     * The map contains the possible wire representation of segments indexes
+     * according to the below 7 segment display as keys. The values are List<String> e.g. {"a","b","d"}.
      *
      *  0000
      * 1    2
@@ -50,34 +173,26 @@ class Day8: AOC_Runner() {
      *  - 1/3 have the same value
      *  - 0 has one value
      */
-    private fun calculateWiring(display: Display) : List<String>{
+    private fun calculateWiring(display: Display) : Map<Int, Set<String>>{
 
-        val digits: MutableList<String> = MutableList(7) { "" }
+        val digits = mutableMapOf<Int,Set<String>>()
         val allDigits = display.digits + display.tries
         val oneSegments = getSegments(allDigits, 2)
         digits[2] = oneSegments
-        digits[5] = oneSegments
         val sevenSegments = getSegments(allDigits, 3)
         digits[0] = sevenSegments - oneSegments
 
         val fourSegments = getSegments(allDigits, 4)
         digits[1] = fourSegments - oneSegments
-        digits[3] = fourSegments - oneSegments
 
         val eightSegments = getSegments(allDigits, 7)
         digits[4] = eightSegments - oneSegments - sevenSegments - fourSegments
-        digits[6] = eightSegments - oneSegments - sevenSegments - fourSegments
 
         return digits
     }
 
-    private fun getSegments(allDigits: List<String>, length: Int) =
-            allDigits.filter { it.length == length }.flatMap { it.chunked(1) }.distinct().sorted().joinToString("")
-
-    override operator fun String.minus(toRemove:String): String {
-        return this.chunked(1).filter { !toRemove.contains(it) }.distinct().sorted().joinToString("")
-    }
-
+    private fun getSegments(allDigits: List<List<String>>, length: Int) =
+            allDigits.filter { it.size == length }.flatten().toSet()
 
     /**
      * Deducts the intended value of the String according these rules:
@@ -103,20 +218,20 @@ class Day8: AOC_Runner() {
      *  - if only one value of the 4/6 segments is present, it is a 9
      *  - 6 otherwise
      */
-    private fun deductValue(s: String, segments: List<String>): Int {
-        return when(s.length) {
+    private fun deductValue(s: Set<String>, segments: Map<Int, Set<String>>): Int {
+        return when(s.size) {
             2 -> 1
             3 -> 7
             4 -> 4
             7 -> 8
             5 -> {
-                if((segments[1] - s).length == 1 && (segments[2]- s).length == 1)return 2
-                if((segments[4]- s).length == 1 && (segments[2]- s).length == 1)return 5
+                if((segments[1]!! - s).size == 1 && (segments[2]!!- s).size == 1)return 2
+                if((segments[4]!! - s).size == 1 && (segments[2]!!- s).size == 1)return 5
                 return 3
             }
             else -> {
-                if((segments[1]-s).length == 1) return 0
-                if((segments[4]-s).length == 1) return 9
+                if((segments[1]!!-s).size == 1) return 0
+                if((segments[4]!!-s).size == 1) return 9
                 return 6
             }
         }
