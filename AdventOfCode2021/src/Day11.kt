@@ -1,6 +1,7 @@
 package com.isor.aoc2021
 
 import com.isor.aoc.common.AOC_Runner
+import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
 
 /**
@@ -349,7 +350,7 @@ fun main() {
     Day11().executeGoals()
 }
 
-//@TestResources
+@TestResources
 @Year(2021)
 class Day11: AOC_Runner() {
 
