@@ -1,3 +1,5 @@
+package com.isor.aoc2020
+
 import com.isor.aoc.common.AOC_Runner
 import com.isor.aoc.common.Year
 import kotlin.reflect.KFunction0

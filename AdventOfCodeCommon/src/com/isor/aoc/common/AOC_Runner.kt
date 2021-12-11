@@ -16,9 +16,9 @@ abstract class AOC_Runner : AOC_Utility() {
 
     private fun readAllLines() : List<String> {
         val year = javaClass.getAnnotation(Year::class.java).year
-        val moduleName: String = "AdventOfCode${year}"
+        val moduleName = "AdventOfCode${year}"
 
-        val test =  if(javaClass.isAnnotationPresent(TestResources::class.java)) "\\test" else ""
+        val test = if(javaClass.isAnnotationPresent(TestResources::class.java)) "-test" else ""
         val resourcesFolder = "resources$test"
 
         val day = javaClass.simpleName
@@ -28,13 +28,13 @@ abstract class AOC_Runner : AOC_Utility() {
         return Files.readAllLines(inputPath)
     }
 
-    fun validateAnnotations() {
+    private fun validateAnnotations() {
         val required = AOC_Runner::class.java.getAnnotation(RequiredAnnotations::class.java)
-        val requiredannotations = required.annotations.map { it.java }
-        requiredannotations.forEach {
-            if(!javaClass.annotations.map { a -> a.annotationClass.java }.contains(it)) {
-                throw IllegalStateException("Missing Annotation: [${it.canonicalName}].")
-            }
+        val requiredAnnotations = required.annotations.map { it.java }
+        val missingAnnotations = requiredAnnotations.filter { !javaClass.annotations.map { a -> a.annotationClass.java }.contains(it) }
+            .map { it.canonicalName }
+        if(missingAnnotations.isNotEmpty()) {
+            throw IllegalStateException("Missing Annotation(s): ${missingAnnotations.fold("") { acc, c -> "$acc\n - [$c]" }}")
         }
     }
 
