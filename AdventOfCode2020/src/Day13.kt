@@ -21,7 +21,7 @@ class Day13: AOC_Runner() {
 
         val minWaitingTimes = mutableListOf<Int>()
         busIds.forEach {minWaitingTimes.add(it - earliestDepartureDate % it) }
-        val element = minWaitingTimes.min()
+        val element = minWaitingTimes.minOrNull()
         val busId = busIds[minWaitingTimes.indexOf(element)]
         println("$busId * $element = ${busId * element!!}")
     }

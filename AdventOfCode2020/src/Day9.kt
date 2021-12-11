@@ -132,7 +132,7 @@ class Day9 : AOC_Runner() {
                 if(additionMap[i]-additionMap[j] == firstInvalid) {
                     println("$j - $i = $firstInvalid")
                     val sublist = numbers.subList(j + 1, i)
-                    println("${sublist.min()} + ${sublist.max()} = ${sublist.min()!! + sublist.max()!!}")
+                    println("${sublist.minOrNull()} + ${sublist.maxOrNull()} = ${sublist.minOrNull()!! + sublist.maxOrNull()!!}")
                     break@outer
                 }
             }

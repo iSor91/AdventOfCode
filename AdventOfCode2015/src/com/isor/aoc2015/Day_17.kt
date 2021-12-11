@@ -66,7 +66,7 @@ class Day_17 : AOC_Runner() {
     }
 
     override fun executeGoal_2() {
-        val size = filteredCombinations.minBy { it.size }!!.size
+        val size = filteredCombinations.minByOrNull { it.size }!!.size
         val minimalElementCombinations = filteredCombinations.filter { it.size == size }
         minimalElementCombinations.forEach{ println(it)}
         println(minimalElementCombinations.size)

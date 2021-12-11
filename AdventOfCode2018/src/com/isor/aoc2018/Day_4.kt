@@ -151,12 +151,12 @@ class Day_4 : AOC_Runner() {
     override fun executeGoal_1() {
         val a = guards.entries.map { e -> e.value }
         Collections.sort(a) { o1, o2 ->  o1.downTime()-o2.downTime()}
-        val maxG = guards.entries.maxBy { e -> e.value.downTime() }!!.value
-        println(maxG.id*maxG.array.indexOf(maxG.array.max()!!))
+        val maxG = guards.entries.maxByOrNull { e -> e.value.downTime() }!!.value
+        println(maxG.id*maxG.array.indexOf(maxG.array.maxOrNull()!!))
     }
 
     override fun executeGoal_2() {
-        val maxG = guards.entries.maxBy { e -> e.value.maxMinute() }!!.value
+        val maxG = guards.entries.maxByOrNull { e -> e.value.maxMinute() }!!.value
         println("""$maxG ${maxG.maxMinute()} ${maxG.array.indexOf(maxG.maxMinute())}""")
         println(maxG.id * maxG.array.indexOf(maxG.maxMinute()))
     }
@@ -172,7 +172,7 @@ class Day_4 : AOC_Runner() {
         }
 
         fun maxMinute () : Int{
-            return array.max()!!
+            return array.maxOrNull()!!
         }
 
         fun downTime(): Int {

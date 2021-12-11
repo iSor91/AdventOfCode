@@ -87,7 +87,7 @@ class Day_14 : AOC_Runner() {
                 }
             }
 
-            val leadDistance = reindeerDistances.values.max()
+            val leadDistance = reindeerDistances.values.maxOrNull()
             val leadReindeers = reindeerDistances.filter { it.value == leadDistance }
             leadReindeers.forEach{
                 reindeerPoints[it.key] = reindeerPoints[it.key]!! + 1

@@ -121,12 +121,12 @@ class Day_15 : AOC_Runner() {
     }
 
     override fun executeGoal_1() {
-        println(results.maxBy { it.first })
+        println(results.maxByOrNull { it.first })
     }
 
     override fun executeGoal_2() {
         val resultsWith500Calories = results.filter { calculateCalories(it.second) == 500 }
-        println(resultsWith500Calories.maxBy { it.first })
+        println(resultsWith500Calories.maxByOrNull { it.first })
     }
 
     private fun calculateCalories (values: MutableList<Int>) : Int {

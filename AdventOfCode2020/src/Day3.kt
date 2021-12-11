@@ -95,7 +95,7 @@ class Day3 : AOC_Runner() {
         var posX = 0
         while (posY < map.size) {
             treesEncountered += if (map[posY][posX] == tree) 1 else 0
-            posX = posX.upperBoundPlus(posXIncr, map[0].indices.max()!!)
+            posX = posX.upperBoundPlus(posXIncr, map[0].indices.maxOrNull()!!)
             posY += posYIncr
         }
         return treesEncountered

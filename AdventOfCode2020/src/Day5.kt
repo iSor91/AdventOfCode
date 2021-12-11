@@ -22,7 +22,7 @@ class Day5 : AOC_Runner() {
     }
 
     override fun executeGoal_1() {
-        val max = seats.maxBy { it.first * 8 + it.second }
+        val max = seats.maxByOrNull { it.first * 8 + it.second }
         println("$max - ${max!!.first * 8 + max!!.second}")
     }
 
