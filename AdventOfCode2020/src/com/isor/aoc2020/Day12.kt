@@ -160,27 +160,5 @@ class Day12 :AOC_Runner() {
         }
         println(ship.first.absoluteValue + ship.second.absoluteValue)
     }
-
 }
-
-private operator fun Pair<Int, Int>.times(value: Int) : Pair<Int, Int> {
-    return this.first * value to this.second * value
-}
-
-private operator fun Pair<Int, Int>.plus(value: Pair<Int, Int>) : Pair<Int, Int> {
-    return this.first + value.first to this.second + value.second
-}
-
-private operator fun Pair<Int, Int>.minus(value: Pair<Int, Int>) : Pair<Int, Int> {
-    return this.first - value.first to this.second - value.second
-}
-
-private fun Pair<Int, Int>.rotate(value: Int) : Pair<Int,Int> {
-    val radVal = toRad(value)
-    val cosx = cos(radVal).roundToInt()
-    val sinx = sin(radVal).roundToInt()
-    return Pair((this.first * cosx - this.second * sinx), (this.first * sinx + this.second * cosx))
-}
-
-private fun toRad(value: Int) = value.toDouble() * Math.PI / 180
 

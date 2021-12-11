@@ -92,4 +92,32 @@ class Day_2 : AOC_Runner(){
         }
     }
 
+    fun String.and(other: String) : String {
+        val sb = StringBuilder()
+        if(this.length != other.length) {
+            return this
+        }
+        this.forEachIndexed {
+                i, c ->
+            if(other.get(i) == c) {
+                sb.append(c)
+            }
+        }
+        return sb.toString()
+    }
+
+    operator fun String.minus(toRemove : String) : String {
+        val sb = StringBuilder()
+        if(this.length != toRemove.length) {
+            return this
+        }
+        this.forEachIndexed {
+                i, c ->
+            if(toRemove.get(i) != c) {
+                sb.append(c)
+            }
+        }
+        return sb.toString()
+    }
+
 }

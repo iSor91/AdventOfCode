@@ -38,7 +38,7 @@ open class AOC_Utility {
     }
 
     fun String.countChar(a: Char): Int {
-        return this.filter { c -> c==a}.count()
+        return this.count { c -> c == a }
     }
 
     fun String.sort () :String {
@@ -49,58 +49,29 @@ open class AOC_Utility {
         return this.toSet().joinToString("")
     }
 
-    fun String.and(other: String) : String {
-        val sb = StringBuilder()
-        if(this.length != other.length) {
-            return this
-        }
-        this.forEachIndexed {
-            i, c ->
-            if(other.get(i) == c) {
-                sb.append(c)
-            }
-        }
-        return sb.toString()
-    }
-
-    open operator fun String.minus(toRemove : String) : String {
-        val sb = StringBuilder()
-        if(this.length != toRemove.length) {
-            return this
-        }
-        this.forEachIndexed {
-            i, c ->
-            if(toRemove.get(i) != c) {
-                sb.append(c)
-            }
-        }
-        return sb.toString()
-    }
-
     fun CharSequence.translateToBinaryString(translationMap: Map<Char, String>) : Int =
             this.map { c -> translationMap[c] }.joinToString("").toInt(2)
 
-
     operator fun Pair<Int, Int>.times(value: Int) : Pair<Int, Int> {
-        return this.first * value to this.second * value
+        return first * value to second * value
     }
 
     operator fun Pair<Int, Int>.plus(value: Pair<Int, Int>) : Pair<Int, Int> {
-        return this.first + value.first to this.second + value.second
+        return first + value.first to second + value.second
     }
 
     operator fun Pair<Int, Int>.minus(value: Pair<Int, Int>) : Pair<Int, Int> {
-        return this.first - value.first to this.second - value.second
+        return first - value.first to second - value.second
     }
 
     fun Pair<Int, Int>.rotate(value: Int) : Pair<Int,Int> {
-        val radVal = toRad(value)
+        val radVal = value.toRad()
         val cosx = cos(radVal).roundToInt()
         val sinx = sin(radVal).roundToInt()
-        return Pair((this.first * cosx - this.second * sinx), (this.first * sinx + this.second * cosx))
+        return Pair((first * cosx - second * sinx), (first * sinx + second * cosx))
     }
 
-    private fun toRad(value: Int) = value.toDouble() * Math.PI / 180
+    fun Int.toRad() = this * Math.PI / 180
 
     private fun gcd(a: Long, b:Long) : Long {
         var tb = b

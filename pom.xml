@@ -13,6 +13,7 @@
     <modules>
         <module>AdventOfCodeCommon</module>
         <module>AdventOfCode2015</module>
+        <module>AdventOfCode2016</module>
         <module>AdventOfCode2018</module>
         <module>AdventOfCode2020</module>
         <module>AdventOfCode2021</module>
