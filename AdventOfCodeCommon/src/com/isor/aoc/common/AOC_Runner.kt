@@ -18,10 +18,14 @@ abstract class AOC_Runner : AOC_Utility() {
         val year = javaClass.getAnnotation(Year::class.java).year
         val moduleName = "AdventOfCode${year}"
 
-        val test = if(javaClass.isAnnotationPresent(TestResources::class.java)) "-test" else ""
+        val useTestResources = javaClass.getAnnotation(TestResources::class.java)
+
+        val test = if(useTestResources != null) "-test" else ""
+        val dayExtend = if(useTestResources != null && useTestResources.index > 0) "_${useTestResources.index}" else ""
+
         val resourcesFolder = "resources$test"
 
-        val day = javaClass.simpleName
+        val day = "${javaClass.simpleName}${dayExtend}"
 
         val inputPath = Paths.get(moduleName, resourcesFolder, day)
         println(inputPath.toAbsolutePath())

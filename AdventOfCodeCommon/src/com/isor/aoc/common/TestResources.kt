@@ -1,3 +1,4 @@
 package com.isor.aoc.common
 
-annotation class TestResources
+@Target(AnnotationTarget.CLASS)
+annotation class TestResources (val index: Int = 0)
