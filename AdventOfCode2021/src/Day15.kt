@@ -1,7 +1,6 @@
 package com.isor.aoc2021
 
 import com.isor.aoc.common.AOC_Runner
-import com.isor.aoc.common.TestResources
 import com.isor.aoc.common.Year
 
 /**
@@ -205,6 +204,8 @@ class Day15: AOC_Runner() {
         val cameFrom = mutableMapOf<Chiton, Chiton>()
         val openSet = mutableSetOf(start)
 
+        val chitonMap = chitons.associateBy { it.pos }.toMap()
+
         chitons.forEach {
             fScore[it] = Int.MAX_VALUE
             gScore[it] = Int.MAX_VALUE
@@ -213,17 +214,20 @@ class Day15: AOC_Runner() {
         gScore[start] = 0
         fScore[start] = getCostToGoal(start, end)
 
+        var i = 0
         while (openSet.isNotEmpty()) {
             val current = openSet.minByOrNull { fScore[it]!! }!!
 
+            i++
             if (current == end) {
-                println(reconstructPath(cameFrom, end).filter { it != start }.sumOf { it.risk })
+                val cost = reconstructPath(cameFrom, end).filter { it != start }.sumOf { it.risk }
+                println("${chitons.size} chitons $i steps $cost")
                 return
             }
 
             openSet.remove(current)
 
-            val neighbors = getNeighbors(current, chitons)
+            val neighbors = getNeighbors(current, chitonMap)
             for (i in neighbors) {
                 val tentativeG = gScore[current]!! + i.risk
                 if (tentativeG < gScore[i]!!) {
@@ -248,7 +252,7 @@ class Day15: AOC_Runner() {
         return totalPath.reversed()
     }
 
-    private fun getNeighbors(current: Chiton, chitonList: List<Chiton>) : Set<Chiton>{
+    private fun getNeighbors(current: Chiton, chitonMap: Map<Pair<Int, Int>, Chiton>) : Set<Chiton>{
         val pos = current.pos
         val of = setOf(
             Pair(pos.first - 1, pos.second),
@@ -256,7 +260,15 @@ class Day15: AOC_Runner() {
             Pair(pos.first, pos.second - 1),
             Pair(pos.first, pos.second + 1)
         )
-        return chitonList.filter { of.contains(it.pos) }.toSet()
+
+        val mutableSetOf = mutableSetOf<Chiton>()
+        of.forEach{
+            val chiton = chitonMap[it]
+            if(chiton!=null) {
+                mutableSetOf.add(chiton)
+            }
+        }
+        return mutableSetOf
     }
 
     private fun getCostToGoal(start: Chiton, end: Chiton) =
