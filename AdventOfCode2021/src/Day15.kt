@@ -8,7 +8,7 @@ fun main() {
     Day15().executeGoals()
 }
 
-//@TestResources
+@TestResources
 @Year(2021)
 class Day15: AOC_Runner() {
 

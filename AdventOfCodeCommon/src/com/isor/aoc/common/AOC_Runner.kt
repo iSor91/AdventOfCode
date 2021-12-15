@@ -3,6 +3,11 @@ package com.isor.aoc.common
 import java.lang.IllegalStateException
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import kotlin.reflect.jvm.reflect
+import kotlin.system.measureTimeMillis
 
 @RequiredAnnotations([Year::class])
 abstract class AOC_Runner : AOC_Utility() {
@@ -43,8 +48,19 @@ abstract class AOC_Runner : AOC_Utility() {
     }
 
     fun executeGoals() {
-        executeGoal_1()
-        executeGoal_2()
+        printExecutionTime(this::executeGoal_1)
+        printExecutionTime(this::executeGoal_2)
+    }
+
+    private fun printExecutionTime(function: () -> Unit) {
+        val elapsedTime = measureTimeMillis(function)
+
+        val simpleDateFormat = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+        val formattedTime = simpleDateFormat.format(
+            Instant.ofEpochMilli(elapsedTime).atZone(ZoneId.of("GMT"))
+        )
+
+        println("$function executed in $formattedTime")
     }
 
     abstract fun executeGoal_1()
