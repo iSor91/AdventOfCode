@@ -10,7 +10,7 @@ fun main() {
     Day18().executeGoals()
 }
 
-@TestResources(10)
+//@TestResources(10)
 @Year(2021)
 class Day18: AOC_Runner() {
 
@@ -20,7 +20,6 @@ class Day18: AOC_Runner() {
 
     data class SnailFishNum(
         val id : Int,
-        val originalString: String,
         var parent: SnailFishNum? = null,
         var left: SnailFishNum? = null,
         var right: SnailFishNum? = null,
@@ -43,18 +42,11 @@ class Day18: AOC_Runner() {
             )
         }
 
-        fun getLeft(): Any? {
-            return left ?: leftInt
-        }
-        fun getRight(): Any? {
-            return right ?: rightInt
-        }
-
         override fun toString(): String {
-            return "[${getLeft()},${getRight()}]"
+            return "[${left ?: leftInt},${right ?: rightInt}]"
         }
 
-        fun getLevel(): Int {
+        private fun getLevel(): Int {
             return if(parent == null) 0 else parent!!.getLevel() + 1
         }
 
@@ -78,18 +70,15 @@ class Day18: AOC_Runner() {
 
         fun split() {
             if(leftInt != null && leftInt!! >= 10) {
-                this.left = SnailFishNum(index++, "", parent = this, leftInt = floor(leftInt!!/2.0).toInt(), rightInt = ceil(leftInt!!/2.0).toInt())
+                this.left = SnailFishNum(index++, parent = this, leftInt = floor(leftInt!!/2.0).toInt(), rightInt = ceil(leftInt!!/2.0).toInt())
                 this.leftInt = null
             } else if(rightInt!=null&& rightInt!! >=10) {
-                this.right = SnailFishNum(index++, "", parent = this, leftInt = floor(rightInt!!/2.0).toInt(), rightInt = ceil(rightInt!!/2.0).toInt())
+                this.right = SnailFishNum(index++, parent = this, leftInt = floor(rightInt!!/2.0).toInt(), rightInt = ceil(rightInt!!/2.0).toInt())
                 this.rightInt = null
             }
         }
 
         fun explode(){
-            if(getLevel() < 4) {
-                return
-            }
             when(this) {
                 parent!!.left -> {
                     if(parent!!.rightInt != null) {
@@ -128,7 +117,7 @@ class Day18: AOC_Runner() {
             }
         }
 
-        fun getRightParent(): SnailFishNum? {
+        private fun getRightParent(): SnailFishNum? {
             if(parent == null) {
                 return null
             }
@@ -138,7 +127,7 @@ class Day18: AOC_Runner() {
             return parent!!.getRightParent()
         }
 
-        fun getLeftParent(): SnailFishNum? {
+        private fun getLeftParent(): SnailFishNum? {
             if(parent == null) {
                 return null
             }
@@ -158,26 +147,14 @@ class Day18: AOC_Runner() {
 
     }
 
-    fun SnailFishNum.add(other: SnailFishNum): SnailFishNum {
-        val newSnailFishNum = SnailFishNum(index++, "", left = this, right = other)
-        newSnailFishNum.parent = this.parent
-        this.parent = newSnailFishNum
-        other.parent = newSnailFishNum
-        return newSnailFishNum
-    }
-
-    val a = allLines.map {
-        readSnailFishNumber(it)
-    }
-
-    private fun readSnailFishNumber(it: String): SnailFishNum? {
+    private fun readSnailFishNumber(it: String): SnailFishNum {
         var top: SnailFishNum? = null
         var parent: SnailFishNum? = null
         var current: SnailFishNum? = top
         for (i in it) {
             if (i == '[') {
                 parent = current
-                current = SnailFishNum(index++, it, parent = parent)
+                current = SnailFishNum(index++, parent = parent)
                 if (top == null) top = current
                 if (parent?.left == null && parent?.leftInt == null)
                     parent?.left = current
@@ -193,63 +170,58 @@ class Day18: AOC_Runner() {
                     current?.rightInt = i.toString().toInt()
             }
         }
-        return top
+        return top!!
     }
 
     override fun executeGoal_1() {
-//        val subList = a.subList(1, a.size)
-//        val folded = subList.fold(a[0]) { acc, num ->
-//            val add = acc!!.add(num!!)
-//            var explodee = add.getExplodee()
-//            var splitee = add.getSplitee()
-//            while (explodee != null || splitee != null) {
-////                println("$add \n\t- $explodee \n\t- $splitee" )
-//                if(explodee != null) {
-//                    explodee.explode()
-//                } else {
-//                    splitee?.split()
-//                }
-//                explodee = add.getExplodee()
-//                splitee = add.getSplitee()
-//            }
-//            add
-//        }
-//        println(folded)
-//
-//        println(folded!!.magnitude())
+        val a = allLines.map { readSnailFishNumber(it) }
+        val subList = a.subList(1, a.size)
+        val folded = subList.fold(a[0]) { acc, num ->
+            addSnailFishNums(acc, num)
+        }
+        println(folded)
 
+        println(folded.magnitude())
+    }
 
+    private fun addSnailFishNums( first: SnailFishNum, second: SnailFishNum ): SnailFishNum {
+
+        val sum = SnailFishNum(index++, left = first, right = second)
+        sum.parent = first.parent
+        first.parent = sum
+        second.parent = sum
+
+        var explodee = sum.getExplodee()
+        var splitee = sum.getSplitee()
+        while (explodee != null || splitee != null) {
+            if (explodee != null) {
+                explodee.explode()
+            } else {
+                splitee?.split()
+            }
+            explodee = sum.getExplodee()
+            splitee = sum.getSplitee()
+        }
+        return sum
     }
 
     override fun executeGoal_2() {
 
         val allPossiblePairs = mutableListOf<Pair<SnailFishNum, SnailFishNum>>()
-        a.forEach { first ->
-            a.forEach { second ->
+        allLines.forEach { first ->
+            allLines.forEach { second ->
                 if(first != second)
-                    allPossiblePairs.add(Pair(readSnailFishNumber(first!!.originalString)!!, readSnailFishNumber(second!!.originalString)!!))
+                    allPossiblePairs.add(Pair(readSnailFishNumber(first), readSnailFishNumber(second)))
             }
         }
 
         val maxOf = allPossiblePairs.map {
-            val add = it.first.add(it.second)
-            var explodee = add.getExplodee()
-            var splitee = add.getSplitee()
-            while (explodee != null || splitee != null) {
-//                println("$add \n\t- $explodee \n\t- $splitee" )
-                if (explodee != null) {
-                    explodee.explode()
-                } else {
-                    splitee?.split()
-                }
-                explodee = add.getExplodee()
-                splitee = add.getSplitee()
-            }
+            val add = addSnailFishNums(it.first, it.second)
             val magnitude = add.magnitude()
             val result = add.toString()
             it.first.parent = null
             it.second.parent = null
-            Pair("${it.first.originalString} + ${it.second.originalString} = $result",magnitude)
+            Pair(result,magnitude)
         }
 
         maxOf.sortedBy { it.second }.forEach { println(it) }

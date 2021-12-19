@@ -96,4 +96,34 @@ open class AOC_Utility {
         return list.reduce { acc, num -> lcm(acc, num) }
     }
 
+    fun Triple<Int, Int, Int>.equalsIgnoreRotation(other: Triple<Int, Int, Int>): Boolean {
+        val fullRotation = arrayOf(0, 90, 180, 270)
+        fullRotation.forEach { x ->
+            val rotatedX = this.rotateX(x)
+            fullRotation.forEach { y ->
+                val rotatedY = rotatedX.rotateY(y)
+                fullRotation.forEach { z ->
+                    val rotatedZ = rotatedY.rotateZ(z)
+                    if (other == rotatedZ)
+                        return true
+                }
+            }
+        }
+        return false
+    }
+
+    fun Triple<Int, Int, Int>.rotateX(value: Int): Triple<Int, Int, Int> {
+        val rotated = Pair(second, third).rotate(value)
+        return Triple(first, rotated.first, rotated.second)
+    }
+
+    fun Triple<Int, Int, Int>.rotateY(value: Int): Triple<Int, Int, Int> {
+        val rotated = Pair(first, third).rotate(value)
+        return Triple(rotated.first, second, rotated.second)
+    }
+
+    fun Triple<Int, Int, Int>.rotateZ(value: Int): Triple<Int, Int, Int> {
+        val rotated = Pair(first, second).rotate(value)
+        return Triple(rotated.first, rotated.second, third)
+    }
 }
