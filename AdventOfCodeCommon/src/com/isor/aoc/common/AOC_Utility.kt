@@ -126,4 +126,16 @@ open class AOC_Utility {
         val rotated = Pair(first, second).rotate(value)
         return Triple(rotated.first, rotated.second, third)
     }
+
+    operator fun Triple<Int, Int, Int>.plus(other: Triple<Int, Int, Int>): Triple<Int, Int, Int> {
+        return Triple(first + other.first, second + other.second, third + other.third)
+    }
+
+    operator fun Triple<Int, Int, Int>.minus(other: Triple<Int, Int, Int>): Triple<Int, Int, Int> {
+        return Triple(first - other.first,second - other.second,third - other.third)
+    }
+
+    operator fun Triple<Int, Int, Int>.times(c: Int): Triple<Int, Int, Int> {
+        return Triple(first * c, second * c, third * c)
+    }
 }
