@@ -66,6 +66,11 @@ fun main() {
 //@TestResources
 class Day21: AOC_Runner() {
 
+    companion object {
+        const val WIN_CONDITION_1 = 1000
+        const val WIN_CONDITION_2 = 21
+    }
+
     val tablePositions = IntArray(10){if(it == 0) 10 else it}
     val playerRegex = "Player (?<id>\\d+) starting position: (?<start>\\d+)".toRegex()
     val players = allLines.map {
@@ -93,12 +98,10 @@ class Day21: AOC_Runner() {
         val playerCopies = players.map { Player(it) }
 
         var dieRolls = 0
-        var round = 0
-        while (!playerCopies.any { it.score >= 1000 }) {
+        while (!playerCopies.any { it.score >= WIN_CONDITION_1 }) {
             val dieRollSum =
                 deterministicDie[(++dieRolls) % 100] + deterministicDie[(++dieRolls) % 100] + deterministicDie[(++dieRolls) % 100]
-            playerRound(playerCopies, round, dieRollSum)
-            round++
+            playerRound(playerCopies[(dieRolls/3 - 1)%playerCount], dieRollSum)
         }
 
         playerCopies.forEach { println(it) }
@@ -128,9 +131,10 @@ class Day21: AOC_Runner() {
         games.forEach {
             threeSidedDie.forEach { roll ->
                 val copiedPlayers = it.second.map { Player(it) }
-                val currentPlayer = playerRound(copiedPlayers, round, roll)
+                val currentPlayer = copiedPlayers[round % playerCount]
+                playerRound(currentPlayer, roll)
                 val weight = it.first * rollSumCount[roll]!!
-                if (currentPlayer.score >= 21) {
+                if (currentPlayer.score >= WIN_CONDITION_2) {
                     wonGames[round % playerCount] += weight
                 } else {
                     newGames.add(Pair(weight, copiedPlayers))
@@ -140,11 +144,9 @@ class Day21: AOC_Runner() {
         return newGames
     }
 
-    private fun playerRound(playerCopies: List<Player>,round: Int,dieRollSum: Int): Player {
-        val currentPlayer = playerCopies[round % playerCount]
-        currentPlayer.pos = tablePositions[(currentPlayer.pos + dieRollSum) % 10]
-        currentPlayer.score += currentPlayer.pos
-        return currentPlayer
+    private fun playerRound(player: Player, dieRollSum: Int) {
+        player.pos = tablePositions[(player.pos + dieRollSum) % 10]
+        player.score += player.pos
     }
 
     data class Player(val id: Int, val initialPos: Int, var pos: Int, var score : Int = 0)
