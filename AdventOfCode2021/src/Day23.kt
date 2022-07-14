@@ -42,7 +42,16 @@ class Day23: AOC_Runner() {
         0 to 7 to null,
         0 to 8 to null,
         0 to 9 to null,
-        0 to 10 to null
+        0 to 10 to null,
+        //rooms
+        1 to 2 to null,
+        2 to 2 to null,
+        1 to 4 to null,
+        2 to 4 to null,
+        1 to 6 to null,
+        2 to 6 to null,
+        1 to 8 to null,
+        2 to 8 to null
     )
 
     fun Map.Entry<Pair<Int,Int>, Amphipod?>.validMoves(map: Map<Pair<Int, Int>, Amphipod?>): List<Pair<Pair<Int,Int>,Int>> {
@@ -111,6 +120,7 @@ class Day23: AOC_Runner() {
     }
 
     init {
+
         allLines.forEachIndexed { i, l ->
             l.chunked(1).forEachIndexed { j,a ->
                 val startSpace = i+1 to (j+1)*2
@@ -120,12 +130,8 @@ class Day23: AOC_Runner() {
     }
 
     fun MutableMap<Pair<Int, Int>, Amphipod?>.printSpaces() {
-        val minY = this.keys.minByOrNull { it.first }!!.first
-        val maxY = this.keys.maxByOrNull { it.first }!!.first
-        val minX = this.keys.maxByOrNull { it.second }!!.second
-        val maxX = this.keys.maxByOrNull { it.second }!!.second
-        ((minY-2)..(maxY+2)).forEach { y ->
-            (minX-2..maxX+2).forEach { x ->
+        (-1..3).forEach { y ->
+            (-1..11).forEach { x ->
                 val pair = Pair(y, x)
                 if(!this.keys.contains(pair)) {
                     print("##")
