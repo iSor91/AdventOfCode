@@ -2,12 +2,10 @@ input = "21752342814933766938172121674976879111362417653261522357855816893656462
 
 # input='9119'
 
-tuples = []
 length = len(input)
-diff = 1
-# diff = int(length/2)
-for i in range(length):
-    tuples.append((int(input[i]), int(input[(i+diff)%length])))
+# diff = 1
+diff = int(length/2)
+tuples = [(int(input[i]), int(input[(i+diff)%length])) for i in range(length)]
 
 sum = 0
 for t in tuples:
