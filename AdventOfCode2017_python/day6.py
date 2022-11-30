@@ -5,8 +5,6 @@ with open('day6.txt') as input:
     for b in banks:
         had = []
         cycles = 0
-        cycle2 = 0
-        first_cycle = ''
         while(True):
             top_bank = max(b)
             index = b.index(top_bank)
