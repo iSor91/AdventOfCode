@@ -1,0 +1,16 @@
+
+elfs=[]
+calories = []
+i = 0
+
+with open('day1.txt') as input:
+    for l in input:
+        print(l)
+        if( l == '\n'):
+            elfs.append({i: {'sum': sum(calories), 'calories': calories}})
+            calories = []
+            i += 1
+        else:
+            calories.append(int(l))
+
+print(elfs)
