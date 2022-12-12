@@ -1,11 +1,13 @@
+task = 2
+
 class place:
 
     def __init__(self, height, c):
         self.c = c
         self.place = None
         self.height = height if height != -14 and height != -28 else (0 if height != -28 else ord('z') - ord('a'))
-        self.is_start = height == -28
-        self.is_end = height == 0
+        self.is_start = height == (-28 if task == 2 else -14)
+        self.is_end = height == (0 if task == 2 else -28)
         self.neighbors = []
         self.can_reach = []
 
@@ -32,7 +34,7 @@ for p in place_dict:
     for n in current.neighbors:
         if(n in place_dict):
             reachable = place_dict[n]
-            if(reachable.height - current.height >= -1) :
+            if((reachable.height - current.height >= -1) if task ==2 else (reachable.height - current.height <= 1)) :
                 current.can_reach.append(reachable)
 
 
