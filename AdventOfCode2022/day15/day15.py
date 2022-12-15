@@ -65,11 +65,13 @@ def is_in_range(p, s):
 def fill_row(row_to_fill, distances):
     e = []
     for p in distances:
-        vertical_distance = abs(p[0][0] - row_to_fill)
+        vertical_distance = abs(p[0][1] - row_to_fill)
         if(vertical_distance <= p[1]):
             horizontal_span = p[1] - vertical_distance
-            for i in range(p[0][1] - horizontal_span, p[0][1] + horizontal_span):
-                e.append((row_to_fill, i))
+            for i in range(p[0][0] - horizontal_span, p[0][0] + horizontal_span):
+                covered = (row_to_fill,i)
+                e.append(covered)
+                # print(covered)
     return e
 
 
@@ -96,12 +98,14 @@ def day15(file, maxx, row_to_check):
         reports = [l.strip() for l in input]
     pane, pairs = process_reports(reports)
 
-    # print_pane(pane)
-    # print(pairs)
     md = process_pairs(pairs)
 
     row = fill_row(row_to_check, md)
     print(len(set(row)))
+    for r in row:
+        pane[r] = must_be_empty
+    # print_pane(pane)
     check_range(md, maxx)
 
+# day15('day15_test', 20, 10)
 day15('day15', 4000000, 2000000)
