@@ -43,7 +43,7 @@ def process_pairs(pairs):
         x = s[0] - b[0]
         y = s[1] - b[1]
         r = abs(x) + abs(y)
-        print(s, b, r)
+        # print(s, b, r)
         e.append((s,r))
     return e
 
@@ -51,38 +51,57 @@ def nr_of_sure_empty(pane, n):
     row = list(filter(lambda x: x[1] == n and pane[x] == must_be_empty, pane))
     return len(row)
 
-def is_in_range(p, ss):
+def is_covered(p, ss):
     for s in ss:
-        x = s[0][0] - p[0]
-        y = s[0][1] - p[1]
-        if(abs(x) + abs(y) <= s[1]):
+        if(is_in_range(p,s)):
             return s
     return None
 
-def check_range(maxs, md, start = 0, threadCount = 1):
+def is_in_range(p, s):
+    x = s[0][0] - p[0]
+    y = s[0][1] - p[1]
+    return abs(x) + abs(y) <= s[1]
+
+def fill_row(row_to_fill, distances):
+    e = []
+    for p in distances:
+        vertical_distance = abs(p[0][0] - row_to_fill)
+        if(vertical_distance <= p[1]):
+            horizontal_span = p[1] - vertical_distance
+            for i in range(p[0][1] - horizontal_span, p[0][1] + horizontal_span):
+                e.append((row_to_fill, i))
+    return e
+
+
+
+def check_range(md, maxs = 20):
     try:
-        for i in range(start, maxs, threadCount):
+        for i in range(maxs):
+            print(i, end='\r')
             j = 0
             while(j in range(maxs)):
-                sensor = is_in_range((i,j), md)
+                sensor = is_covered((i,j), md)
                 if(sensor == None):
-                    raise Exception(f"{(i,j)} {i*maxs + j}")
+                    print(f"second solution {(i,j)} {i*maxs + j}")
+                    j+=1
                 else:
-                    j+=sensor[0][1]-j + sensor[1] - abs(sensor[0][0] - i) + 1
-            print((i + 1) * maxs)
+                    empties = sensor[0][1]-j + sensor[1] - abs(sensor[0][0] - i)
+                    j+= empties + 1
     except Exception as e:
         print(f"solution: {e}")
     
 
-def day15(file, maxx):
+def day15(file, maxx, row_to_check):
     with open(file) as input:
         reports = [l.strip() for l in input]
     pane, pairs = process_reports(reports)
+
+    # print_pane(pane)
+    # print(pairs)
     md = process_pairs(pairs)
 
-    check_range(maxx, md)
+    row = fill_row(row_to_check, md)
+    print(len(set(row)))
+    check_range(md, maxx)
 
-
-
-    
-day15('day15', 4000000)
+day15('day15', 4000000, 2000000)
