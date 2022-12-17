@@ -60,21 +60,49 @@ direction = {
     '>': (0,  1)
 }
 
-with open('day17_test') as input:
+with open('day17') as input:
     directions = list(map(lambda x: direction[x], [list(l.strip()) for l in input][0]))
 
 occupied_row = {
     0: [(0,i) for i in range(7)]
 }
 
-rock_cnt = 2022
+rock_cnt = 1000000000000
 j = 0
+
+dir_to_rocks={}
 for i in range(rock_cnt):
+    # print(i, end='\r')
     top = min(occupied_row.keys())
-    for y in range(min(occupied_row.keys())+2000, max(occupied_row.keys())):
-        for rem in range(y+1,max(occupied_row.keys())+1):
-            occupied_row.pop(rem)
-    print(top, len(occupied_row.keys()), i, end='\r')
+
+    dir_to_rock=(j%len(directions), i%len(shapes))
+    if(dir_to_rock in dir_to_rocks and i%len(shapes)==0):
+        previous_state = dir_to_rocks[dir_to_rock]
+        print(i, previous_state, top)
+        height_diff = previous_state['top'] - top
+        print(f"height diff = {height_diff}")
+        rock_diff = i - previous_state['cnt']
+        print(f"rock diff = {rock_diff}")
+        rock_remaining = rock_cnt - previous_state['cnt']
+        print(f"rocks remaining after first match = {rock_remaining}")
+        same_iteration = rock_remaining//rock_diff
+        print(f"iteration count to fill = {same_iteration}")
+        add_these_yet = rock_remaining - same_iteration * rock_diff
+        print(f"add these many rocks yet: {add_these_yet}")
+        rocks_to_add = list(filter(lambda x: dir_to_rocks[x]['cnt'] == add_these_yet + previous_state['cnt'], dir_to_rocks))
+        rock_to_add = list(map(lambda x: dir_to_rocks[x], rocks_to_add))[0]
+        print(rock_to_add)
+        print(same_iteration * height_diff - (rock_to_add['top']))
+
+        # 1577207973640 not good
+        # 1577207975413 >
+        # 1577207977186
+        # 1577207979848 ??
+        # 1577207980269 <
+
+        break
+    dir_to_rocks[dir_to_rock]={'top': top, 'cnt': i}
+
     can_fall = True
     shape_current = shapes[i % 5]
     shape_top_left = (top-4-max(list(map(lambda x: x[0], shape_current))), 2)
@@ -118,5 +146,4 @@ for i in range(rock_cnt):
 # top = min(occupied_row.keys())
 # print_cavern(top, occupied_row)
 print()
-print(top)
 
