@@ -17,7 +17,7 @@ from task_state import task_state
 from contants import *
 
 
-with open('day19_test') as input:
+with open('day19') as input:
     bp = [[l for l in line.strip().split(':')]for line in input]
 
 blueprints = {}
@@ -33,12 +33,14 @@ for b in bp:
     blueprints[blueprint_id] = blueprint_details
 
 def calculate_geodes(base_time, i) -> task_state:
+    print(i, end=' - ')
     current_blueprint = blueprints[i]
     starting_state = task_state(current_blueprint)
     states = [starting_state]
 
     max_geode = 0
     prev_max_geode = 0
+    
     for t in range(base_time):
         print(t, end=' - ')
         
@@ -48,6 +50,7 @@ def calculate_geodes(base_time, i) -> task_state:
             current_state.update_treasury()
             for robot_to_build in priority:
                 if( robot_to_build in build_available
+                    and robot_to_build not in current_state.could_have_built
                     and (robot_to_build == GEODE 
                         or not current_state.reached_max(robot_to_build))):
                     build_robot_state = current_state.copy()
@@ -59,12 +62,15 @@ def calculate_geodes(base_time, i) -> task_state:
                         if(curr_geode > max_geode):
                             max_geode = curr_geode 
                         break
+            current_state.could_have_built = build_available
         
         for new_state in new_states:
             states.append(new_state)
+        states = list(filter(lambda state: len(state.could_have_built) < len(priority), states))
         if(max_geode != prev_max_geode):
-            states = list(filter(lambda state: state.robots[GEODE] >= max_geode, states))
+            states = list(filter(lambda state: state.robots[GEODE] >= max_geode - 1, states))
             prev_max_geode = max_geode
+        
         print(f"states count: {len(states)}")
     states.sort(key=lambda state: state.treasury[GEODE])
     print(f"states count: {len(states)}, max geode = {states[-1]}")
@@ -74,8 +80,13 @@ def calculate_geodes(base_time, i) -> task_state:
 
 
 quality_levels = []
-for bp_id in blueprints:
-    max_state = calculate_geodes(24, bp_id)
+result = 1
+task = 2
+for bp_id in range(1,4) if task == 2 else blueprints:
+    max_state = calculate_geodes(32 if task == 2 else 24, bp_id)
     quality_levels.append(max_state.treasury[GEODE] * bp_id)
+    result *= max_state.treasury[GEODE]
+
 
 print(quality_levels, sum(quality_levels))
+print(result)

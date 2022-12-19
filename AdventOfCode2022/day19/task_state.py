@@ -4,6 +4,7 @@ from contants import *
 class task_state:
     def __init__(self, blueprint):
         self.blueprint = blueprint
+        self.could_have_built = []
         self.maxes = {}
 
         for robot_type in self.blueprint:
@@ -29,6 +30,7 @@ class task_state:
 
     def copy(self):
         new_state = task_state(self.blueprint)
+        new_state.could_have_built = []
         new_state.maxes = self.maxes
         new_state.treasury = self.treasury.copy()
         new_state.robots = self.robots.copy()
