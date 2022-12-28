@@ -64,6 +64,7 @@ def get_next_tiles_1(current_dir, tiles, current_tile):
 def get_next_tiles_2(current_dir, tiles, current_tile, grid_size):
     next_tiles = get_next_tiles_1(current_dir, tiles, current_tile)
     tiles_with_directions = list(map(lambda t: (t, current_dir), next_tiles))
+    tile_lists = [tiles_with_directions]
     # print(f"next_tiles {next_tiles}")
     grid_mod = grid_size - 1
     if(len(next_tiles) < 4 * grid_size):
@@ -95,6 +96,7 @@ def get_next_tiles_2(current_dir, tiles, current_tile, grid_size):
             if(current_dir in [1,3]):
                 prev_row = transpose_list(prev_row)
             prev_row_with_dir = list(map(lambda t: (t, (current_dir - 2) % 4), prev_row))
+            tile_lists.append(prev_row_with_dir)
 
             dir_change = -1 if(current_dir in [1,3]) else 1
             prev_col_index_under = start_current_block_x - 1 - block_mod
@@ -106,24 +108,21 @@ def get_next_tiles_2(current_dir, tiles, current_tile, grid_size):
             if(prev_col):
                 prev_col_end = max(prev_col, key = lambda t: t[0])
                 prev_col_start = min(prev_col, key = lambda t: t[0])
-                if( prev_col and prev_col_end[0] == start_current_block_y - 1 ):
-                    if(current_dir in [0]):
-                        prev_col.reverse()
-                elif(prev_col and prev_col_start[0] == start_next_block_y):
+                if( prev_col and prev_col_end[0] == start_current_block_y - 1 ): # prev col is over current block
+                    pass
+                elif(prev_col and prev_col_start[0] == start_next_block_y): # prev block is under the current block
                     prev_col = list(map(lambda t: (t[0],start_current_block_x - 1 - (grid_mod - block_mod)), prev_col))
-                    # if(current_dir in [0, 1]):
-                    #     prev_col.reverse()
                     dir_change = -1 * dir_change
                 else:
                     prev_col = []
                 if(current_dir in [1,3]):
                     prev_col = transpose_list(prev_col)
                 prev_col_with_dir = list(map(lambda t: (t, (current_dir + dir_change) % 4), prev_col))
+            tile_lists.append(prev_col_with_dir)
             
-
             dir_change = -1 if(current_dir in [1,3]) else 1
             next_col_index = start_next_block_x + block_mod
-            next_col = get_next_tiles_1((current_dir + dir_change) % 4,tiles, (next_col_index, next_col_index))
+            next_col = get_next_tiles_1((current_dir - dir_change) % 4,tiles, (next_col_index, next_col_index))
             # print(f"next_col {next_col_index} = {next_col}")
             if(current_dir in [1,3]):
                 next_col = transpose_list(next_col)
@@ -132,15 +131,16 @@ def get_next_tiles_2(current_dir, tiles, current_tile, grid_size):
                 next_col_end = max(next_col, key = lambda t: t[0])
                 next_col_start = min(next_col, key = lambda t: t[0])
                 if( next_col and next_col_end[0] == start_current_block_y - 1 ):
-                    dir_change = -1 * dir_change
+                    pass
                 elif(next_col and next_col_start[0] == start_next_block_y):
                     next_col = list(map(lambda t: (t[0],start_next_block_x + grid_mod - block_mod), next_col))
+                    dir_change = -1 * dir_change
                 else:
                     next_col = []
                 if(current_dir in [1,3]):
                     next_col = transpose_list(next_col)
-                next_col_with_dir = list(map(lambda t: (t, (current_dir + dir_change) % 4), next_col))
-            
+                next_col_with_dir = list(map(lambda t: (t, (current_dir - dir_change) % 4), next_col))
+            tile_lists.append(next_col_with_dir)
 
             next_row_index = start_next_block_y + grid_size + grid_mod - block_mod
             next_row = get_next_tiles_1((current_dir + 2) % 4, tiles, (next_row_index, next_row_index))
@@ -153,12 +153,15 @@ def get_next_tiles_2(current_dir, tiles, current_tile, grid_size):
             if(current_dir in [1,3]):
                 next_row = transpose_list(next_row)
             next_row_with_dir = list(map(lambda t: (t, (current_dir + 2) % 4), next_row))
+            tile_lists.append(next_row_with_dir)
+
+            tile_lists.sort(key=lambda l: l[0][0][0] if l else -1)
 
 
-            prev = (prev_row_with_dir + prev_col_with_dir) if current_dir in [0,1] else (prev_col_with_dir + prev_row_with_dir) 
-            next = (next_col_with_dir + next_row_with_dir) if current_dir in [0,1] else (next_row_with_dir + next_col_with_dir) 
-            tiles_with_directions = (prev + tiles_with_directions + next) if current_dir in [0,2] else (next + tiles_with_directions + prev)
-    return tiles_with_directions
+    final_list = []
+    for other_list in tile_lists:
+        final_list += other_list
+    return final_list
 
 
 tiles, commands = process_tiles('day22')
@@ -175,29 +178,32 @@ grid_size = 50
 # print(len(next_tiles), next_tiles)
 # print_collected_tiles(tiles, current_tile, next_tiles)
 
+i = 0
 for c in range(0, len(processed_commands) + 1, 2):
     print(f"STEP {c//2 + 1} - {current_tile}")
     print(c, current_dir, processed_commands[c], processed_commands[c + 1] if c + 1 < len(processed_commands) else '')
     next_tiles = get_next_tiles_2(current_dir, tiles, current_tile, grid_size)
     next_tiles = {t[0]: t[1] for t in next_tiles}
-    # print(next_tiles)
+    # print_collected_tiles(tiles, current_tile, next_tiles)
     if(len(next_tiles) != 4*grid_size):
         start_tile = list(next_tiles.keys())[-1]
         next_tiles_update = get_next_tiles_2(next_tiles[start_tile], tiles, start_tile, grid_size)
 
-        for tile in next_tiles_update:
-            next_tiles[tile[0]] = tile[1]
-
-        if(len(next_tiles) != 4*grid_size):
+        if(len(next_tiles_update) != 4*grid_size):
             start_tile = list(next_tiles.keys())[0]
             next_tiles_update = get_next_tiles_2(next_tiles[start_tile], tiles, start_tile, grid_size)
 
-            for tile in next_tiles_update:
-                next_tiles[tile[0]] = tile[1]
-
-            if(len(next_tiles) != 4*grid_size):
+            if(len(next_tiles_update) != 4*grid_size):
                 print_collected_tiles(tiles, current_tile, next_tiles)
                 raise Exception(f"not adequate number of possible next tiles: {len(next_tiles)} \n{next_tiles}")
+        
+        next_tiles = {t[0]: t[1] for t in next_tiles_update}
+
+        # if(i == 1):
+        #     print_collected_tiles(tiles, start_tile, next_tiles)
+        #     print(f"STEP {c//2 + 1} - {current_tile}")
+        #     break
+        i+=1
 
     tile_keys = list(next_tiles.keys())
     current_tile_index = tile_keys.index(current_tile)
