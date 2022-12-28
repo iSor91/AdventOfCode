@@ -38,8 +38,8 @@ def print_collected_tiles(tiles, current, next_tiles):
                 else: 
                     tile_keys = list(next_tiles.keys())
                     # print(tile_keys.index(tile)%10, end='')
-                    # print(tile_keys.index(tile)//50, end='')
-                    print(directions_show[next_tiles[tile]], end='')
+                    print(tile_keys.index(tile)//50, end='')
+                    # print(directions_show[next_tiles[tile]], end='')
             elif(tile in tiles):
                 print(tiles[tile], end='')
             else:

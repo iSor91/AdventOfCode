@@ -155,7 +155,7 @@ def get_next_tiles_2(current_dir, tiles, current_tile, grid_size):
             next_row_with_dir = list(map(lambda t: (t, (current_dir + 2) % 4), next_row))
             tile_lists.append(next_row_with_dir)
 
-            tile_lists.sort(key=lambda l: l[0][0][0] if l else -1)
+            tile_lists.sort(key=lambda l: (l[0][0][0]//grid_size, l[0][0][1]//grid_size) if l else (-1,-1))
 
 
     final_list = []
@@ -171,8 +171,8 @@ current_tile = get_first_tile(tiles)
 current_dir = 0
 grid_size = 50
 
-# current_dir = 3
-# current_tile = (6, 7)
+current_dir = 1
+current_tile = (138, 3)
 # next_tiles = get_next_tiles_2(current_dir, tiles, current_tile, 4)
 # next_tiles = {t[0]: t[1] for t in next_tiles}
 # print(len(next_tiles), next_tiles)
@@ -184,7 +184,6 @@ for c in range(0, len(processed_commands) + 1, 2):
     print(c, current_dir, processed_commands[c], processed_commands[c + 1] if c + 1 < len(processed_commands) else '')
     next_tiles = get_next_tiles_2(current_dir, tiles, current_tile, grid_size)
     next_tiles = {t[0]: t[1] for t in next_tiles}
-    # print_collected_tiles(tiles, current_tile, next_tiles)
     if(len(next_tiles) != 4*grid_size):
         start_tile = list(next_tiles.keys())[-1]
         next_tiles_update = get_next_tiles_2(next_tiles[start_tile], tiles, start_tile, grid_size)
@@ -205,6 +204,7 @@ for c in range(0, len(processed_commands) + 1, 2):
         #     break
         i+=1
 
+    # print_collected_tiles(tiles, current_tile, next_tiles)
     tile_keys = list(next_tiles.keys())
     current_tile_index = tile_keys.index(current_tile)
     for _ in range(processed_commands[c]):
