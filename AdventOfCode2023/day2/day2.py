@@ -1,63 +1,34 @@
-# red, green, or blue kubes
-# random number of them in a bag
-
 import re
+import math
 
+colors=['red', 'green', 'blue']
 content = [12, 13, 14]
 
-games = {}
+sum=0
+power=0
 
 with open('data') as game_reveals:
-    sum=0
-    power=0
     for l in game_reveals.readlines():
-        first_split=l.split(":")
-        reveals=first_split[1]
-        if(ma:=re.match(r'Game (\d+)', first_split[0])):
+        if(ma:=re.match(r'Game (\d+)', l)):
             game_num=ma.group(1)
-            games[game_num] = []
         else:
-            raise ValueError(f"game is not part of {first_split[0]}")
-        separate_reveals = reveals.split(";")
+            raise ValueError(f"Game is not find in {l}")
         possible = True
-        for reveal in separate_reveals:
-            r=0
-            g=0
-            b=0
-            print(reveal)
-            if(m:=re.search(r"(\d+) red", reveal)):
-                r=int(m.group(1))
-            if(m:=re.search(r"(\d+) green", reveal)):
-                g=int(m.group(1))
-            if(m:=re.search(r"(\d+) blue", reveal)):
-                b=int(m.group(1))
+        max=[0,0,0]
+        for reveal in l.split(";"):
+            current=[0,0,0]
+            for i,c in enumerate(colors):
+                if(m:=re.search(fr"(\d+) {c}", reveal)):
+                    current[i]=int(m.group(1))
+                    if(current[i]>max[i]):
+                        max[i]=current[i]
 
-            # print(r, g, b)
-            if(r > content[0] or g > content[1] or b>content[2]):
+            if(any([a>b for a,b in zip(current, content)])):
                 possible = False
 
-            games[game_num].append([r,g,b])
-
         if(possible):
-            print(first_split[0],"is possible")
-
             sum = sum + int(game_num)
+        power = power+(math.prod(max))
 
-        r=0
-        g=0
-        b=0
-        for game in games[game_num]:
-            if(game[0] > r):
-                r = game[0]
-            if(game[1] > g):
-                g = game[1]
-            if(game[2] > b):
-                b = game[2]
-
-        power = power+(r*g*b)
-        print(r*g*b)
-
-    print(games)
-    print(sum)
-    print(power)
-
+print(sum)
+print(power)
