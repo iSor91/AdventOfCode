@@ -1,6 +1,9 @@
 import math
 import re
 
+def surround(tup):
+    return [(tup[0]+i, tup[1]+j) for i in range(-1,2) for j in range(-1,2)]
+
 numberRegex = r"\d+"
 symbolRegex = r"[^\d\.\n]"
 
@@ -16,15 +19,11 @@ with open('data') as file1:
 
         for n in re.finditer(numberRegex, l):
             numbers[(i,n.start())]=n.group()
+
+gears = {s: [] for s in symbols if symbols[s]==gear}
         
 print(symbols)
 print(numbers)
-print()
-
-def surround(tup):
-    return [(tup[0]+i, tup[1]+j) for i in range(-1,2) for j in range(-1,2)]
-
-gears = {s: [] for s in symbols if symbols[s]==gear}
 print(gears)
 
 sum = 0
@@ -34,20 +33,12 @@ for n in numbers:
     border = [surround(s) for s in numSpan]
     flattened_border = list(set([item for row in border for item in row]))
     flattened_border.sort()
-    # print(flattened_border)
-    containment=[(x in symbols) for x in flattened_border]
-    # print(containment)
-    if (any(containment)):
+    if (any([(x in symbols) for x in flattened_border])):
         sum = sum + int(numbers[n])
-        # print(numbers[n])
 
     for g in gears:
         if (g in flattened_border):
             gears[g].append(int(numbers[n]))
-
-
-print(sum)
-print(gears)
 
 gears_filtered=(list(filter(lambda x: len(x) == 2, gears.values())))
 
@@ -55,4 +46,5 @@ sum2=0
 for g in gears_filtered:
     sum2 = sum2 + math.prod(g)
 
+print(sum)
 print(sum2)
