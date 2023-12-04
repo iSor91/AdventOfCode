@@ -1,45 +1,19 @@
 import math
+import re
 with open('data') as input:
+    lines=input.readlines()
+    card_count={x: 1 for x in range(1,len(lines)+1)}
+    sum=[0,0]
+    for l in lines:
+        parts=[item.split() for item in  [row.strip() for row in re.split('\\||:', l)]]
+        [number, matches]=[int(parts[0][1]), [x for x in parts[2] if x in parts[1]]]
 
-    cards = {}
-    won_cards={}
-    sum = 0
-    for l in input.readlines():
-        print(l)
-        parts=[item for row in [s.split('|') for s in l.split(':')] for item in row]
-        parts2=list(map(lambda x: x.strip(), parts))
+        for m in range(1,len(matches)+1):
+            card_count[number+m] = card_count[number+m]+1*card_count[number]
 
-        number=int(parts2[0].split()[1])
-        winning=parts2[1].split()
-        having=parts2[2].split()
+        sum[0] = sum[0] + int(math.pow(2, len(matches)-1))
+        sum[1]+=card_count[number]
 
-
-        print(winning, having)
-
-        matches=list(filter(lambda x: x in winning, having))
-
-        cards[number] = {'w':winning, 'h':having, 'm': matches}
-
-        print(matches)
-
-        sum = sum + int(math.pow(2, len(matches)-1))
-
-    print(sum)
-    print(cards)
-
-    for c in cards:
-        if(c not in won_cards):
-            won_cards[c] = 1
-        for l in range(1,len(cards[c]['m'])+1):
-            for _ in range(won_cards[c]):
-                if(c+l not in won_cards):
-                    won_cards[c+l]=1
-                won_cards[c+l] = won_cards[c+l]+1
-    
-    print(won_cards)
-    sum2=0
-    for c in won_cards:
-        sum2+=won_cards[c]
-
-    print(sum2)
+    print(sum[0])
+    print(sum[1])
 
