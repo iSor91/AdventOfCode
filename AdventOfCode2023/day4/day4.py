@@ -9,9 +9,9 @@ with open('data') as input:
         [number, matches]=[int(parts[0][1]), [x for x in parts[2] if x in parts[1]]]
 
         for m in range(1,len(matches)+1):
-            card_count[number+m] = card_count[number+m]+1*card_count[number]
+            card_count[number+m]+=card_count[number]
 
-        sum[0] = sum[0] + int(math.pow(2, len(matches)-1))
+        sum[0]+=int(math.pow(2, len(matches)-1))
         sum[1]+=card_count[number]
 
     print(sum[0])
