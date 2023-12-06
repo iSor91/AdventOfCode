@@ -1,4 +1,3 @@
-import math
 import re
 
 #creates new sections from t1 - seed and t2 dest tuples
