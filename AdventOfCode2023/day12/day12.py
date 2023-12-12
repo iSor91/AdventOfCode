@@ -10,40 +10,62 @@ def extend(line, base, arrangement_findings):
                 l.append([*b, a])
     return l
 
-sum = 0
+def solve(springs, arrangments):
+    all_substrings = [springs[i:] for i in range(len(springs))]
+    arrangement_findings = []
+    for a in arrangments.split(","):
+        findings = set(([(f.start()+i, f.end()+i) 
+                          for i,s in enumerate(all_substrings) 
+                          for f in re.finditer(fr'[#?]{{{int(a)}}}', s)]))
+        # print(findings)
+        arrangement_findings.append(findings)
+    # print(arrangement_findings)
 
-with open('data') as input:
+    valid=[]
+    current = [[]]
+    for a in range(len(arrangement_findings)):
+        # print(a, current, end=' ')
+        current = extend(springs, current, arrangement_findings[a])
+        # print(current)
+    for i in current:
+        if(i not in valid):
+            valid.append(i)
+
+    print('VALID', len(valid))
+    broken_springs=[i for i in range(len(springs)) if springs[i] == '#']
+    true_valid=[]
+    for v in valid:
+        broken=[i for x in v for i in range(*x)]
+        if(all([i in broken for i in broken_springs])):
+            true_valid.append(valid)
+        # print(broken)
+        # for i in range(len(springs)):
+        #     if(i not in broken):
+        #         print('.', end='')
+        #     else:
+        #         print('#', end='')
+        # print()
+    # print()
+    # print(valid)
+
+    return len(true_valid)
+
+sum=0
+with open('test') as input:
     
     for l in input.readlines():
-        [springs, arrangments] = l.strip().split(" ")
-        print(springs, arrangments)
+        [s, a] = l.strip().split(" ")
+        print(s, a)
 
-        all_substrings = [springs[i:] for i in range(len(springs))]
-        arrangement_findings = []
-        for a in arrangments.split(","):
-            findings = set(([(f.start()+i, f.end()+i) 
-                              for i,s in enumerate(all_substrings) 
-                              for f in re.finditer(fr'[#?]{{{int(a)}}}', s)]))
-            # print(findings)
-            arrangement_findings.append(findings)
-        # print(arrangement_findings)
+        es = "?".join([s,s,s,s,s])
+        ea = ",".join([a,a,a,a,a])
+        print(es, ea)
 
-        valid=[]
-        for base in arrangement_findings[0]:
-            current = [[]]
-            for a in range(len(arrangement_findings)):
-                # print(a, current, end=' ')
-                current = extend(springs, current, arrangement_findings[a])
-                # print(current)
-            for i in current:
-                if(i not in valid):
-                    valid.append(i)
-
-        print('VALID', len(valid))
-        # print(valid)
-        sum+=len(valid)
+        sum+=solve(es, ea)
 
 print(sum)
+
+
 
 
         
