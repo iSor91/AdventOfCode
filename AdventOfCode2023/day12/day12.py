@@ -31,7 +31,6 @@ def solve(springs, arrangments):
         if(i not in valid):
             valid.append(i)
 
-    print('VALID', len(valid))
     broken_springs=[i for i in range(len(springs)) if springs[i] == '#']
     true_valid=[]
     for v in valid:
@@ -48,22 +47,33 @@ def solve(springs, arrangments):
     # print()
     # print(valid)
 
+    print('VALID', len(true_valid))
     return len(true_valid)
 
-sum=0
-with open('test') as input:
+sum1=0
+sum2=0
+with open('data') as input:
     
     for l in input.readlines():
         [s, a] = l.strip().split(" ")
         print(s, a)
 
-        es = "?".join([s,s,s,s,s])
-        ea = ",".join([a,a,a,a,a])
-        print(es, ea)
+        res1=solve(s,a)
+        sum1+=res1
 
-        sum+=solve(es, ea)
+        es = f"{s}?"
+        res2=solve(es, a)
+        es = f"?{s}?"
+        res3=solve(es, a)
+        es = f"?{s}"
+        res4=solve(es, a)
+        res = res2*res3*res3*res3*res4
+        print(res1, res2, res)
+        sum2+=res
 
-print(sum)
+
+print(sum1)
+print(sum2)
 
 
 
