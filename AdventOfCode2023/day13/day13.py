@@ -1,15 +1,14 @@
+max_distance = 1
+
 def identify_horizontal_mirror(current, possible_h_mirrors):
     print(current, possible_h_mirrors)
     for possible_mirror in possible_h_mirrors:
 
         rows_to_check = min(len(current)-possible_mirror, possible_mirror)
         print(rows_to_check)
-        # is_mirror = all([current[possible_mirror-i-1] == current[possible_mirror+i] for i in range(rows_to_check)])
-        # if(is_mirror):
-        #     return possible_mirror
         hamming_dist_list=[calculate_hamming_dist(current[possible_mirror-i-1], current[possible_mirror+i]) for i in range(rows_to_check)]
         print("dists", hamming_dist_list, sum(hamming_dist_list))
-        if(sum(hamming_dist_list) == 1):
+        if(sum(hamming_dist_list) == max_distance):
             return possible_mirror
     return 0
 
@@ -22,9 +21,7 @@ def find_mirrors(current):
         print(l)
     possible_h_mirrors=[]
     for i in range(1,len(current)):
-        # if(current[i] == current[i-1]):
-        #     possible_h_mirrors.append(i)
-        if(calculate_hamming_dist(current[i], current[i-1])<=1):
+        if(calculate_hamming_dist(current[i], current[i-1])<=max_distance):
             possible_h_mirrors.append(i)
     h=identify_horizontal_mirror(current, possible_h_mirrors)
     return h
