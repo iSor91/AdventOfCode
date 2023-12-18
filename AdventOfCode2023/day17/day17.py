@@ -13,7 +13,7 @@ def add(t1, t2):
 
 def create_step(current, dir, length):
     pos=add(current[0],dir)
-    if(pos[0] >= 0 and pos[0] < rows and pos[1] >= 0 and pos[1] < cols and length+1 <= 3):
+    if(pos[0] >= 0 and pos[0] < rows and pos[1] >= 0 and pos[1] < cols and length+1 <= 10):
         new_pos_heat_loss=heat_loss_matrix[pos[0]][pos[1]]
         new_step=(pos, dir, length+1, new_pos_heat_loss)
         sum_heat_loss = heat_loss_map[current] + new_pos_heat_loss
@@ -28,8 +28,8 @@ def next_steps(current):
     dir1=(dir[1], dir[0])
     dir2=(-dir[1], -dir[0])
     same_dir=create_step(current, dir, current[2])
-    change_dir1=create_step(current, dir1, 0)
-    change_dir2=create_step(current, dir2, 0)
+    change_dir1=create_step(current, dir1, 0) if current[2] >= 4 else None
+    change_dir2=create_step(current, dir2, 0) if current[2] >= 4 else None
     return[x for x in [same_dir, change_dir1, change_dir2] if x != None]
 
 with open('data') as input1:
@@ -42,16 +42,13 @@ with open('data') as input1:
     start = ((0,0),(0,1),0,0)
     heat_loss_map[start] = 0
     finish=(rows-1,cols-1)
-    # heat_loss_map = {}
-    # heat_loss_map[start[0]] = 0
-
 
     to_visit=[]
     to_visit.append(start)
     visited=[]
     current=start
 
-    while(len(to_visit) != 0 and current[0] != finish):
+    while(len(to_visit) != 0 and (current[0] != finish or current[2] < 4)):
         current=to_visit[0]
         print(current, heat_loss_map[current])
         to_visit.remove(current)
@@ -60,28 +57,11 @@ with open('data') as input1:
         next_possible_steps=next_steps(current)
         for next_step in list(filter(lambda x: x not in visited, next_possible_steps)):
             to_visit.append(next_step)
-            # current_heat_loss = heat_loss_map[current[0]] + next_step[3]
-            # if(next_step[0] not in heat_loss_map or heat_loss_map[next_step[0]] > current_heat_loss):
-            #     heat_loss_map[next_step[0]] = current_heat_loss
 
         to_visit.sort(key=lambda x: heat_loss_map[x] * 1000000 + 1000 * (rows-x[0][0]) + (cols-x[0][1]))
 
     print('press a button')
     input()
-    end_states=[x for x in visited if x[0]==(12,12)]
+    end_states=[x for x in visited if x[0]==finish and x[2] >= 4]
     end_states.sort(key=lambda x: heat_loss_map[x])
     print(heat_loss_map[end_states[0]])
-    # for v in [x for x in visited if x[0]==(12,12)]:
-    #     print(v, heat_loss_map[v])
-        # c=v
-        # while(c in move_map):
-        #     print(c, heat_loss_map[c])
-        #     c=move_map[c]
-        # print()
-    # print(list(filter(lambda x: x[0]==(12,12), visited)))
-
-    # for i in range(rows):
-    #     for j in range(cols):
-    #         print((i,j), heat_loss_map[(i,j)])
-
-
