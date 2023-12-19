@@ -2,8 +2,10 @@
 #the crucible can't turn around
 #either go straight, left or right
 
-move_map={}
 heat_loss_map={}
+
+max_steps = 3
+min_steps = 0
 
 def substract(t1, t2):
     return (t2[0]-t1[0],t2[1]-t1[1])
@@ -11,15 +13,18 @@ def substract(t1, t2):
 def add(t1, t2):
     return tuple(map(sum, zip(t1,t2)))
 
+def heat_key(current):
+    return (current[0], current[1], current[2])
+
 def create_step(current, dir, length):
     pos=add(current[0],dir)
     if(pos[0] >= 0 and pos[0] < rows and pos[1] >= 0 and pos[1] < cols and length+1 <= 10):
         new_pos_heat_loss=heat_loss_matrix[pos[0]][pos[1]]
         new_step=(pos, dir, length+1, new_pos_heat_loss)
-        sum_heat_loss = heat_loss_map[current] + new_pos_heat_loss
-        if(new_step not in heat_loss_map or heat_loss_map[new_step] > sum_heat_loss):
-            move_map[new_step] = current
-            heat_loss_map[new_step] = sum_heat_loss
+        sum_heat_loss = heat_loss_map[heat_key(current)][0] + new_pos_heat_loss
+        heat_map_key = heat_key(new_step)
+        if(heat_map_key not in heat_loss_map or heat_loss_map[heat_map_key][0] > sum_heat_loss):
+            heat_loss_map[heat_map_key] = (sum_heat_loss, length+1)
             return new_step
     return None
 
@@ -39,18 +44,18 @@ with open('data') as input1:
 
     heat_loss_matrix=[[int(x) for x in l.strip()] for l in lines]
 
-    start = ((0,0),(0,1),0,0)
-    heat_loss_map[start] = 0
+    current = ((0,0),(0,1),0,0)
+    heat_loss_map[heat_key(current)] = (0,0)
     finish=(rows-1,cols-1)
 
     to_visit=[]
-    to_visit.append(start)
+    to_visit.append(current)
     visited=[]
-    current=start
+    finish_reaches = set()
 
     while(len(to_visit) != 0 and (current[0] != finish or current[2] < 4)):
         current=to_visit[0]
-        print(current, heat_loss_map[current])
+        print(current, heat_loss_map[heat_key(current)])
         to_visit.remove(current)
         visited.append(current)
 
