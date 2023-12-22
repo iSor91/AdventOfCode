@@ -19,7 +19,7 @@ def get_plots():
         return plots, right, bottom, start
 
 
-step_count = 65
+step_count = 4
 odd_reachable = []
 even_reachable = []
 
@@ -38,7 +38,7 @@ while(len(to_visit)!=0):
     to_visit_pos = [x[0] for x in to_visit] 
     for n in neighbors:
         next_step=step+1
-        if(n not in to_visit_pos and n not in visited):
+        if(n not in to_visit_pos and n not in visited and next_step <= step_count):
             to_visit.append((n,next_step))
         if(next_step % 2 == 1 and n not in odd_reachable):
             odd_reachable.append(n)
