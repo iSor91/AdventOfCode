@@ -2,16 +2,24 @@ lines = None
 with open ('data') as f:
     lines = f.readlines()
 
-
-path = {(i,j): lines[i][j] for i in range(len(lines)) for j in range(len(lines[i])) if lines[i][j] != '#'}
-
 start = (0,1)
 bot = len(lines)-1
 rig = len(lines[0].strip())-1
+
 finish = (bot,rig-1)
 
-print(start, finish)
+choke_points=[]
+choke_points.append(start)
+choke_points.append(finish)
 
+finish_test = (19, 19)
+finish_data = (135, 127)
+pre_finish=finish_data
+post_start=(5, 9)
+
+path = {(i,j): lines[i][j] for i in range(len(lines)) for j in range(len(lines[i])) if lines[i][j] != '#'}
+
+print(start, finish)
 
 forced_dirs = {
     '>': (0,1),
@@ -25,6 +33,8 @@ def add_tuple(t1,t2):
     return x if x[0] >= 0 and x[0]<=bot and x[1]>=0 and x[1]<=rig else t1
 
 def get_neighbours(current):
+    # if(path[current] in '<>v^'):
+    #     return [add_tuple(current, forced_dirs[path[current]])]
     neighbours = []
 
     left=add_tuple(current, forced_dirs['<'])
@@ -45,12 +55,6 @@ def get_neighbours(current):
 
     return neighbours
 
-choke_points=[]
-choke_points.append(start)
-choke_points.append(finish)
-
-finish_test = (19, 19)
-finish_data = (135, 127)
 
 for p in path:
     if(len(get_neighbours(p)) > 2):
@@ -91,25 +95,34 @@ for c in choke_points:
 input()
 
 to_check = []
-to_check.append({'p':[start],'l':0})
+to_check.append({'p':[start],'last': start, 'l':0})
 checked = []
 cnt = 0
+longest_path = 0
 while(len(to_check) != 0):
     cnt+=1
     current = to_check[0]
     to_check.remove(current)
-    print(cnt, current['l'], len(to_check), len(checked))
+    print(cnt, current['l'], len(current['p']), len(to_check), len(checked), longest_path)
     # print(current)
 
-    neighbours = choke_point_map[current['p'][-1]]
+    neighbours = choke_point_map[current['last']]
     for n in neighbours:
         if(n not in current['p']):
-            next_step = {'p': [*current['p'], n], 'l': current['l'] + neighbours[n]}
-            if(n == finish_data):
+            path = [*current['p'], n]
+            path.sort()
+            next_step = {'p': path, 'last': n, 'l': current['l'] + neighbours[n]}
+            if(n == pre_finish):
+                # print(next_step)
                 checked.append(next_step)
-            elif(next_step not in to_check):
+                if(next_step['l'] + choke_point_map[pre_finish][finish] > longest_path):
+                    longest_path = next_step['l'] + choke_point_map[pre_finish][finish] 
+            elif(next_step not in to_check and next_step not in checked):
                 to_check.append(next_step)
-
+    to_check.sort(key=lambda x: len(x['p']), reverse=True)
+    checked.append(current)
+    # print(to_check)
+    # input()
 
 checked.sort(key=lambda x: x['l'])
-print(checked[-1]['l'] + choke_point_map[finish][finish_data])
+print(checked[-1]['l'] + choke_point_map[pre_finish][finish])
