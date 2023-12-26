@@ -94,35 +94,27 @@ for c in choke_points:
 
 input()
 
-to_check = []
-to_check.append({'p':[start],'last': start, 'l':0})
-checked = []
-cnt = 0
 longest_path = 0
-while(len(to_check) != 0):
+
+cnt = 0
+
+def calculate(current):
+    global longest_path 
+    global cnt
     cnt+=1
-    current = to_check[0]
-    to_check.remove(current)
-    print(cnt, current['l'], len(current['p']), len(to_check), len(checked), longest_path)
-    # print(current)
 
-    neighbours = choke_point_map[current['last']]
+    last = current[-1]
+    neighbours = choke_point_map[last]
     for n in neighbours:
-        if(n not in current['p']):
-            path = [*current['p'], n]
-            path.sort()
-            next_step = {'p': path, 'last': n, 'l': current['l'] + neighbours[n]}
-            if(n == pre_finish):
-                # print(next_step)
-                checked.append(next_step)
-                if(next_step['l'] + choke_point_map[pre_finish][finish] > longest_path):
-                    longest_path = next_step['l'] + choke_point_map[pre_finish][finish] 
-            elif(next_step not in to_check and next_step not in checked):
-                to_check.append(next_step)
-    to_check.sort(key=lambda x: len(x['p']), reverse=True)
-    checked.append(current)
-    # print(to_check)
-    # input()
+        next_step = [*current, n]
+        if(n not in current):
+            if (n == pre_finish and len(next_step) > 30):
+                length = (sum([*[choke_point_map[next_step[i]][next_step[i+1]] for i in range(len(next_step)-1)], choke_point_map[finish][pre_finish]]))
+                print(cnt, length, longest_path)
+                if(length > longest_path):
+                    longest_path = length
+                        # choke_point_map[pre_finish][finish] 
+            else:
+                calculate(next_step)
 
-checked.sort(key=lambda x: x['l'])
-print(checked[-1]['l'] + choke_point_map[pre_finish][finish])
+calculate([start])
