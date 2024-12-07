@@ -92,42 +92,42 @@ const navigate = (obs, sp, sd, positionsUntilNow) => {
 }
 
 
+// let possibilities = 0
+// for (let i = 0; i < data.length - 1; i++) {
+//   for (let j = 0; j < data[0].length; j++) {
+//     console.log([i, j], possibilities)
+//     const updatedObstacles = [...obstacles, [i, j]]
+//     const [end, _, cycle] = navigate(updatedObstacles, startingPos, startingDir, [])
+//     if (cycle) {
+//       possibilities++
+//     }
+//   }
+// }
+//
+// console.log(possibilities)
+
+const [, positions,] = navigate(obstacles, startingPos, startingDir, [])
+const newObstaclePositions = []
 let possibilities = 0
-for (let i = 0; i < data.length - 1; i++) {
-  for (let j = 0; j < data[0].length; j++) {
-    console.log([i, j], possibilities)
-    const updatedObstacles = [...obstacles, [i, j]]
-    const [end, _, cycle] = navigate(updatedObstacles, startingPos, startingDir, [])
-    if (cycle) {
-      possibilities++
-    }
+positions.forEach((p, i) => {
+  const obstaclePlace = add([p[0], p[1]], p[2])
+  const nextIsObstacle = includes(obstacles, obstaclePlace)
+  if (nextIsObstacle ||
+    obstaclePlace[0] < 0 || obstaclePlace[0] >= data.length - 1
+    || obstaclePlace[1] < 0 || obstaclePlace[1] >= data[0].length - 1
+    || obstaclePlace[0] === startingPos[0] && obstaclePlace[1] === startingPos[1]) {
+    return
   }
-}
+
+  const nextDir = turn(p[2])
+  const [newEnd, , circle] = navigate([...obstacles, obstaclePlace], [p[0], p[1]], nextDir, positions.slice(0, i))
+  if (circle) {
+    console.log(newObstaclePositions.length, newEnd, i)
+    if (!newObstaclePositions.filter(o => o[0] === obstaclePlace[0] && o[1] === obstaclePlace[1])[0])
+      newObstaclePositions.push(obstaclePlace)
+    possibilities++
+  }
+})
 
 console.log(possibilities)
-
-// const [gettingOut, positions] = navigate(obstacles, startingPos, startingDir, [])
-// const newObstaclePositions = []
-// let possibilities = 0
-// positions.forEach((p, i) => {
-//   const obstaclePlace = add([p[0], p[1]], p[2])
-//   const nextIsObstacle = includes(obstacles, obstaclePlace)
-//   if (nextIsObstacle ||
-//     obstaclePlace[0] < 0 || obstaclePlace[0] >= data.length - 1
-//     || obstaclePlace[1] < 0 || obstaclePlace[1] >= data[0].length - 1
-//     || obstaclePlace[0] === startingPos[0] && obstaclePlace[1] === startingPos[1]) {
-//     return
-//   }
-//
-//   const nextDir = turn(p[2])
-//   const [newEnd, newPositions, circle] = navigate([...obstacles, obstaclePlace], p, nextDir, positions.slice(0, i))
-//   if (circle) {
-//     console.log(newEnd, i)
-//     if (!newObstaclePositions.filter(o => o[0] === obstaclePlace[0] && o[1] === obstaclePlace[1])[0])
-//       newObstaclePositions.push(obstaclePlace)
-//     possibilities++
-//   }
-// })
-
-// console.log(possibilities)
-// console.log(newObstaclePositions.length)
+console.log(newObstaclePositions.length)
