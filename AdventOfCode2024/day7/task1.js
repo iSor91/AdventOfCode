@@ -36,12 +36,11 @@ const resolvedEquations = equations.map(numbers => {
   for (let i = 1; i < usableNumbers.length; i++) {
     currentValues = currentValues.flatMap(a => {
       const b = usableNumbers[i]
-      // console.log(a, b)
       return availableOperators.map(o => o.apply(a, b))
     })
 
-    // console.log(currentValues)
     currentValues = currentValues.filter(v => v <= expectedResult)
+    console.log(currentValues.length)
   }
 
 
