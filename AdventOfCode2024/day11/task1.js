@@ -62,8 +62,8 @@ stones.forEach(stone => {
   count += stoneCount.reduce((previous, current) => {
     return previous + current
   }, 0)
-  count += transformed.length
-  stoneCount = []
+  count += transformed.
+    stoneCount = []
   console.log(`current stones: ${count}`)
 })
 
